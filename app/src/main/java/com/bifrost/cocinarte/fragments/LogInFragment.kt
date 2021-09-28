@@ -56,6 +56,7 @@ class LogInFragment : Fragment() {
         txtForgotPassword = v.findViewById(R.id.textForgotPassword)
         btnLogin = v.findViewById(R.id.buttonLogIn)
         txtRegister = v.findViewById(R.id.textRegister)
+
         // For snackbar use
         rootLayout = v.findViewById(R.id.loginLayout)
 

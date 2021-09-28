@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
+        <entry key="..\:/ORT/4to Cuatrimestre 2021/CocinArte/app/src/main/res/layout/account_profile_fragment.xml" value="0.35260416666666666" />
+        <entry key="..\:/ORT/4to Cuatrimestre 2021/CocinArte/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/ORT/4to Cuatrimestre 2021/CocinArte/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/ORT/4to Cuatrimestre 2021/CocinArte/app/src/main/res/layout/log_in_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Lucas/AndroidStudioProjects/CocinArte/app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/Lucas/AndroidStudioProjects/CocinArte/app/src/main/res/layout/log_in_fragment.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>
