@@ -10,8 +10,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.AccountProfileViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class AccountProfileFragment : Fragment() {
 
@@ -30,6 +32,9 @@ class AccountProfileFragment : Fragment() {
     lateinit var imgChangePassword: ImageView
     lateinit var txtChangePassword: TextView
     lateinit var btnUpdate: Button
+
+    // For snackbar use
+    lateinit var rootLayout: ConstraintLayout
 
     companion object {
         fun newInstance() = AccountProfileFragment()
@@ -58,6 +63,9 @@ class AccountProfileFragment : Fragment() {
         txtChangePassword = v.findViewById(R.id.txtChangePassword)
         btnUpdate = v.findViewById(R.id.btnUpdate)
 
+        // For snackbar use
+        rootLayout = v.findViewById(R.id.accountProfileLayout)
+
         return v
     }
 
@@ -66,6 +74,9 @@ class AccountProfileFragment : Fragment() {
 
         // Initialize all text variables
         initializeText()
+
+        // Initialize all buttons variables
+        initializeButtons()
     }
 
     private fun initializeText() {
@@ -77,10 +88,45 @@ class AccountProfileFragment : Fragment() {
         txtChangePassword.setText("Change Password")
     }
 
+    private fun initializeButtons() {
+        // Delete button
+        txtDeleteAccount.setOnClickListener() {
+            deleteAccountNavigation();
+        }
+
+        imgDeleteAccount.setOnClickListener() {
+            deleteAccountNavigation();
+        }
+
+        // Change Password button
+        txtChangePassword.setOnClickListener() {
+            changePasswordNavigation();
+        }
+
+        imgChangePassword.setOnClickListener() {
+            changePasswordNavigation();
+        }
+
+        // Update button
+        btnUpdate.setOnClickListener() {
+            // TODO Update Account and Profile
+            Snackbar.make(rootLayout, "TODO UPDATE", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun deleteAccountNavigation() {
+        // TODO Navigation to Delete Account Fragment
+        Snackbar.make(rootLayout, "TODO DELETE ACCOUNT", Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun changePasswordNavigation() {
+        // TODO Navigation to Change Password
+        Snackbar.make(rootLayout, "TODO CHANGE PASSWORD", Snackbar.LENGTH_SHORT).show()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AccountProfileViewModel::class.java)
         // TODO: Use the ViewModel
     }
-
 }
