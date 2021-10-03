@@ -11,6 +11,12 @@
 .mtj.tmp/
 .gradle/
 .idea/
+.idea\
+.idea/libraries
+.idea\libraries
+*.idea
+
+
 
 # Package Files #
 *.jar
