@@ -77,7 +77,7 @@ class LogInFragment : Fragment() {
     private fun initializeText() {
         txtLogin.setText("LOGIN")
         txtEmail.setText("EMAIL")
-        inputEmail.setHint("jhondoe@email.com")
+        inputEmail.setHint("johndoe@email.com")
         txtPassword.setText("PASSWORD")
         inputPassword.setHint("Password")
         txtForgotPassword.setText("FORGOT PASSWORD?")
