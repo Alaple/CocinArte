@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.LogInViewModel
+import com.bifrost.cocinarte.models.login.LogInViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class LogInFragment : Fragment() {

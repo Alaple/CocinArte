@@ -5,7 +5,7 @@
     android:id="@+id/getsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.StartedFragment">
+    tools:context=".fragments.login.StartedFragment">
 
     <TextView
         android:id="@+id/textStarted"

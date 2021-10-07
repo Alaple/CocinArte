@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.RegisterViewModel
+import com.bifrost.cocinarte.models.login.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class RegisterFragment : Fragment() {

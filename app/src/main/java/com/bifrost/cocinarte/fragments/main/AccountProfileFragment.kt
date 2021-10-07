@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.AccountProfileViewModel
+import com.bifrost.cocinarte.models.main.AccountProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class AccountProfileFragment : Fragment() {

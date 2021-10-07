@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.LogInViewModel
-import com.bifrost.cocinarte.models.StartedViewModel
+import com.bifrost.cocinarte.models.login.StartedViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class StartedFragment : Fragment() {
