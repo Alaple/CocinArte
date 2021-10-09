@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.LogInViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -101,6 +102,8 @@ class LogInFragment : Fragment() {
         // Register Password text button
         txtRegister.setOnClickListener() {
             // TODO Register
+            val action = LogInFragmentDirections.actionLogInFragmentToListIngredients()
+            v.findNavController().navigate(action)
             Snackbar.make(rootLayout, "TODO REGISTER LINK", Snackbar.LENGTH_SHORT).show()
         }
     }

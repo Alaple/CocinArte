@@ -9,5 +9,14 @@
         android:id="@+id/logInFragment"
         android:name="com.bifrost.cocinarte.fragments.LogInFragment"
         android:label="log_in_fragment"
-        tools:layout="@layout/log_in_fragment" />
+        tools:layout="@layout/log_in_fragment" >
+        <action
+            android:id="@+id/action_logInFragment_to_listIngredients"
+            app:destination="@id/listIngredients" />
+    </fragment>
+    <fragment
+        android:id="@+id/listIngredients"
+        android:name="com.bifrost.cocinarte.fragments.ListIngredients"
+        android:label="fragment_list_ingredients"
+        tools:layout="@layout/fragment_list_ingredients" />
 </navigation>

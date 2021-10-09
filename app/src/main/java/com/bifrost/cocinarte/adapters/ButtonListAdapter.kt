@@ -1,5 +1,6 @@
 package com.bifrost.cocinarte.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.entities.Filter
+import com.google.android.material.chip.Chip
 
 class ButtonListAdapter (
-    private var buttonsList: MutableList<Button>
+    private var buttonsList: MutableList<Filter>
         ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>(){
 
     override fun onCreateViewHolder(
@@ -22,7 +25,7 @@ class ButtonListAdapter (
     }
 
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
-        // TODO holder.setName(buttonsList[position].nombreVino)
+        holder.setName(buttonsList[position].name)
 
 
         holder.getCardLayout().setOnClickListener() {
@@ -39,13 +42,18 @@ class ButtonListAdapter (
         }
 
         fun setName(name: String){
-            //TODO  val txt : TextView = view.findViewById(R.id.wineName)
-            //txt.text = name
+            val txt : Button = view.findViewById(R.id.toggleButton)
+            txt.setText(name)
         }
 
-        fun getCardLayout (): CardView {
-           //TODO return view.findViewById(R.id.cardView)//TODO
-            return view.findViewById(R.id.buttonsRecView)
+        fun getCardLayout (): Button {
+            return view.findViewById(R.id.toggleButton)
+        }
+
+        fun onClick(){
+            val chip: Chip = view.findViewById(R.id.toggleButton)
+            chip.closeIconTint
+
         }
 
     }
