@@ -44,9 +44,14 @@ class ButtonListAdapter (
 =======
         // TODO holder.setName(buttonsList[position].nombreVino)
 
+
         holder.getCardLayout().setOnClickListener() {
            //TODO  onItemClick(buttonsList[position].nombreVino)
+<<<<<<< HEAD
 >>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
+=======
+
+>>>>>>> 61a0fb1 (COC-24- Stable pre test)
         }
     }
 
@@ -73,21 +78,29 @@ class ButtonListAdapter (
 
 =======
             //TODO  val txt : TextView = view.findViewById(R.id.wineName)
-            txt.text = name
+            //txt.text = name
         }
 
         fun getCardLayout (): CardView {
            //TODO return view.findViewById(R.id.cardView)//TODO
+<<<<<<< HEAD
 >>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
+=======
+            return view.findViewById(R.id.buttonsRecView)
+>>>>>>> 61a0fb1 (COC-24- Stable pre test)
         }
 
     }
 
     override fun getItemCount(): Int {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return buttonsList.size
 =======
         TODO("Not yet implemented")
 >>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
+=======
+        return buttonsList.size
+>>>>>>> 61a0fb1 (COC-24- Stable pre test)
     }
 }
