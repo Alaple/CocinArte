@@ -24,8 +24,10 @@ class ButtonListAdapter (
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
         // TODO holder.setName(buttonsList[position].nombreVino)
 
+
         holder.getCardLayout().setOnClickListener() {
            //TODO  onItemClick(buttonsList[position].nombreVino)
+
         }
     }
 
@@ -38,16 +40,17 @@ class ButtonListAdapter (
 
         fun setName(name: String){
             //TODO  val txt : TextView = view.findViewById(R.id.wineName)
-            txt.text = name
+            //txt.text = name
         }
 
         fun getCardLayout (): CardView {
            //TODO return view.findViewById(R.id.cardView)//TODO
+            return view.findViewById(R.id.buttonsRecView)
         }
 
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return buttonsList.size
     }
 }
