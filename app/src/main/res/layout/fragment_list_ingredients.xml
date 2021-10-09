@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         android:text="Search"
         app:layout_constraintBottom_toTopOf="@+id/searchBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,8 +23,6 @@
         android:id="@+id/searchBar"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="21dp"
         android:hint="Carrot"
         android:minHeight="48dp"
         android:singleLine="true"
@@ -36,9 +34,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/buttonsRecView"
-        android:layout_width="410dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="18dp"
+        android:layout_width="365dp"
+        android:layout_height="122dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="477dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
