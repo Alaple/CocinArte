@@ -1,9 +1,13 @@
 package com.bifrost.cocinarte.adapters
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.util.Log
 =======
 >>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
+=======
+import android.util.Log
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +16,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
+<<<<<<< HEAD
 <<<<<<< HEAD
 import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
@@ -23,6 +28,13 @@ class ButtonListAdapter (
 class ButtonListAdapter (
     private var buttonsList: MutableList<Button>
 >>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
+=======
+import com.bifrost.cocinarte.entities.Filter
+import com.google.android.material.chip.Chip
+
+class ButtonListAdapter (
+    private var buttonsList: MutableList<Filter>
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
         ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>(){
 
     override fun onCreateViewHolder(
@@ -35,6 +47,7 @@ class ButtonListAdapter (
 
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         holder.setName(buttonsList[position].name)
 
 
@@ -43,6 +56,9 @@ class ButtonListAdapter (
 
 =======
         // TODO holder.setName(buttonsList[position].nombreVino)
+=======
+        holder.setName(buttonsList[position].name)
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
 
 
         holder.getCardLayout().setOnClickListener() {
@@ -63,6 +79,7 @@ class ButtonListAdapter (
         }
 
         fun setName(name: String){
+<<<<<<< HEAD
 <<<<<<< HEAD
             val txt : Button = view.findViewById(R.id.toggleButton)
             txt.setText(name)
@@ -88,6 +105,20 @@ class ButtonListAdapter (
 =======
             return view.findViewById(R.id.buttonsRecView)
 >>>>>>> 61a0fb1 (COC-24- Stable pre test)
+=======
+            val txt : Button = view.findViewById(R.id.toggleButton)
+            txt.setText(name)
+        }
+
+        fun getCardLayout (): Button {
+            return view.findViewById(R.id.toggleButton)
+        }
+
+        fun onClick(){
+            val chip: Chip = view.findViewById(R.id.toggleButton)
+            chip.closeIconTint
+
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
         }
 
     }

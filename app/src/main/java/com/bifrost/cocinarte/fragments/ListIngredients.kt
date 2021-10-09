@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,6 +76,7 @@ class ListIngredients : Fragment() {
         buttons = v.findViewById(R.id.buttonsRecView)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ButtonsViewModel::class.java)
 
         buttonsViewModel.cargarTest()
@@ -98,6 +102,10 @@ class ListIngredients : Fragment() {
 
 =======
 =======
+=======
+        buttonsViewModel = ViewModelProvider(requireActivity()).get(ButtonsViewModel::class.java)
+
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
         buttonsViewModel.cargarTest()
 
 >>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
@@ -109,10 +117,13 @@ class ListIngredients : Fragment() {
         super.onStart()
 
         buttons.setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(context)
+        //linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager = GridLayoutManager(context, 3)
         buttons.layoutManager = linearLayoutManager
 
         buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList)
+
+        buttons.adapter = buttonListAdapter
 
     }
 <<<<<<< HEAD

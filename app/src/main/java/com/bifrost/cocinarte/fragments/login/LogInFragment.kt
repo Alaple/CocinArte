@@ -101,8 +101,15 @@ class LogInFragment : Fragment() {
 
         // Register Password button
         txtRegister.setOnClickListener() {
+<<<<<<< HEAD:app/src/main/java/com/bifrost/cocinarte/fragments/login/LogInFragment.kt
             val action = LogInFragmentDirections.actionLogInFragmentToRegisterFragment()
             v.findNavController().navigate(action)
+=======
+            // TODO Register
+            val action = LogInFragmentDirections.actionLogInFragmentToListIngredients()
+            v.findNavController().navigate(action)
+            Snackbar.make(rootLayout, "TODO REGISTER LINK", Snackbar.LENGTH_SHORT).show()
+>>>>>>> 82b2c6f (COC-24 Dynamic filters recView):app/src/main/java/com/bifrost/cocinarte/fragments/LogInFragment.kt
         }
     }
 
