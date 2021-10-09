@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
@@ -34,6 +36,8 @@ class ListIngredients : Fragment() {
         searchBar = v.findViewById(R.id.searchBar)
         buttons = v.findViewById(R.id.buttonsRecView)
 
+        buttonsViewModel = ViewModelProvider(requireActivity()).get(ButtonsViewModel::class.java)
+
         buttonsViewModel.cargarTest()
 
         // Inflate the layout for this fragment
@@ -44,10 +48,13 @@ class ListIngredients : Fragment() {
         super.onStart()
 
         buttons.setHasFixedSize(true)
-        linearLayoutManager = LinearLayoutManager(context)
+        //linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager = GridLayoutManager(context, 3)
         buttons.layoutManager = linearLayoutManager
 
         buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList)
+
+        buttons.adapter = buttonListAdapter
 
     }
 
