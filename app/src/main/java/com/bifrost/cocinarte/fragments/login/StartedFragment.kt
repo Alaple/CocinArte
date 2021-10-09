@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.StartedViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -47,7 +48,7 @@ class StartedFragment : Fragment() {
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtSkip = v.findViewById(R.id.textSkip)
         // For snackbar use
-        rootLayout = v.findViewById(R.id.loginLayout)
+        rootLayout = v.findViewById(R.id.getsLayout)
 
         return v
     }
@@ -73,8 +74,8 @@ class StartedFragment : Fragment() {
     private fun initializeButtons() {
         // LOGIN button
         btnLogin.setOnClickListener() {
-            // TODO Login
-            Snackbar.make(rootLayout, "TODO LOGIN", Snackbar.LENGTH_SHORT).show()
+            val action = StartedFragmentDirections.actionStartedFragmentToLogInFragment()
+            v.findNavController().navigate(action)
         }
 
         // REGISTER button
