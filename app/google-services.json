@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "260705158229",
+    "project_id": "cocinarte-e8093",
+    "storage_bucket": "cocinarte-e8093.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260705158229:android:cea5e1ed516066047240dc",
+        "android_client_info": {
+          "package_name": "com.bifrost.cocinarte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260705158229-ro3csdgda99dq1sn6d3fq21ju01cams7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuN0lst1sWC9dSEkDLDBfxCasq_WCyY6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260705158229-ro3csdgda99dq1sn6d3fq21ju01cams7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
