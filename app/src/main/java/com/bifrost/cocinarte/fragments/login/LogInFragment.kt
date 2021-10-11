@@ -14,7 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.LogInViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class LogInFragment : Fragment() {
 
@@ -58,7 +57,7 @@ class LogInFragment : Fragment() {
         btnLogin = v.findViewById(R.id.buttonLogIn)
         txtRegister = v.findViewById(R.id.textRegister)
         // For snackbar use
-        rootLayout = v.findViewById(R.id.loginLayout)
+        rootLayout = v.findViewById(R.id.LoginLayout)
 
         return v
     }

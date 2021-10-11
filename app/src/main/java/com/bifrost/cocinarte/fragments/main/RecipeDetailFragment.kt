@@ -48,7 +48,7 @@ class RecipeDetailFragment : Fragment() {
         btnPrepare = v.findViewById(R.id.btnPrepare)
 
         // For snackbar use
-        rootLayout = v.findViewById(R.id.loginLayout)
+        rootLayout = v.findViewById(R.id.LoginLayout)
 
         return v
     }
