@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments.main
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,10 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.main.DeleteAccountViewModel
+import com.bifrost.cocinarte.models.login.DeleteAccountViewModel
 
 class DeleteAccountFragment : Fragment() {
+
+    lateinit var v: View
+
+    lateinit var btnDeleteAccount: Button
 
     companion object {
         fun newInstance() = DeleteAccountFragment()
@@ -21,7 +27,21 @@ class DeleteAccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.delete_account_fragment, container, false)
+        v = inflater.inflate(R.layout.delete_account_fragment, container, false)
+
+        btnDeleteAccount = v.findViewById(R.id.btnDeleteAccount)
+
+        return v
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        btnDeleteAccount.setOnClickListener() {
+            // TODO Delete account
+            val action = DeleteAccountFragmentDirections.actionDeleteAccountFragmentToStartedFragment()
+            v.findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

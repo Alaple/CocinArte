@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments.main
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -11,8 +11,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.main.AccountProfileViewModel
+import com.bifrost.cocinarte.models.login.AccountProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class AccountProfileFragment : Fragment() {
@@ -50,7 +51,7 @@ class AccountProfileFragment : Fragment() {
         v = inflater.inflate(R.layout.account_profile_fragment, container, false)
 
         // Initialize variables
-        txtAccount = v.findViewById(R.id.txtAccountProfile)
+        txtAccount = v.findViewById(R.id.txtAccountProfileTitle)
         txtFirstName = v.findViewById(R.id.txtFirstName)
         inputFirstName = v.findViewById(R.id.inputFirstName)
         txtLastName = v.findViewById(R.id.txtLastName)
@@ -115,13 +116,13 @@ class AccountProfileFragment : Fragment() {
     }
 
     private fun deleteAccountNavigation() {
-        // TODO Navigation to Delete Account Fragment
-        Snackbar.make(rootLayout, "TODO DELETE ACCOUNT", Snackbar.LENGTH_SHORT).show()
+        val action = AccountProfileFragmentDirections.actionAccountProfileFragment2ToDeleteAccountFragment()
+        v.findNavController().navigate(action)
     }
 
     private fun changePasswordNavigation() {
-        // TODO Navigation to Change Password
-        Snackbar.make(rootLayout, "TODO CHANGE PASSWORD", Snackbar.LENGTH_SHORT).show()
+        val action = AccountProfileFragmentDirections.actionAccountProfileFragment2ToResetPasswordFragment()
+        v.findNavController().navigate(action)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

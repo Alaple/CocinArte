@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -87,13 +88,14 @@ class RegisterFragment : Fragment() {
         // REGISTER button
         btnRegister.setOnClickListener() {
             // TODO Register
-            Snackbar.make(rootLayout, "TODO REGISTER", Snackbar.LENGTH_SHORT).show()
+            val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+            v.findNavController().navigate(action)
         }
 
         // LOGIN button
         txtLogIn.setOnClickListener() {
-            // TODO LogIn
-            Snackbar.make(rootLayout, "TODO LOGIN", Snackbar.LENGTH_SHORT).show()
+            val action = RegisterFragmentDirections.actionRegisterFragmentToLogInFragment()
+            v.findNavController().navigate(action)
         }
     }
 

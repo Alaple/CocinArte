@@ -16,9 +16,6 @@
         android:label="user_profile_fragment"
         tools:layout="@layout/user_profile_fragment" >
         <action
-            android:id="@+id/action_userProfileFragment_to_accountProfileFragment"
-            app:destination="@id/accountProfileFragment" />
-        <action
             android:id="@+id/action_userProfileFragment_to_rewardsFragment"
             app:destination="@id/rewardsFragment" />
         <action
@@ -30,24 +27,7 @@
         <action
             android:id="@+id/action_userProfileFragment_to_favouritesFragment"
             app:destination="@id/favouritesFragment" />
-        <action
-            android:id="@+id/action_userProfileFragment_to_logOutFragment"
-            app:destination="@id/logOutFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/accountProfileFragment"
-        android:name="com.bifrost.cocinarte.fragments.main.AccountProfileFragment"
-        android:label="account_profile_fragment"
-        tools:layout="@layout/account_profile_fragment" >
-        <action
-            android:id="@+id/action_accountProfileFragment_to_deleteAccountFragment"
-            app:destination="@id/deleteAccountFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/deleteAccountFragment"
-        android:name="com.bifrost.cocinarte.fragments.main.DeleteAccountFragment"
-        android:label="delete_account_fragment"
-        tools:layout="@layout/delete_account_fragment" />
     <activity
         android:id="@+id/preferenceActivity"
         android:name="com.bifrost.cocinarte.activities.PreferenceActivity"
@@ -58,20 +38,6 @@
         android:name="com.bifrost.cocinarte.fragments.main.RewardsFragment"
         android:label="rewards_fragment"
         tools:layout="@layout/rewards_fragment" />
-    <fragment
-        android:id="@+id/logOutFragment"
-        android:name="com.bifrost.cocinarte.fragments.main.LogOutFragment"
-        android:label="log_out_fragment"
-        tools:layout="@layout/log_out_fragment" />
-    <fragment
-        android:id="@+id/searchResultsFragment"
-        android:name="com.bifrost.cocinarte.fragments.main.SearchResultsFragment"
-        android:label="search_results_fragment"
-        tools:layout="@layout/search_results_fragment" >
-        <action
-            android:id="@+id/action_searchResultsFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
-    </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.bifrost.cocinarte.fragments.main.RecipeDetailFragment"

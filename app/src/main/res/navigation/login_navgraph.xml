@@ -70,4 +70,34 @@
         android:name="com.bifrost.cocinarte.activities.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/accountProfileFragment2"
+        android:name="com.bifrost.cocinarte.fragments.login.AccountProfileFragment"
+        android:label="account_profile_fragment"
+        tools:layout="@layout/account_profile_fragment" >
+        <action
+            android:id="@+id/action_accountProfileFragment2_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment" />
+        <action
+            android:id="@+id/action_accountProfileFragment2_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.bifrost.cocinarte.fragments.login.DeleteAccountFragment"
+        android:label="delete_account_fragment"
+        tools:layout="@layout/delete_account_fragment" >
+        <action
+            android:id="@+id/action_deleteAccountFragment_to_startedFragment"
+            app:destination="@id/startedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.bifrost.cocinarte.fragments.login.LogOutFragment"
+        android:label="log_out_fragment"
+        tools:layout="@layout/log_out_fragment" >
+        <action
+            android:id="@+id/action_logOutFragment_to_startedFragment"
+            app:destination="@id/startedFragment" />
+    </fragment>
 </navigation>

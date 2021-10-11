@@ -80,14 +80,14 @@ class StartedFragment : Fragment() {
 
         // REGISTER button
         btnRegister.setOnClickListener() {
-            // TODO Register
-            Snackbar.make(rootLayout, "TODO REGISTER", Snackbar.LENGTH_SHORT).show()
+            val action = StartedFragmentDirections.actionStartedFragmentToRegisterFragment()
+            v.findNavController().navigate(action)
         }
 
         // Forgot Password text button
         txtSkip.setOnClickListener() {
-            // TODO Skip
-            Snackbar.make(rootLayout, "TODO SKIP LINK", Snackbar.LENGTH_SHORT).show()
+            val action = StartedFragmentDirections.actionStartedFragmentToMainActivity()
+            v.findNavController().navigate(action)
         }
     }
 

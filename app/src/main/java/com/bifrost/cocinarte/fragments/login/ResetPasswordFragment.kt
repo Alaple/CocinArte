@@ -6,10 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.ResetPasswordViewModel
 
 class ResetPasswordFragment : Fragment() {
+
+    lateinit var v: View
+
+    lateinit var btnResetPassword: Button
 
     companion object {
         fun newInstance() = ResetPasswordFragment()
@@ -21,7 +27,21 @@ class ResetPasswordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.reset_password_fragment, container, false)
+        v = inflater.inflate(R.layout.reset_password_fragment, container, false)
+
+        btnResetPassword = v.findViewById(R.id.btnResetPassword)
+
+        return v
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        btnResetPassword.setOnClickListener() {
+            // TODO Reset password
+            val action = ResetPasswordFragmentDirections.actionResetPasswordFragmentToEmailSentFragment()
+            v.findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

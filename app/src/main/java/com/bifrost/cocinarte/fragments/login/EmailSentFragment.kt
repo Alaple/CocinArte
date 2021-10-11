@@ -6,10 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.EmailSentViewModel
 
 class EmailSentFragment : Fragment() {
+
+    lateinit var v: View
+
+    lateinit var btnEmailSent: Button
 
     companion object {
         fun newInstance() = EmailSentFragment()
@@ -21,7 +27,20 @@ class EmailSentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.email_sent_fragment, container, false)
+        v = inflater.inflate(R.layout.email_sent_fragment, container, false)
+
+        btnEmailSent = v.findViewById(R.id.btnEmailSent)
+
+        return v
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        btnEmailSent.setOnClickListener() {
+            val action = EmailSentFragmentDirections.actionEmailSentFragmentToLogInFragment()
+            v.findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

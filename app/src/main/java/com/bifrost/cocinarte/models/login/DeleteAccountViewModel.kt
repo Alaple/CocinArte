@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.models.main
+package com.bifrost.cocinarte.models.login
 
 import androidx.lifecycle.ViewModel
 
