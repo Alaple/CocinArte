@@ -31,7 +31,7 @@ class User(
     }
 
 
-    fun delteUser(user: User){
+    fun deleteUser(user: User){
         //TODO
     }
 
