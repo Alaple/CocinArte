@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navgraph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.UserProfileFragment"
+        android:label="user_profile_fragment"
+        tools:layout="@layout/user_profile_fragment" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_rewardsFragment"
+            app:destination="@id/rewardsFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_preferenceActivity"
+            app:destination="@id/preferenceActivity" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_preparedFragment"
+            app:destination="@id/preparedFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/preferenceActivity"
+        android:name="com.bifrost.cocinarte.activities.PreferenceActivity"
+        android:label="activity_preference"
+        tools:layout="@layout/activity_preference" />
+    <fragment
+        android:id="@+id/rewardsFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.RewardsFragment"
+        android:label="rewards_fragment"
+        tools:layout="@layout/rewards_fragment" />
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.RecipeDetailFragment"
+        android:label="recipe_detail_fragment"
+        tools:layout="@layout/recipe_detail_fragment" >
+        <action
+            android:id="@+id/action_recipeDetailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.FavouritesFragment"
+        android:label="favourites_fragment"
+        tools:layout="@layout/favourites_fragment" />
+    <fragment
+        android:id="@+id/preparedFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.PreparedFragment"
+        android:label="prepared_fragment"
+        tools:layout="@layout/prepared_fragment" />
+</navigation>

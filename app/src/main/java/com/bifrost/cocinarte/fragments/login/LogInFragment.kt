@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -11,9 +11,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.LogInViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.bifrost.cocinarte.models.login.LogInViewModel
 
 class LogInFragment : Fragment() {
 
@@ -57,7 +57,7 @@ class LogInFragment : Fragment() {
         btnLogin = v.findViewById(R.id.buttonLogIn)
         txtRegister = v.findViewById(R.id.textRegister)
         // For snackbar use
-        rootLayout = v.findViewById(R.id.loginLayout)
+        rootLayout = v.findViewById(R.id.LoginLayout)
 
         return v
     }
@@ -89,19 +89,20 @@ class LogInFragment : Fragment() {
         // LOGIN button
         btnLogin.setOnClickListener() {
             // TODO Login
-            Snackbar.make(rootLayout, "TODO LOGIN", Snackbar.LENGTH_SHORT).show()
+            val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
+            v.findNavController().navigate(action)
         }
 
-        // Forgot Password text button
+        // Forgot Password button
         txtForgotPassword.setOnClickListener() {
-            // TODO Forgot Password
-            Snackbar.make(rootLayout, "TODO FORGOT PASSWORD LINK", Snackbar.LENGTH_SHORT).show()
+            val action = LogInFragmentDirections.actionLogInFragmentToResetPasswordFragment()
+            v.findNavController().navigate(action)
         }
 
-        // Register Password text button
+        // Register Password button
         txtRegister.setOnClickListener() {
-            // TODO Register
-            Snackbar.make(rootLayout, "TODO REGISTER LINK", Snackbar.LENGTH_SHORT).show()
+            val action = LogInFragmentDirections.actionLogInFragmentToRegisterFragment()
+            v.findNavController().navigate(action)
         }
     }
 
@@ -110,5 +111,4 @@ class LogInFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(LogInViewModel::class.java)
         // TODO: Use the ViewModel
     }
-
 }

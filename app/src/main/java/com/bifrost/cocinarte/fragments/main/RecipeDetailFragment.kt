@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.RecipeDetailViewModel
+import com.bifrost.cocinarte.models.main.RecipeDetailViewModel
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +48,7 @@ class RecipeDetailFragment : Fragment() {
         btnPrepare = v.findViewById(R.id.btnPrepare)
 
         // For snackbar use
-        rootLayout = v.findViewById(R.id.loginLayout)
+        rootLayout = v.findViewById(R.id.LoginLayout)
 
         return v
     }

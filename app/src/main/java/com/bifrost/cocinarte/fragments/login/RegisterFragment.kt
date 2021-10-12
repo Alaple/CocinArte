@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -10,9 +10,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.RegisterViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.bifrost.cocinarte.models.login.RegisterViewModel
 
 class RegisterFragment : Fragment() {
 
@@ -54,9 +54,9 @@ class RegisterFragment : Fragment() {
         txtPassword = v.findViewById(R.id.textPassword)
         inputPassword = v.findViewById(R.id.inputPassword)
         btnRegister = v.findViewById(R.id.buttonRegister)
-        txtLogIn = v.findViewById(R.id.textLogIn)
+        txtLogIn = v.findViewById(R.id.textLogin)
         // For snackbar use
-        rootLayout = v.findViewById(R.id.loginLayout)
+        rootLayout = v.findViewById(R.id.LoginLayout)
 
         return v
     }
@@ -87,13 +87,14 @@ class RegisterFragment : Fragment() {
         // REGISTER button
         btnRegister.setOnClickListener() {
             // TODO Register
-            Snackbar.make(rootLayout, "TODO REGISTER", Snackbar.LENGTH_SHORT).show()
+            val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+            v.findNavController().navigate(action)
         }
 
         // LOGIN button
         txtLogIn.setOnClickListener() {
-            // TODO LogIn
-            Snackbar.make(rootLayout, "TODO LOGIN", Snackbar.LENGTH_SHORT).show()
+            val action = RegisterFragmentDirections.actionRegisterFragmentToLogInFragment()
+            v.findNavController().navigate(action)
         }
     }
 

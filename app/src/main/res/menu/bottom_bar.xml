@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/userProfileFragment"
+        android:icon="@drawable/outline_person_black_18"
+        android:title="Account And Profile" />
+
+    <!-- TODO Agregar item SEARCH (PR Julian Alvarez)-->
+    <!--
+    <item
+        android:id="@+id/"
+        android:icon="@drawable/outline_search_black_18"
+        android:title="Search" />
+    -->
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/outline_home_black_18"
+        android:title="Home" />
+    <item
+        android:id="@+id/favouritesFragment"
+        android:icon="@drawable/outline_favorite_border_black_18"
+        android:title="Favourites" />
+    <item
+        android:id="@+id/preparedFragment"
+        android:icon="@drawable/outline_restaurant_black_18"
+        android:title="Prepared" />
+</menu>
