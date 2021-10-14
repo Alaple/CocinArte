@@ -4,6 +4,10 @@ class ConnectionDB (connectionDB: ConnectionDB){
 
     var connectionDB: ConnectionDB = connectionDB
 
+    init {
+        this.connectionDB = connectionDB
+    }
+
     fun getConnection():ConnectionDB{
         //TODO
         return this

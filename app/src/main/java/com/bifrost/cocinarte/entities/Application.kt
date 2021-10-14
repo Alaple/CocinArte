@@ -5,15 +5,22 @@ import android.os.Parcelable
 
 class Application(
         name: String,
-        recepies: Array<Recipe>,
-        applicationIngredient: Array<Ingredient>,
-        users: Array<User>
+        recepies: MutableList<Recipe>,
+        applicationIngredient: MutableList<Ingredient>,
+        users: MutableList<User>
     )  {
 
     var name: String = name
-    var recepies: Array<Recipe> = recepies
-    var applicationIngredient: Array<Ingredient> = applicationIngredient
-    var users: Array<User> = users
+    var recepies: MutableList<Recipe> = recepies
+    var applicationIngredient: MutableList<Ingredient> = applicationIngredient
+    var users: MutableList<User> = users
+
+    init {
+        this.name = name
+        this.recepies = recepies
+        this.applicationIngredient = applicationIngredient
+        this.users = users
+    }
 
     fun addUser(user: User){
         //TODO
@@ -30,19 +37,19 @@ class Application(
     fun search(recipe: String): Array<Recipe> {
         //TODO
 
-        var dietLabel = Array<DietLabel>(1){
+        var dietLabel = MutableList<DietLabel>(1){
             DietLabel.BALANCED
         }
 
-        var mealType = Array<MealType>(1){
+        var mealType = MutableList<MealType>(1){
             MealType.BREAKFAST
         }
 
-        var cuisineTypes = Array<CuisineType>(1){
+        var cuisineTypes = MutableList<CuisineType>(1){
             CuisineType.ASIAN
         }
 
-        var categories = Array<Category>(1){
+        var categories = MutableList<Category>(1){
             Category.CELIAC
         }
         return Array(20) { Recipe(

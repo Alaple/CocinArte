@@ -5,4 +5,11 @@ class Ingredient(id: String, quantity: Float, description: String, foodName: Str
     var description: String = description
     var foodName: String = foodName
     var food: Food = food
+
+    init {
+        this.quantity = quantity
+        this.description = description
+        this.foodName = foodName
+        this.food = food
+    }
 }

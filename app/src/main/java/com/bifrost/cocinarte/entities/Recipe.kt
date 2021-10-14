@@ -7,11 +7,11 @@ class Recipe (
     yield: Int,
     image_url: String,
     calories: Float,
-    dietLabel: Array<DietLabel>,
-    ingredients: Array<Ingredient>,
-    mealType: Array<MealType>,
-    cuisineType: Array<CuisineType>,
-    category: Array<Category>
+    dietLabel: MutableList<DietLabel>,
+    ingredients: MutableList<Ingredient>,
+    mealType: MutableList<MealType>,
+    cuisineType: MutableList<CuisineType>,
+    category: MutableList<Category>
 
 ) {
 
@@ -20,11 +20,24 @@ class Recipe (
     var yield: Int = `yield`
     var image_url: String = image_url
     var calories: Float = calories
-    var dietLabel: Array<DietLabel> = dietLabel
-    var ingredients: Array<Ingredient> = ingredients
-    var mealType: Array<MealType> = mealType
-    var cuisineType: Array<CuisineType> = cuisineType
-    var category: Array<Category> = category
+    var dietLabel: MutableList<DietLabel> = dietLabel
+    var ingredients: MutableList<Ingredient> = ingredients
+    var mealType: MutableList<MealType> = mealType
+    var cuisineType: MutableList<CuisineType> = cuisineType
+    var category: MutableList<Category> = category
+
+    init {
+        this.title = title
+        this.description = description
+        this.yield = `yield`
+        this.image_url = image_url
+        this.calories = calories
+        this.dietLabel = dietLabel
+        this.ingredients = ingredients
+        this.mealType = mealType
+        this.cuisineType = cuisineType
+        this.category = category
+    }
 
     fun prepare(cocina:String){
 

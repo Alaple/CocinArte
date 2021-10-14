@@ -8,11 +8,11 @@ class User(
         name: String,
         email: String,
         password: String,
-        reward: Array<Reward>,
+        reward: MutableList<Reward>,
         userPrefence: Preference,
         token: AccessToken,
-        favorite: Array<Favorite>,
-        preparedRecipe: Array<Prepared>,
+        favorite: MutableList<Favorite>,
+        preparedRecipe: MutableList<Prepared>,
         profile: Category
 )  {
     var name: String
@@ -20,6 +20,12 @@ class User(
     var password: String
     var enabled: Boolean
     var level: Int
+    var reward: MutableList<Reward>
+    var userPrefence: Preference
+    var token: AccessToken
+    var favorite: MutableList<Favorite>
+    var preparedRecipe: MutableList<Prepared>
+    var profile: Category
 
 
     init {
@@ -28,6 +34,12 @@ class User(
         this.password = password
         this.enabled = false
         this.level = 0
+        this.reward = reward
+        this.userPrefence = userPrefence
+        this.token = token
+        this.favorite = favorite
+        this.preparedRecipe = preparedRecipe
+        this.profile = profile
     }
 
 
