@@ -77,6 +77,7 @@ class RegisterFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        val currentUser = auth.currentUser
 
         // Initialize all text variables
         initializeText()
@@ -108,6 +109,7 @@ class RegisterFragment : Fragment() {
                 if (task.isSuccessful) {
                     val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
                     v.findNavController().navigate(action)
+                    val user = auth.currentUser
                 } else {
                     Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
                 }

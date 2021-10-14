@@ -78,6 +78,8 @@ class LogInFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val currentUser = auth.currentUser
+
         // Initialize image variables
         imageLogin.setImageResource(R.drawable.ic_launcher_background)
         // Initialize all text variables
@@ -110,6 +112,7 @@ class LogInFragment : Fragment() {
                 if (task.isSuccessful) {
                     val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
                     v.findNavController().navigate(action)
+                    val user = auth.currentUser
                 } else {
                     Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
                 }
