@@ -109,7 +109,7 @@ class RegisterFragment : Fragment() {
                     val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
                     v.findNavController().navigate(action)
                 } else {
-                    Snackbar.make(rootLayout, "DATOS INCORRECTOS", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

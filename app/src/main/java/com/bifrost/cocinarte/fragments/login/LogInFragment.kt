@@ -111,7 +111,7 @@ class LogInFragment : Fragment() {
                     val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
                     v.findNavController().navigate(action)
                 } else {
-                    Snackbar.make(rootLayout, "DATOS INCORRECTOS", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
