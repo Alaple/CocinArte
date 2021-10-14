@@ -103,17 +103,19 @@ class LogInFragment : Fragment() {
         btnLogin.setOnClickListener() {
             // TODO Login
 
-            println(inputEmail.text)
-            println(inputPassword.text)
-            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()){
-                auth.signInWithEmailAndPassword(inputEmail.text as String,inputPassword.text as String)
-
-                val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
-                v.findNavController().navigate(action)
-            }else {
-                Snackbar.make(rootLayout, "TODO LOGIN", Snackbar.LENGTH_SHORT).show()
+            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) auth.signInWithEmailAndPassword(
+                inputEmail.text.toString(),
+                inputPassword.text.toString()
+            ).addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
+                    v.findNavController().navigate(action)
+                } else {
+                    Snackbar.make(rootLayout, "DATOS INCORRECTOS", Snackbar.LENGTH_SHORT).show()
+                }
             }
         }
+
 
         // Forgot Password button
         txtForgotPassword.setOnClickListener() {

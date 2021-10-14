@@ -13,6 +13,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterFragment : Fragment() {
 
@@ -28,6 +32,11 @@ class RegisterFragment : Fragment() {
     lateinit var inputPassword: EditText
     lateinit var btnRegister: Button
     lateinit var txtLogIn: TextView
+
+    //FireBase
+    private lateinit var dbReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
@@ -55,8 +64,13 @@ class RegisterFragment : Fragment() {
         inputPassword = v.findViewById(R.id.inputPassword)
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtLogIn = v.findViewById(R.id.textLogin)
+
         // For snackbar use
         rootLayout = v.findViewById(R.id.LoginLayout)
+
+        //Firebase
+        database= FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         return v
     }
@@ -87,8 +101,17 @@ class RegisterFragment : Fragment() {
         // REGISTER button
         btnRegister.setOnClickListener() {
             // TODO Register
-            val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-            v.findNavController().navigate(action)
+            if (inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) auth.createUserWithEmailAndPassword(
+                inputEmail.text.toString(),
+                inputPassword.text.toString()
+            ).addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                    v.findNavController().navigate(action)
+                } else {
+                    Snackbar.make(rootLayout, "DATOS INCORRECTOS", Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // LOGIN button
