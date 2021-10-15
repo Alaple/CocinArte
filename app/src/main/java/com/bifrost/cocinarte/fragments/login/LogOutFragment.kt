@@ -10,12 +10,14 @@ import android.widget.Button
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.LogOutViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 
 class LogOutFragment : Fragment() {
 
     lateinit var v: View
-
     lateinit var btnLogOut: Button
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         fun newInstance() = LogOutFragment()
@@ -31,6 +33,8 @@ class LogOutFragment : Fragment() {
 
         btnLogOut = v.findViewById(R.id.btnLogOut)
 
+        auth = FirebaseAuth.getInstance()
+
         return v
     }
 
@@ -39,6 +43,7 @@ class LogOutFragment : Fragment() {
 
         btnLogOut.setOnClickListener() {
             // TODO Logout
+            auth.signOut()
             val action = LogOutFragmentDirections.actionLogOutFragmentToStartedFragment()
             v.findNavController().navigate(action)
         }

@@ -14,6 +14,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.LogInViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class LogInFragment : Fragment() {
 
@@ -29,6 +33,10 @@ class LogInFragment : Fragment() {
     lateinit var txtForgotPassword: TextView
     lateinit var btnLogin: Button
     lateinit var txtRegister: TextView
+    //FireBase
+    private lateinit var dbReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
@@ -59,11 +67,18 @@ class LogInFragment : Fragment() {
         // For snackbar use
         rootLayout = v.findViewById(R.id.LoginLayout)
 
+        //Firebase
+        database= FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
+
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        val currentUser = auth.currentUser
 
         // Initialize image variables
         imageLogin.setImageResource(R.drawable.ic_launcher_background)
@@ -89,9 +104,21 @@ class LogInFragment : Fragment() {
         // LOGIN button
         btnLogin.setOnClickListener() {
             // TODO Login
-            val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
-            v.findNavController().navigate(action)
+
+            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) auth.signInWithEmailAndPassword(
+                inputEmail.text.toString(),
+                inputPassword.text.toString()
+            ).addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
+                    v.findNavController().navigate(action)
+                    val user = auth.currentUser
+                } else {
+                    Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
+
 
         // Forgot Password button
         txtForgotPassword.setOnClickListener() {

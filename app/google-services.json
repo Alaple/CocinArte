@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "260705158229",
-    "project_id": "cocinarte-e8093",
-    "storage_bucket": "cocinarte-e8093.appspot.com"
+    "project_number": "926429645876",
+    "project_id": "cocinarte-75f7a",
+    "storage_bucket": "cocinarte-75f7a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:260705158229:android:cea5e1ed516066047240dc",
+        "mobilesdk_app_id": "1:926429645876:android:73dff6df0968ee2e0e0e61",
         "android_client_info": {
           "package_name": "com.bifrost.cocinarte"
         }
       },
       "oauth_client": [
         {
-          "client_id": "260705158229-ro3csdgda99dq1sn6d3fq21ju01cams7.apps.googleusercontent.com",
+          "client_id": "926429645876-8tgh3m7ks5m6uudgag6e3p6c64ffn4jp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBuN0lst1sWC9dSEkDLDBfxCasq_WCyY6A"
+          "current_key": "AIzaSyBhqYDOxsr3Bpc6qVsyNxMwwRPczl88fwU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "260705158229-ro3csdgda99dq1sn6d3fq21ju01cams7.apps.googleusercontent.com",
+              "client_id": "926429645876-8tgh3m7ks5m6uudgag6e3p6c64ffn4jp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
