@@ -1,11 +1,11 @@
-package com.bifrost.cocinarte.models
+package com.bifrost.cocinarte.models.main
 
 import android.util.Log
 import android.widget.Button
 import androidx.lifecycle.ViewModel
 import com.bifrost.cocinarte.entities.Filter
 
-class ButtonsViewModel: ViewModel() {
+class ListIngredientsButtonsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
 
     //TEST

@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments
+package com.bifrost.cocinarte.fragments.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapters.ButtonListAdapter
-import com.bifrost.cocinarte.models.ButtonsViewModel
+import com.bifrost.cocinarte.models.main.ListIngredientsButtonsViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 class ListIngredients : Fragment() {
@@ -21,7 +21,7 @@ class ListIngredients : Fragment() {
     lateinit var buttons: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var buttonListAdapter: ButtonListAdapter
-    private lateinit var buttonsViewModel: ButtonsViewModel
+    private lateinit var buttonsViewModel: ListIngredientsButtonsViewModel
     lateinit var v: View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class ListIngredients : Fragment() {
         searchBar = v.findViewById(R.id.searchBar)
         buttons = v.findViewById(R.id.buttonsRecView)
 
-        buttonsViewModel = ViewModelProvider(requireActivity()).get(ButtonsViewModel::class.java)
+        buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsButtonsViewModel::class.java)
 
         buttonsViewModel.cargarTest()
 
