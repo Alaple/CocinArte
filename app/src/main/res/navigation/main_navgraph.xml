@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_accountProfileFragment_to_deleteAccountFragment"
             app:destination="@id/deleteAccountFragment" />
+        <action
+            android:id="@+id/action_accountProfileFragment_to_resetPasswordDialogFragment"
+            app:destination="@id/resetPasswordDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/deleteAccountFragment"
@@ -95,4 +98,9 @@
         android:name="com.bifrost.cocinarte.activities.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/resetPasswordDialogFragment"
+        android:name="com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment"
+        android:label="fragment_reset_password_dialog"
+        tools:layout="@layout/fragment_reset_password_dialog" />
 </navigation>

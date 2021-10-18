@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment
 import com.bifrost.cocinarte.models.main.AccountProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -121,7 +122,8 @@ class AccountProfileFragment : Fragment() {
     }
 
     private fun changePasswordNavigation() {
-        // TODO Dialog - ChangePassword
+        ResetPasswordDialogFragment().show(
+            childFragmentManager, ResetPasswordDialogFragment.TAG)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
