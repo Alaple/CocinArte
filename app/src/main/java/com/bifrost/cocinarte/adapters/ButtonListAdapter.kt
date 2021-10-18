@@ -1,13 +1,6 @@
 package com.bifrost.cocinarte.adapters
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import android.util.Log
-=======
->>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
-=======
-import android.util.Log
->>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,25 +9,12 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
-<<<<<<< HEAD
-<<<<<<< HEAD
 import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
 
 class ButtonListAdapter (
     private var buttonsList: MutableList<Filter>
-=======
 
-class ButtonListAdapter (
-    private var buttonsList: MutableList<Button>
->>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
-=======
-import com.bifrost.cocinarte.entities.Filter
-import com.google.android.material.chip.Chip
-
-class ButtonListAdapter (
-    private var buttonsList: MutableList<Filter>
->>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
         ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>(){
 
     override fun onCreateViewHolder(
@@ -46,28 +26,13 @@ class ButtonListAdapter (
     }
 
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         holder.setName(buttonsList[position].name)
 
 
         holder.getCardLayout().setOnClickListener() {
            //TODO  onItemClick(buttonsList[position].nombreVino)
 
-=======
-        // TODO holder.setName(buttonsList[position].nombreVino)
-=======
-        holder.setName(buttonsList[position].name)
->>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
-
-
-        holder.getCardLayout().setOnClickListener() {
-           //TODO  onItemClick(buttonsList[position].nombreVino)
-<<<<<<< HEAD
->>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
-=======
-
->>>>>>> 61a0fb1 (COC-24- Stable pre test)
         }
     }
 
@@ -79,8 +44,7 @@ class ButtonListAdapter (
         }
 
         fun setName(name: String){
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             val txt : Button = view.findViewById(R.id.toggleButton)
             txt.setText(name)
         }
@@ -93,45 +57,23 @@ class ButtonListAdapter (
             val chip: Chip = view.findViewById(R.id.toggleButton)
             chip.closeIconTint
 
-=======
+
             //TODO  val txt : TextView = view.findViewById(R.id.wineName)
             //txt.text = name
         }
 
-        fun getCardLayout (): CardView {
-           //TODO return view.findViewById(R.id.cardView)//TODO
-<<<<<<< HEAD
->>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
-=======
-            return view.findViewById(R.id.buttonsRecView)
->>>>>>> 61a0fb1 (COC-24- Stable pre test)
-=======
+
             val txt : Button = view.findViewById(R.id.toggleButton)
-            txt.setText(name)
-        }
-
-        fun getCardLayout (): Button {
-            return view.findViewById(R.id.toggleButton)
-        }
-
-        fun onClick(){
-            val chip: Chip = view.findViewById(R.id.toggleButton)
-            chip.closeIconTint
-
->>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
-        }
 
     }
 
-    override fun getItemCount(): Int {
-<<<<<<< HEAD
-<<<<<<< HEAD
+        override fun getItemCount(): Int {
+
         return buttonsList.size
-=======
-        TODO("Not yet implemented")
->>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
-=======
-        return buttonsList.size
->>>>>>> 61a0fb1 (COC-24- Stable pre test)
-    }
-}
+
+            }
+        }
+
+
+
+

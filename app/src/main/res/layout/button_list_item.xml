@@ -2,34 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checkable="true"
-=======
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-=======
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
->>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/toggleButton"
+    <Button
+        android:id="@+id/buttonListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:text="Button"
->>>>>>> 097be13 (COC-24-Recycler View implementation WIP)
-=======
-        android:checkable="true"
->>>>>>> 82b2c6f (COC-24 Dynamic filters recView)
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
