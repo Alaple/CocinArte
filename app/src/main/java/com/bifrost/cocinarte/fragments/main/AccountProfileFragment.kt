@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments.login
+package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.login.AccountProfileViewModel
+import com.bifrost.cocinarte.models.main.AccountProfileViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class AccountProfileFragment : Fragment() {
@@ -116,13 +116,12 @@ class AccountProfileFragment : Fragment() {
     }
 
     private fun deleteAccountNavigation() {
-        val action = AccountProfileFragmentDirections.actionAccountProfileFragment2ToDeleteAccountFragment()
+        val action = AccountProfileFragmentDirections.actionAccountProfileFragmentToDeleteAccountFragment()
         v.findNavController().navigate(action)
     }
 
     private fun changePasswordNavigation() {
-        val action = AccountProfileFragmentDirections.actionAccountProfileFragment2ToResetPasswordFragment()
-        v.findNavController().navigate(action)
+        // TODO Dialog - ChangePassword
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
