@@ -57,4 +57,13 @@
         android:name="com.bifrost.cocinarte.fragments.main.PreparedFragment"
         android:label="prepared_fragment"
         tools:layout="@layout/prepared_fragment" />
+    <fragment
+        android:id="@+id/listIngredients"
+        android:name="com.bifrost.cocinarte.fragments.main.ListIngredients"
+        android:label="list_ingredients_fragment"
+        tools:layout="@layout/list_ingredients_fragment" >
+        <action
+            android:id="@+id/action_listIngredients_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
 </navigation>
