@@ -55,7 +55,8 @@ class UserProfileFragment : Fragment() {
 
     private fun initializeButtons() {
         txtAccountProfile.setOnClickListener() {
-            // TODO Navigation to Account and Profile
+            val action = UserProfileFragmentDirections.actionUserProfileFragmentToAccountProfileFragment()
+            v.findNavController().navigate(action)
         }
 
         txtRewards.setOnClickListener() {
@@ -79,7 +80,8 @@ class UserProfileFragment : Fragment() {
         }
 
         txtLogout.setOnClickListener() {
-            // TODO Navigation to Logout
+            val action = UserProfileFragmentDirections.actionUserProfileFragmentToLogOutFragment()
+            v.findNavController().navigate(action)
         }
     }
 

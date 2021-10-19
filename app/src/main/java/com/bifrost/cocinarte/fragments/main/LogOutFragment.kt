@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments.login
+package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.login.LogOutViewModel
+import com.bifrost.cocinarte.models.main.LogOutViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 class LogOutFragment : Fragment() {
 
@@ -44,7 +43,7 @@ class LogOutFragment : Fragment() {
         btnLogOut.setOnClickListener() {
             // TODO Logout
             auth.signOut()
-            val action = LogOutFragmentDirections.actionLogOutFragmentToStartedFragment()
+            val action = LogOutFragmentDirections.actionLogOutFragmentToLoginActivity()
             v.findNavController().navigate(action)
         }
     }

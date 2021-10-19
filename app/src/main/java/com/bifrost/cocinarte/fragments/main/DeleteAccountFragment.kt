@@ -1,4 +1,4 @@
-package com.bifrost.cocinarte.fragments.login
+package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.login.DeleteAccountViewModel
+import com.bifrost.cocinarte.models.main.DeleteAccountViewModel
 
 class DeleteAccountFragment : Fragment() {
 
@@ -39,7 +39,7 @@ class DeleteAccountFragment : Fragment() {
 
         btnDeleteAccount.setOnClickListener() {
             // TODO Delete account
-            val action = DeleteAccountFragmentDirections.actionDeleteAccountFragmentToStartedFragment()
+            val action = DeleteAccountFragmentDirections.actionDeleteAccountFragmentToLoginActivity()
             v.findNavController().navigate(action)
         }
     }
