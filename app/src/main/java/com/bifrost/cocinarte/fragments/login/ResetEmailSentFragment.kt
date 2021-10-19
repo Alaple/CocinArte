@@ -40,8 +40,8 @@ class ResetEmailSentFragment : Fragment() {
 
         btnBackToLogin.setOnClickListener() {
             // TODO Delete account
-            //val action = ResetEmailSentFragmentDirections.actionStartedFragmentToLogInFragment();
-            ///v.findNavController().navigate(action)
+            val action = ResetEmailSentFragmentDirections.actionResetEmailSentFragment2ToLogInFragment();
+            v.findNavController().navigate(action)
         }
     }
 

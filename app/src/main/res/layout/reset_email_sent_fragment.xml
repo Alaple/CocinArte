@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="172dp"
-        android:layout_height="18dp"
+        android:layout_width="185dp"
+        android:layout_height="19dp"
         android:text="We've sent you an email at"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,10 +58,10 @@
         android:textColor="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintHorizontal_bias="0.866"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
+        app:layout_constraintVertical_bias="0.193" />
 
     <TextView
         android:id="@+id/textView4"
