@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="CocinArte_primary">#FF2fdbbc</color>
+    <color name="CocinArte_secondary">#FF01887a</color>
+    <color name="CocinArte_input">#FFf4f4f4</color>
 </resources>
