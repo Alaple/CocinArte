@@ -39,7 +39,7 @@ class ResetPasswordFragment : Fragment() {
 
         btnResetPassword.setOnClickListener() {
             // TODO Reset password
-            val action = ResetPasswordFragmentDirections.actionResetPasswordFragmentToEmailSentFragment()
+            val action = ResetPasswordFragmentDirections.actionResetPasswordFragmentToResetEmailSentFragment2()
             v.findNavController().navigate(action)
         }
     }

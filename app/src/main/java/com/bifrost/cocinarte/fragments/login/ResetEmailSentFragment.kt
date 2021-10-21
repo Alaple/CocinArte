@@ -9,27 +9,28 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.models.login.EmailSentViewModel
+import com.bifrost.cocinarte.entities.Login
+import com.bifrost.cocinarte.models.login.ResetEmailSentViewModel
 
-class EmailSentFragment : Fragment() {
+class ResetEmailSentFragment : Fragment() {
 
     lateinit var v: View
 
-    lateinit var btnEmailSent: Button
+    lateinit var btnBackToLogin: Button
 
     companion object {
-        fun newInstance() = EmailSentFragment()
+        fun newInstance() = ResetEmailSentFragment()
     }
 
-    private lateinit var viewModel: EmailSentViewModel
+    private lateinit var viewModel: ResetEmailSentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.email_sent_fragment, container, false)
+        v = inflater.inflate(R.layout.reset_email_sent_fragment, container, false)
 
-        btnEmailSent = v.findViewById(R.id.btnEmailSent)
+        btnBackToLogin = v.findViewById(R.id.btnBackToLogin)
 
         return v
     }
@@ -37,15 +38,17 @@ class EmailSentFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        btnEmailSent.setOnClickListener() {
-            val action = EmailSentFragmentDirections.actionEmailSentFragmentToLogInFragment()
+        btnBackToLogin.setOnClickListener() {
+            // TODO Delete account
+            val action = ResetEmailSentFragmentDirections.actionResetEmailSentFragment2ToLogInFragment();
             v.findNavController().navigate(action)
         }
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EmailSentViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ResetEmailSentViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

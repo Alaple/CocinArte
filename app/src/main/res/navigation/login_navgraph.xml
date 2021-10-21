@@ -53,21 +53,21 @@
         android:label="reset_password_fragment"
         tools:layout="@layout/reset_password_fragment" >
         <action
-            android:id="@+id/action_resetPasswordFragment_to_emailSentFragment"
-            app:destination="@id/emailSentFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/emailSentFragment"
-        android:name="com.bifrost.cocinarte.fragments.login.EmailSentFragment"
-        android:label="email_sent_fragment"
-        tools:layout="@layout/email_sent_fragment" >
-        <action
-            android:id="@+id/action_emailSentFragment_to_logInFragment"
-            app:destination="@id/logInFragment" />
+            android:id="@+id/action_resetPasswordFragment_to_resetEmailSentFragment2"
+            app:destination="@id/resetEmailSentFragment2" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.bifrost.cocinarte.activities.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/resetEmailSentFragment2"
+        android:name="com.bifrost.cocinarte.fragments.login.ResetEmailSentFragment"
+        android:label="reset_email_sent_fragment"
+        tools:layout="@layout/reset_email_sent_fragment" >
+        <action
+            android:id="@+id/action_resetEmailSentFragment2_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
 </navigation>
