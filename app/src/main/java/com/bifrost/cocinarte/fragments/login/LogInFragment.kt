@@ -81,7 +81,7 @@ class LogInFragment : Fragment() {
         val currentUser = auth.currentUser
 
         // Initialize image variables
-        imageLogin.setImageResource(R.drawable.ic_launcher_background)
+        imageLogin.setImageResource(R.drawable.logo_cocinarte)
         // Initialize all text variables
         initializeText()
 

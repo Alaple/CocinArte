@@ -9,6 +9,8 @@ import com.bifrost.cocinarte.R
 class SplashScreenActivity : AppCompatActivity() {
 
     lateinit var handler: Handler
+    private val SPLASH_TIME_OUT:Long = 2000
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -19,6 +21,6 @@ class SplashScreenActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, SPLASH_TIME_OUT)
     }
 }

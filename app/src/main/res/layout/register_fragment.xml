@@ -24,6 +24,7 @@
 
     <TextView
         android:id="@+id/textFullName"
+        android:textColor="@color/CocinArte_primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -38,13 +39,15 @@
 
     <EditText
         android:id="@+id/inputFullName"
+        android:background="@drawable/input_round_style"
+        android:paddingLeft="30dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
-        android:hint="Jhon Doe"
+        android:hint="John Doe"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/textEmail"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +56,7 @@
 
     <TextView
         android:id="@+id/textEmail"
+        android:textColor="@color/CocinArte_primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -67,13 +71,15 @@
 
     <EditText
         android:id="@+id/inputEmail"
+        android:background="@drawable/input_round_style"
+        android:paddingLeft="30dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
-        android:hint="jhondoe@email.com"
+        android:hint="johndoe@email.com"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +88,7 @@
 
     <TextView
         android:id="@+id/textPassword"
+        android:textColor="@color/CocinArte_primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -96,6 +103,8 @@
 
     <EditText
         android:id="@+id/inputPassword"
+        android:background="@drawable/input_round_style"
+        android:paddingLeft="30dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -110,6 +119,7 @@
 
     <Button
         android:id="@+id/buttonRegister"
+        android:background="@drawable/roundstyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

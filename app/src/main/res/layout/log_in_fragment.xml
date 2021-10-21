@@ -19,27 +19,29 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageLogin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="350dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/logo_cocinarte"
         app:layout_constraintBottom_toTopOf="@+id/textEmail"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textLogIn"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/textLogIn" />
 
     <TextView
         android:id="@+id/textEmail"
+        android:textColor="@color/CocinArte_primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="60dp"
         android:layout_marginEnd="32dp"
         android:text="EMAIL"
         android:textSize="12sp"
@@ -51,24 +53,28 @@
 
     <EditText
         android:id="@+id/inputEmail"
+        android:background="@drawable/input_round_style"
+        android:paddingLeft="30dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
-        android:hint="jhondoe@email.com"
+        android:hint="johndoe@email.com"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmail" />
 
     <TextView
         android:id="@+id/textPassword"
+        android:textColor="@color/CocinArte_primary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="60dp"
         android:layout_marginEnd="32dp"
         android:text="PASSWORD"
         android:textSize="12sp"
@@ -80,6 +86,8 @@
 
     <EditText
         android:id="@+id/inputPassword"
+        android:background="@drawable/input_round_style"
+        android:paddingLeft="30dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -110,6 +118,7 @@
 
     <Button
         android:id="@+id/buttonLogIn"
+        android:background="@drawable/roundstyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -128,13 +137,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="20dp"
         android:text="YOU DON`T HAVE AN ACCOUNT? REGISTER"
         android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLogIn" />
 
