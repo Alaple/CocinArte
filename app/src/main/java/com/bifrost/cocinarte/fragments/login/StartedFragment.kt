@@ -1,5 +1,6 @@
 package com.bifrost.cocinarte.fragments.login
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +13,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.StartedViewModel
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import com.google.android.material.snackbar.Snackbar
 
 class StartedFragment : Fragment() {
@@ -64,11 +68,13 @@ class StartedFragment : Fragment() {
     }
 
     private fun initializeText() {
-        txtStarted.setText("GET STARTED!")
+
         msgStarted.setText("Get started and enjoy the awesome food recepies that we have for you!")
         btnLogin.setText("LOGIN")
         btnRegister.setText("REGISTER")
         txtSkip.setText("SKIP THIS PART")
+        coloredText()
+
     }
 
     private fun initializeButtons() {
@@ -96,5 +102,17 @@ class StartedFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(StartedViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
+    private fun coloredText() {
+
+        val spannableString = SpannableString("GET STARTED")
+
+        val fColor = ForegroundColorSpan(Color.rgb(47, 219, 188))
+        spannableString.setSpan(fColor, 4, 11, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+
+        txtStarted.text = spannableString
+    }
+
+
 
 }
