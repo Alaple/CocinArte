@@ -103,4 +103,9 @@
         android:name="com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment"
         android:label="fragment_reset_password_dialog"
         tools:layout="@layout/fragment_reset_password_dialog" />
+    <fragment
+        android:id="@+id/listIngredients3"
+        android:name="com.bifrost.cocinarte.fragments.main.ListIngredients"
+        android:label="list_ingredients_fragment"
+        tools:layout="@layout/list_ingredients_fragment" />
 </navigation>
