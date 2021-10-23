@@ -80,10 +80,9 @@ class AccountProfileFragment : Fragment() {
     }
 
     private fun initializeText() {
-        txtAccount.setText("Account and profile")
-        txtFirstName.setText("First name")
-        txtLastName.setText("Last name")
-        txtEmail.setText("Email")
+        txtAccount.setText("ACCOUNT AND PROFILE")
+        txtFirstName.setText("FULL NAME")
+        txtEmail.setText("EMAIL")
         txtDeleteAccount.setText("Delete account")
         txtChangePassword.setText("Change Password")
     }
