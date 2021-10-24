@@ -6,36 +6,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardRecipe"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="88dp"
     android:layout_margin="8dp"
     android:backgroundTintMode="add"
-    app:cardCornerRadius="20dp"
     app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imgRecipe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:scaleType="fitEnd"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:srcCompat="@drawable/lacinato_salad" />
+            app:srcCompat="@drawable/thai_salad" />
 
         <TextView
             android:id="@+id/txtRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Lacinato Salad"
-            android:textSize="30sp"
+            android:layout_marginStart="116dp"
+            android:text="Salad"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

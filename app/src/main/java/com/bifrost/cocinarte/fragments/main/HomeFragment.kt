@@ -38,10 +38,10 @@ class HomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        recipes.add(Recipe("lacinato_salad", "lacinato_salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-        recipes.add(Recipe("shaved_salad", "shaved_salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-        recipes.add(Recipe("shredded_salad", "shredded_salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-        recipes.add(Recipe("thai_salad", "thai_salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+        recipes.add(Recipe("lacinato_salad", "Lacinato Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+        recipes.add(Recipe("shaved_salad", "Shaved Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+        recipes.add(Recipe("shredded_salad", "Shredded Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+        recipes.add(Recipe("thai_salad", "Thai Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
 
         recRecipe.setHasFixedSize(true)
         recRecipe.layoutManager = LinearLayoutManager(context)

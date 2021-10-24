@@ -1,6 +1,6 @@
 package com.bifrost.cocinarte.adapter
 
-import android.net.Uri
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +10,13 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.entities.Recipe
 import com.bifrost.cocinarte.R
+import java.io.InputStream
+import java.lang.Exception
+import java.net.URL
 
 class RecipeAdapter (
-    var recipes : MutableList <Recipe>,
-    var onClick : (Int) -> Unit
+    private var recipes : MutableList <Recipe>,
+    private var onClick : (Int) -> Unit
 ) : RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
@@ -41,15 +44,20 @@ class RecipeAdapter (
         }
 
         fun setTitle (title : String) {
-            var txtRecipe : TextView = view.findViewById(R.id.txtRecipe)
+            val txtRecipe : TextView = view.findViewById(R.id.txtRecipe)
             txtRecipe.text = title
         }
 
         fun setImage (image : String) {
-            var imgRecipe : ImageView = view.findViewById(R.id.imgRecipe)
-            val uri: Uri = Uri.parse(image)
-            //imgRecipe.setImageURI(uri)
-            imgRecipe.setImageResource(R.drawable.lacinato_salad)
+            val imgRecipe : ImageView = view.findViewById(R.id.imgRecipe)
+
+            try {
+                val `is`: InputStream = URL(image).content as InputStream
+                val imgDrawable = Drawable.createFromStream(`is`, "src image")
+                imgRecipe.setImageDrawable(imgDrawable)
+            } catch (e: Exception) {
+                // No fue posible cargar la imagen.
+            }
         }
 
         fun getCardView () : CardView {
