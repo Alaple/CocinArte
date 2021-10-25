@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.113" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/btnDeleteAccount"
         android:layout_width="310dp"
         android:layout_height="40dp"
@@ -40,8 +40,13 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="339dp"
-        android:layout_height="115dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/poppins"
+        android:textSize="15sp"
+        android:textStyle="bold"
         android:text="We'll remove all your account information from our servers, including your preferences and achievements. \n\nKeep in mind that this action cannot be undone."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

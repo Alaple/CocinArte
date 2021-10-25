@@ -1,7 +1,11 @@
 package com.bifrost.cocinarte.fragments.login
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -81,7 +85,7 @@ class LogInFragment : Fragment() {
         val currentUser = auth.currentUser
 
         // Initialize image variables
-        imageLogin.setImageResource(R.drawable.ic_launcher_background)
+        imageLogin.setImageResource(R.drawable.logo_cocinarte)
         // Initialize all text variables
         initializeText()
 
@@ -97,7 +101,7 @@ class LogInFragment : Fragment() {
         inputPassword.setHint("Password")
         txtForgotPassword.setText("FORGOT PASSWORD?")
         btnLogin.setText("LOGIN")
-        txtRegister.setText("YOU DON`T HAVE AN ACCOUNT? REGISTER")
+        coloredText()
     }
 
     private fun initializeButtons() {
@@ -138,4 +142,15 @@ class LogInFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(LogInViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
+    private fun coloredText() {
+
+        val spannableString = SpannableString("YOU DON'T HAVE AN ACCOUNT? REGISTER")
+
+        val fColor = ForegroundColorSpan(Color.rgb(47, 219, 188))
+        spannableString.setSpan(fColor, 27, 35, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+
+        txtRegister.text = spannableString
+    }
 }
+
