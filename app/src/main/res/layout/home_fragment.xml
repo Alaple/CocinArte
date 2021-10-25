@@ -1,29 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeFrameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.main.HomeFragment">
-
-    <TextView
-        android:id="@+id/txtGreetings"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="Hello!"
-        android:textAlignment="viewStart"
-        android:textAllCaps="true"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-=======
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,12 +6,12 @@
     android:id="@+id/homeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment" >
+    tools:context=".fragments.main.HomeFragment" >
 
     <ImageView
         android:id="@+id/imgWelcome"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="156dp"
         android:layout_marginTop="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
@@ -60,23 +35,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgWelcome" />
 
-    <GridView
-        android:id="@+id/gridRecommended"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRecommended"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="@dimen/margin_bottom"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_top"
         android:layout_marginStart="@dimen/margin_start"
         android:layout_marginEnd="@dimen/margin_end"
-        android:columnWidth="120dp"
-        android:horizontalSpacing="4dp"
-        android:numColumns="auto_fit"
-        android:padding="1dp"
-        android:verticalSpacing="4dp"
+        android:layout_marginBottom="@dimen/margin_bottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRecommended"
-        app:layout_constraintBottom_toBottomOf="parent"/>
->>>>>>> 476836e (Se trabajo en la estructura del card de recetas y el home de la aplicación.)
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
