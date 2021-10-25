@@ -70,7 +70,7 @@ class RegisterFragment : Fragment() {
         txtLogIn = v.findViewById(R.id.textLogin)
 
         // For snackbar use
-        rootLayout = v.findViewById(R.id.LoginLayout)
+        rootLayout = v.findViewById(R.id.registerLayout)
 
         //Firebase
         database= FirebaseDatabase.getInstance()
