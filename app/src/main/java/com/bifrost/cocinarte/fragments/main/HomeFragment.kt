@@ -17,7 +17,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var v: View
 
-    private lateinit var viewModel: com.bifrost.cocinarte.models.HomeViewModel
+    private lateinit var viewModel: HomeViewModel
     private lateinit var recRecipe: RecyclerView
 
     private var recipes: MutableList<Recipe> = ArrayList<Recipe>()
@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(com.bifrost.cocinarte.models.HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
