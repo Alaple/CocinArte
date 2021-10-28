@@ -7,12 +7,12 @@
         android:title="Account And Profile" />
 
     <!-- TODO Agregar item SEARCH (PR Julian Alvarez)-->
-    <!--
+
     <item
-        android:id="@+id/"
+        android:id="@+id/listIngredients3"
         android:icon="@drawable/icon_search"
         android:title="Search" />
-    -->
+
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/icon_home"
