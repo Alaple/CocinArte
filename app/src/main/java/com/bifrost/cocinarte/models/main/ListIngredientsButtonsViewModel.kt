@@ -3,7 +3,13 @@ package com.bifrost.cocinarte.models.main
 import android.util.Log
 import android.widget.Button
 import androidx.lifecycle.ViewModel
+import com.bifrost.cocinarte.entities.ApiCaller
 import com.bifrost.cocinarte.entities.Filter
+import com.bifrost.cocinarte.entities.RecipesDataCollectionItem
+import com.bifrost.cocinarte.entities.RestEngine
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ListIngredientsButtonsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
@@ -40,6 +46,28 @@ class ListIngredientsButtonsViewModel: ViewModel() {
         buttonsList.add(button6)
 
 
+    }
+
+    fun searchRecipe(ingredient: String): Call<List<RecipesDataCollectionItem>> {
+        val appId: String = "9f9ee2ec"
+        val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
+        val type: String = "public"
+        val userService: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
+        val result : Call<List<RecipesDataCollectionItem>> = userService.listRecipes(type,ingredient, appId, apiKey)
+
+        result.enqueue(object: Callback<List<RecipesDataCollectionItem>> {
+            override fun onFailure(call: Call<List<RecipesDataCollectionItem>>, t: Throwable) {
+                Log.d("Response", "Error")
+            }
+
+            override fun onResponse(call: Call<List<RecipesDataCollectionItem>>, response: Response<List<RecipesDataCollectionItem>>) {
+                Log.d("Response","OK - CODE: " + response.code() +"Message: "+ response.message())
+                Log.d("response", response.body().toString())
+
+            }
+        })
+
+        return result
     }
 
 

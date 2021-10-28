@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +28,7 @@ class ListIngredients : Fragment() {
 
     lateinit var searchBar : TextInputEditText
     lateinit var buttons: RecyclerView
+    lateinit var searchButton: ImageButton
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var buttonListAdapter: ButtonListAdapter
     private lateinit var buttonsViewModel: ListIngredientsButtonsViewModel
@@ -43,13 +46,17 @@ class ListIngredients : Fragment() {
         searchBar = v.findViewById(R.id.searchBar)
         buttons = v.findViewById(R.id.buttonsRecView)
 
+        searchButton = v.findViewById(R.id.searchBarButton)
+
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsButtonsViewModel::class.java)
 
         buttonsViewModel.cargarTest()
 
-        //Loadlist Test
 
-        loadList()
+
+        searchButton.setOnClickListener(){
+            buttonsViewModel.searchRecipe(searchBar.text.toString())
+        }
 
         // Inflate the layout for this fragment
         return v
@@ -69,24 +76,7 @@ class ListIngredients : Fragment() {
 
     }
 
-    private fun loadList(){
 
-        val appId: String = "9f9ee2ec"
-        val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
-        val userService: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
-        val result : Call<List<RecipesDataCollectionItem>> = userService.listRecipes("public","Chicken", appId, apiKey)
-
-        result.enqueue(object: Callback<List<RecipesDataCollectionItem>> {
-            override fun onFailure(call: Call<List<RecipesDataCollectionItem>>, t: Throwable) {
-                Log.d("Response", "Error")
-            }
-
-            override fun onResponse(call: Call<List<RecipesDataCollectionItem>>, response: Response<List<RecipesDataCollectionItem>>) {
-                Log.d("Response","OK - CODE: " + response.code() +"Message: "+ response.message())
-                Log.d("response", response.body().toString())
-            }
-        })
-    }
 
 
 }
