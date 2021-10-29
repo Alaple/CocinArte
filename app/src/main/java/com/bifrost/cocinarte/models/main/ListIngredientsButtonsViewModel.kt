@@ -3,16 +3,14 @@ package com.bifrost.cocinarte.models.main
 import android.util.Log
 import android.widget.Button
 import androidx.lifecycle.ViewModel
-import com.bifrost.cocinarte.entities.ApiCaller
-import com.bifrost.cocinarte.entities.Filter
-import com.bifrost.cocinarte.entities.RecipesDataCollectionItem
-import com.bifrost.cocinarte.entities.RestEngine
+import com.bifrost.cocinarte.entities.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ListIngredientsButtonsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
+    var listaRecetas: List<Recipe>? = ArrayList<Recipe>()
 
     //TEST
     lateinit var button1 : Filter
@@ -48,27 +46,31 @@ class ListIngredientsButtonsViewModel: ViewModel() {
 
     }
 
-    fun searchRecipe(ingredient: String): Call<List<RecipesDataCollectionItem>> {
+    fun searchRecipe(ingredient: String): List<Recipe>? {
         val appId: String = "9f9ee2ec"
         val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
         val type: String = "public"
-        val userService: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
-        val result : Call<List<RecipesDataCollectionItem>> = userService.listRecipes(type,ingredient, appId, apiKey)
 
-        result.enqueue(object: Callback<List<RecipesDataCollectionItem>> {
-            override fun onFailure(call: Call<List<RecipesDataCollectionItem>>, t: Throwable) {
+        val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
+        val result : Call<List<Recipe>> = apiCaller.listRecipes(type,ingredient, appId, apiKey)
+
+        result.enqueue(object: Callback<List<Recipe>> {
+            override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
                 Log.d("Response", "Error")
+                Log.d("Error: ", t.message.toString())
             }
 
-            override fun onResponse(call: Call<List<RecipesDataCollectionItem>>, response: Response<List<RecipesDataCollectionItem>>) {
+            override fun onResponse(call: Call<List<Recipe>>, response: Response<List<Recipe>>) {
                 Log.d("Response","OK - CODE: " + response.code() +"Message: "+ response.message())
                 Log.d("response", response.body().toString())
+                listaRecetas =  response.body()
 
             }
         })
 
-        return result
+        return listaRecetas
     }
+
 
 
 

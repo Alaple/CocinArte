@@ -8,6 +8,6 @@ import retrofit2.http.Url
 
 interface ApiCaller {
     @GET("v2")
-    fun listRecipes(@Query("type") type: String, @Query("q") search: String, @Query("app_id") key: String, @Query("app_key") appKey: String): Call<List<RecipesDataCollectionItem>>
+    fun listRecipes(@Query("type") type: String, @Query("q") search: String, @Query("app_id") key: String, @Query("app_key") appKey: String): Call<List<Recipe>>
 
 }

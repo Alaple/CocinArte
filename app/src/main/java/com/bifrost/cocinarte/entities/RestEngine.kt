@@ -10,11 +10,10 @@ class RestEngine {
         fun getRestEngine(): Retrofit{
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            //val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl("https://api.edamam.com/api/recipes/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
                 .build()
 
             return retrofit

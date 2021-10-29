@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapters.ButtonListAdapter
+import com.bifrost.cocinarte.adapters.RecipesListAdapter
 import com.bifrost.cocinarte.entities.ApiCaller
 import com.bifrost.cocinarte.entities.RecipesDataCollectionItem
 import com.bifrost.cocinarte.entities.RestEngine
@@ -28,9 +29,11 @@ class ListIngredients : Fragment() {
 
     lateinit var searchBar : TextInputEditText
     lateinit var buttons: RecyclerView
+    lateinit var recipesRecView : RecyclerView
     lateinit var searchButton: ImageButton
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var buttonListAdapter: ButtonListAdapter
+    private lateinit var recipesListAdapter: RecipesListAdapter
     private lateinit var buttonsViewModel: ListIngredientsButtonsViewModel
     lateinit var v: View
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +48,8 @@ class ListIngredients : Fragment() {
         v =inflater.inflate(R.layout.list_ingredients_fragment, container, false)
         searchBar = v.findViewById(R.id.searchBar)
         buttons = v.findViewById(R.id.buttonsRecView)
-
+        recipesRecView = v.findViewById(R.id.recipesRecView)
         searchButton = v.findViewById(R.id.searchBarButton)
-
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsButtonsViewModel::class.java)
 
         buttonsViewModel.cargarTest()
@@ -73,6 +75,11 @@ class ListIngredients : Fragment() {
         buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList)
 
         buttons.adapter = buttonListAdapter
+
+        recipesRecView.setHasFixedSize(true)
+        recipesRecView.layoutManager = LinearLayoutManager(context)
+        recipesListAdapter = RecipesListAdapter(buttonsViewModel.listaRecetas as MutableList<RecipesDataCollectionItem>)
+        recipesRecView.adapter = recipesListAdapter
 
     }
 
