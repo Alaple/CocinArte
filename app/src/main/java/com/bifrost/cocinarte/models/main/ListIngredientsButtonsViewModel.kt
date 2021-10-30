@@ -10,7 +10,7 @@ import retrofit2.Response
 
 class ListIngredientsButtonsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
-    var listaRecetas: List<Recipe>? = ArrayList<Recipe>()
+    var listaRecetas: List<RecipeHit>? = ArrayList<RecipeHit>()
 
     //TEST
     lateinit var button1 : Filter
@@ -46,29 +46,35 @@ class ListIngredientsButtonsViewModel: ViewModel() {
 
     }
 
-    fun searchRecipe(ingredient: String): List<Recipe>? {
+    fun searchRecipe(ingredient: String) {
         val appId: String = "9f9ee2ec"
         val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
         val type: String = "public"
 
         val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
-        val result : Call<List<Recipe>> = apiCaller.listRecipes(type,ingredient, appId, apiKey)
+        val result : Call<EdamamResponse> = apiCaller.listRecipes(type,ingredient, appId, apiKey)
 
-        result.enqueue(object: Callback<List<Recipe>> {
-            override fun onFailure(call: Call<List<Recipe>>, t: Throwable) {
+       result.enqueue(object: Callback<EdamamResponse> {
+            override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
                 Log.d("Response", "Error")
                 Log.d("Error: ", t.message.toString())
             }
 
-            override fun onResponse(call: Call<List<Recipe>>, response: Response<List<Recipe>>) {
-                Log.d("Response","OK - CODE: " + response.code() +"Message: "+ response.message())
-                Log.d("response", response.body().toString())
-                listaRecetas =  response.body()
+            override fun onResponse(call: Call<EdamamResponse>, response: Response<EdamamResponse>) {
+                Log.d("Response","OK - CODE: " + response.code() +" Message: "+ response.message())
+                if(!response.isSuccessful){
+                    Log.d("Error", "No response")
+                    return
+                }
+                var apiResponse = response.body()
+                if (apiResponse != null) {
+                    listaRecetas = apiResponse.getHits()
+                }
 
             }
         })
 
-        return listaRecetas
+       // return listaRecetas
     }
 
 

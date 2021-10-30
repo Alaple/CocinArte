@@ -1,5 +1,8 @@
 package com.bifrost.cocinarte.entities
 
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+
 class Recipe (
     id : String,
     title : String,
@@ -15,15 +18,35 @@ class Recipe (
 
 ) {
 
+    @SerializedName("")
+    @Expose
     var title : String = title
+    @SerializedName("")
+    @Expose
     var description: String = description
+    @SerializedName("")
+    @Expose
     var yield: Int = `yield`
+    @SerializedName("")
+    @Expose
     var image_url: String = image_url
+    @SerializedName("")
+    @Expose
     var calories: Float = calories
+    @SerializedName("")
+    @Expose
     var dietLabel: MutableList<DietLabel> = dietLabel
+    @SerializedName("")
+    @Expose
     var ingredients: MutableList<Ingredient> = ingredients
+    @SerializedName("")
+    @Expose
     var mealType: MutableList<MealType> = mealType
+    @SerializedName("")
+    @Expose
     var cuisineType: MutableList<CuisineType> = cuisineType
+    @SerializedName("")
+    @Expose
     var category: MutableList<Category> = category
 
     init {
@@ -42,4 +65,6 @@ class Recipe (
     fun prepare(cocina:String){
 
     }
+
+
 }
