@@ -1,19 +1,18 @@
 package com.bifrost.cocinarte.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
 
-class ButtonListAdapter (
-    private var buttonsList: MutableList<Filter>
+class ButtonListAdapter(
+    private var buttonsList: MutableList<Filter>,
+    val onItemsClick: (Int, String) -> Unit
+
 
         ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>(){
 
@@ -32,7 +31,7 @@ class ButtonListAdapter (
 
         holder.getCardLayout().setOnClickListener() {
            //TODO  onItemClick(buttonsList[position].nombreVino)
-
+            onItemsClick(position, "")
         }
     }
 
