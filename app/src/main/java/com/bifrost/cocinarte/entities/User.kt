@@ -10,7 +10,6 @@ class User(
         password: String,
         reward: MutableList<Reward>,
         userPrefence: Preference,
-        token: AccessToken,
         favorite: MutableList<Favorite>,
         preparedRecipe: MutableList<Prepared>,
         profile: Category
@@ -22,7 +21,6 @@ class User(
     var level: Int
     var reward: MutableList<Reward>
     var userPrefence: Preference
-    var token: AccessToken
     var favorite: MutableList<Favorite>
     var preparedRecipe: MutableList<Prepared>
     var profile: Category
@@ -36,7 +34,6 @@ class User(
         this.level = 0
         this.reward = reward
         this.userPrefence = userPrefence
-        this.token = token
         this.favorite = favorite
         this.preparedRecipe = preparedRecipe
         this.profile = profile

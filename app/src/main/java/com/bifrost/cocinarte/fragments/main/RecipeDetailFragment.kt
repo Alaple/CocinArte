@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bifrost.cocinarte.entities.Recipe
 import com.google.android.material.snackbar.Snackbar
 
 class RecipeDetailFragment : Fragment() {
@@ -48,30 +49,25 @@ class RecipeDetailFragment : Fragment() {
         btnPrepare = v.findViewById(R.id.btnPrepare)
 
         // For snackbar use
-        rootLayout = v.findViewById(R.id.LoginLayout)
+        rootLayout = v.findViewById(R.id.RecipeDetailLayout)
 
         return v
     }
 
-    private fun initializeText() {
-        txtRecipe.setText("SALMON")
-        txtTitle.setText("DESCRIPTION")
-        txtDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
-        btnPrepare.setText("PREPARE")
-    }
+    override fun onStart() {
+        super.onStart()
 
-    private fun initializeButtons() {
         // PREPARE button
         btnPrepare.setOnClickListener() {
-            // TODO Prepare
-            Snackbar.make(rootLayout, "TODO PREPARE", Snackbar.LENGTH_SHORT).show()
+            // TODO Reeplace "recipeId" with the real id
+            viewModel.prepare("recipeId")
+            Snackbar.make(rootLayout, "MARK AS PREPARE", Snackbar.LENGTH_LONG).show()
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
