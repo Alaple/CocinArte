@@ -52,13 +52,14 @@ class ListIngredients : Fragment() {
 
 
         searchButton.setOnClickListener(){
-            Log.d("Filters:", filterArgList.toString())
-            buttonsViewModel.searchRecipe(searchBar.text.toString())
+
+            buttonsViewModel.searchRecipe(searchBar.text.toString(), filterArgList as ArrayList<String>)
         }
 
         // Inflate the layout for this fragment
         return v
     }
+
 
     override fun onStart() {
         super.onStart()
