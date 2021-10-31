@@ -7,6 +7,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import androidx.lifecycle.viewModelScope
+import com.bifrost.cocinarte.entities.RecipeHit
 
 class RecipeDetailViewModel : ViewModel() {
 
@@ -14,6 +16,12 @@ class RecipeDetailViewModel : ViewModel() {
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
+
+    lateinit var listIngredientsButtonsViewModel: ListIngredientsButtonsViewModel
+
+    fun getRecipe(recipeIndex: Int): RecipeHit? {
+        return listIngredientsButtonsViewModel.listaRecetas?.get(recipeIndex)
+    }
 
     fun prepare(recipeId : String) {
         // TODO Get User Data

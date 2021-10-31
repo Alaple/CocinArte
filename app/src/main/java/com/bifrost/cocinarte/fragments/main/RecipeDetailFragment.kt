@@ -12,7 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.bifrost.cocinarte.entities.Recipe
+import com.bifrost.cocinarte.entities.RecipeHit
 import com.google.android.material.snackbar.Snackbar
 
 class RecipeDetailFragment : Fragment() {
@@ -25,6 +25,8 @@ class RecipeDetailFragment : Fragment() {
     lateinit var txtTitle: TextView
     lateinit var txtDescription: TextView
     lateinit var btnPrepare: Button
+
+
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
@@ -56,6 +58,18 @@ class RecipeDetailFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        // TODO Send from ListIngredientsButtons the recipe index
+        //var recipe = viewModel.getRecipe(RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipeIndex)
+
+        //initializeText(recipe)
+    }
+
+    private fun initializeText(recipe: RecipeHit?) {
+        if (recipe != null) {
+            txtRecipe.setText(recipe.label)
+            txtDescription.setText(recipe.ingredients?.joinToString("/n"))
+        }
 
         // PREPARE button
         btnPrepare.setOnClickListener() {
