@@ -1,6 +1,7 @@
 package com.bifrost.cocinarte.models.main
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bifrost.cocinarte.entities.*
 import retrofit2.Call
@@ -9,7 +10,8 @@ import retrofit2.Response
 
 class ListIngredientsButtonsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
-    var listaRecetas: List<RecipeHit>? = ArrayList<RecipeHit>()
+    var listaRecetas: MutableList<RecipeHit> = mutableListOf()
+    var listaRecetasLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
 
     //TEST
     lateinit var button1 : Filter
@@ -68,6 +70,8 @@ class ListIngredientsButtonsViewModel: ViewModel() {
                 var apiResponse = response.body()
                 if (apiResponse != null) {
                     listaRecetas = apiResponse.getHits()
+
+                    listaRecetasLiveData.value = listaRecetas
                 }
 
             }

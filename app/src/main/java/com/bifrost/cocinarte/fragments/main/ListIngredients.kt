@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -75,8 +76,15 @@ class ListIngredients : Fragment() {
 
         recipesRecView.setHasFixedSize(true)
         recipesRecView.layoutManager = LinearLayoutManager(context)
-        recipesListAdapter = RecipesListAdapter(buttonsViewModel.listaRecetas as MutableList<RecipesDataCollectionItem>)
+        recipesListAdapter = RecipesListAdapter()
         recipesRecView.adapter = recipesListAdapter
+
+        //Observer
+
+        buttonsViewModel.listaRecetasLiveData.observe(viewLifecycleOwner, Observer { result ->
+            recipesListAdapter.setData(result)
+            recipesRecView.adapter = recipesListAdapter
+        })
 
     }
 
