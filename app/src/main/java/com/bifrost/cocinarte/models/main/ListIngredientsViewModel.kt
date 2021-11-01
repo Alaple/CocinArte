@@ -1,39 +1,28 @@
 package com.bifrost.cocinarte.models.main
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bifrost.cocinarte.entities.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListIngredientsButtonsViewModel: ViewModel() {
+class ListIngredientsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
-    var listaRecetas: List<RecipeHit>? = ArrayList<RecipeHit>()
-
-    //TEST
-    lateinit var button1 : Filter
-    lateinit var button2: Filter
-    lateinit var button3: Filter
-    lateinit var button4: Filter
-    lateinit var button5: Filter
-    lateinit var button6: Filter
+    var listaRecetas: MutableList<RecipeHit> = mutableListOf()
+    var listaRecetasLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
 
 
-    fun cargarTest(){
 
-        button1 = Filter("Vegetarian", "vegetarian")
+    fun loadButtons(){
 
-        button2 = Filter("Celiac", "celiac")
-
-        button3 = Filter("Amigo", "amigo")
-
-        button4 = Filter("Carnivoro", "carnivoro")
-
-        button5 = Filter("Kosher", "kosher")
-
-        button6 = Filter("Otro", "otro")
-
+        var button1 = Filter("Vegetarian", "vegetarian")
+        var button2 = Filter("Gluten-Free", "gluten-free")
+        var button3 = Filter("Keto", "keto-friendly")
+        var button4 = Filter("Low Sugar", "low-sugar")
+        var button5 = Filter("Kosher", "kosher")
+        var button6 = Filter("Vegan", "vegan")
 
         buttonsList.add(button1)
         buttonsList.add(button2)
@@ -68,6 +57,8 @@ class ListIngredientsButtonsViewModel: ViewModel() {
                 var apiResponse = response.body()
                 if (apiResponse != null) {
                     listaRecetas = apiResponse.getHits()
+
+                    listaRecetasLiveData.value = listaRecetas
                 }
 
             }

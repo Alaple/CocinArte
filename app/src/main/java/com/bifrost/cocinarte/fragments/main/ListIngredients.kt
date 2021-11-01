@@ -1,21 +1,21 @@
 package com.bifrost.cocinarte.fragments.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapters.ButtonListAdapter
 import com.bifrost.cocinarte.adapters.RecipesListAdapter
-import com.bifrost.cocinarte.entities.RecipesDataCollectionItem
-import com.bifrost.cocinarte.models.main.ListIngredientsButtonsViewModel
+import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 class ListIngredients : Fragment() {
@@ -28,7 +28,7 @@ class ListIngredients : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var buttonListAdapter: ButtonListAdapter
     private lateinit var recipesListAdapter: RecipesListAdapter
-    private lateinit var buttonsViewModel: ListIngredientsButtonsViewModel
+    private lateinit var buttonsViewModel: ListIngredientsViewModel
     private lateinit var filterArgList: MutableList<String>
     lateinit var v: View
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +45,9 @@ class ListIngredients : Fragment() {
         buttons = v.findViewById(R.id.buttonsRecView)
         recipesRecView = v.findViewById(R.id.recipesRecView)
         searchButton = v.findViewById(R.id.searchBarButton)
-        buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsButtonsViewModel::class.java)
+        buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
         filterArgList = ArrayList()
-        buttonsViewModel.cargarTest()
+        buttonsViewModel.loadButtons()
 
 
 
@@ -75,13 +75,27 @@ class ListIngredients : Fragment() {
 
         recipesRecView.setHasFixedSize(true)
         recipesRecView.layoutManager = LinearLayoutManager(context)
-        recipesListAdapter = RecipesListAdapter(buttonsViewModel.listaRecetas as MutableList<RecipesDataCollectionItem>)
+        recipesListAdapter = RecipesListAdapter{ x -> onCardItemClick(x) }
         recipesRecView.adapter = recipesListAdapter
+
+        //Observer
+
+        buttonsViewModel.listaRecetasLiveData.observe(viewLifecycleOwner, Observer { result ->
+            recipesListAdapter.setData(result)
+            recipesRecView.adapter = recipesListAdapter
+        })
 
     }
 
     private fun onItemsClick(position: Int, y: String) {
         filterArgList.add(buttonsViewModel.buttonsList[position].filterName)
+    }
+
+    private fun onCardItemClick(position: Int): Boolean{
+        var action = ListIngredientsDirections.actionListIngredients3ToRecipeDetailFragment(position)
+        var navController = v.findNavController()
+        navController.navigate(action)
+        return true
     }
 
 

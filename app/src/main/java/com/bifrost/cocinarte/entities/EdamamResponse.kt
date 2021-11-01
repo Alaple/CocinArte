@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
 class EdamamResponse {
     @SerializedName("hits")
     @Expose
-    var hitList =  ArrayList<RecipeHit>()
+    var hitList: MutableList<RecipeHit> = mutableListOf()
 
-    fun getHits(): ArrayList<RecipeHit>{
+    fun getHits(): MutableList<RecipeHit>{
       return hitList
     }
 
