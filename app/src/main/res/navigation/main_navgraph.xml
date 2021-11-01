@@ -52,6 +52,10 @@
         <action
             android:id="@+id/action_recipeDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="recipePosition"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/favouritesFragment"
@@ -107,5 +111,9 @@
         android:id="@+id/listIngredients3"
         android:name="com.bifrost.cocinarte.fragments.main.ListIngredients"
         android:label="list_ingredients_fragment"
-        tools:layout="@layout/list_ingredients_fragment" />
+        tools:layout="@layout/list_ingredients_fragment" >
+        <action
+            android:id="@+id/action_listIngredients3_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
 </navigation>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -76,7 +77,7 @@ class ListIngredients : Fragment() {
 
         recipesRecView.setHasFixedSize(true)
         recipesRecView.layoutManager = LinearLayoutManager(context)
-        recipesListAdapter = RecipesListAdapter()
+        recipesListAdapter = RecipesListAdapter{ x -> onCardItemClick(x) }
         recipesRecView.adapter = recipesListAdapter
 
         //Observer
@@ -90,6 +91,13 @@ class ListIngredients : Fragment() {
 
     private fun onItemsClick(position: Int, y: String) {
         filterArgList.add(buttonsViewModel.buttonsList[position].filterName)
+    }
+
+    private fun onCardItemClick(position: Int): Boolean{
+        var action = ListIngredientsDirections.actionListIngredients3ToRecipeDetailFragment(position)
+        var navController = v.findNavController()
+        navController.navigate(action)
+        return true
     }
 
 

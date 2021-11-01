@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,6 +21,8 @@ import kotlin.properties.Delegates
 
 class RecipesListAdapter (
     //private var recipesList: MutableList<RecipesDataCollectionItem>
+
+    val onCardItemsClick: (Int) -> Boolean
 
 ): RecyclerView.Adapter<RecipesListAdapter.RecipeHolder>(){
 
@@ -49,7 +52,7 @@ class RecipesListAdapter (
 
 
         holder.getCardLayout().setOnClickListener() {
-            //TODO  onItemClick(buttonsList[position])
+            onCardItemsClick(position)
 
         }
     }
