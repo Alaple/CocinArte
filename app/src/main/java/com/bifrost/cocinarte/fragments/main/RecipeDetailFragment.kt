@@ -2,6 +2,7 @@ package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.entities.RecipeHit
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
 class RecipeDetailFragment : Fragment() {
@@ -25,17 +27,16 @@ class RecipeDetailFragment : Fragment() {
     lateinit var txtTitle: TextView
     lateinit var txtDescription: TextView
     lateinit var btnPrepare: Button
-
-
+    lateinit var txtMinutes: TextView
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
 
+    private lateinit var viewModel: RecipeDetailViewModel
+
     companion object {
         fun newInstance() = RecipeDetailFragment()
     }
-
-    private lateinit var viewModel: RecipeDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +50,7 @@ class RecipeDetailFragment : Fragment() {
         txtTitle = v.findViewById(R.id.txtTitle)
         txtDescription = v.findViewById(R.id.txtDescription)
         btnPrepare = v.findViewById(R.id.btnPrepare)
+        txtMinutes = v.findViewById(R.id.txtMinutes)
 
         // For snackbar use
         rootLayout = v.findViewById(R.id.RecipeDetailLayout)
@@ -59,22 +61,28 @@ class RecipeDetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        // TODO Send from ListIngredientsButtons the recipe index
-        //var recipe = viewModel.getRecipe(RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipeIndex)
-
-        //initializeText(recipe)
+        // TODO Take out comment lines after PR "[COC-113] Render recipes in List Screen" is rebased
+        //var recipe = viewModel.getRecipe(RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipePosition)
+        //initialize(recipe)
     }
 
-    private fun initializeText(recipe: RecipeHit?) {
+    private fun initialize(recipe: RecipeHit?) {
         if (recipe != null) {
             txtRecipe.setText(recipe.label)
             txtDescription.setText(recipe.ingredients?.joinToString("/n"))
+            txtMinutes.setText(recipe.time.toString() + " MIN")
+            Glide.with(this)
+                .load(recipe.image_url)
+                .into(imageRecipe)
         }
 
         // PREPARE button
         btnPrepare.setOnClickListener() {
             // TODO Reeplace "recipeId" with the real id
-            viewModel.prepare("recipeId")
+            if (recipe != null) {
+                var initPos = recipe.uri?.length?.minus(32)
+                viewModel.prepare(recipe.uri?.substring(initPos!!))
+            }
             Snackbar.make(rootLayout, "MARK AS PREPARE", Snackbar.LENGTH_LONG).show()
         }
     }
