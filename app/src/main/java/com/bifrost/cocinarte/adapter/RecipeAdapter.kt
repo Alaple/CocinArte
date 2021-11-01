@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.entities.Recipe
 import com.bifrost.cocinarte.R
+import com.bumptech.glide.Glide
 import java.io.InputStream
 import java.lang.Exception
 import java.net.URL
@@ -48,16 +49,11 @@ class RecipeAdapter (
             txtRecipe.text = title
         }
 
-        fun setImage (image : String) {
-            val imgRecipe : ImageView = view.findViewById(R.id.imgRecipe)
-
-            try {
-                val `is`: InputStream = URL(image).content as InputStream
-                val imgDrawable = Drawable.createFromStream(`is`, "src image")
-                imgRecipe.setImageDrawable(imgDrawable)
-            } catch (e: Exception) {
-                // No fue posible cargar la imagen.
-            }
+        fun setImage (urlImage : String) {
+            var imgMovie : ImageView = view.findViewById(R.id.imgRecipe)
+            Glide.with(getCardView())
+                .load(urlImage)
+                .into(imgMovie)
         }
 
         fun getCardView () : CardView {

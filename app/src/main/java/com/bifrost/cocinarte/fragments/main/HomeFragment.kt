@@ -2,6 +2,7 @@ package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapter.RecipeAdapter
 import com.bifrost.cocinarte.entities.*
 import com.bifrost.cocinarte.models.main.HomeViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -20,7 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var recRecipe: RecyclerView
 
-    private var recipes: MutableList<Recipe> = ArrayList<Recipe>()
+    private var recipes: ArrayList<Recipe> = ArrayList<Recipe>()
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -38,16 +42,45 @@ class HomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        recipes.add(Recipe("lacinato_salad", "Lacinato Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-        recipes.add(Recipe("shaved_salad", "Shaved Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-        recipes.add(Recipe("shredded_salad", "Shredded Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-        recipes.add(Recipe("thai_salad", "Thai Salad", "", 1, "https://www.edamam.com/web-img/7a2/7a2f41a7891e8a8f8a087a96930c6463.jpg", 1.1f, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+        val appId: String = "9f9ee2ec"
+        val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
+        val type: String = "public"
+        var listaRecetas: MutableList<RecipeHit>? = ArrayList<RecipeHit>()
 
-        recRecipe.setHasFixedSize(true)
-        recRecipe.layoutManager = LinearLayoutManager(context)
-        recRecipe.adapter = RecipeAdapter(recipes) { index ->
-            onItemClick(index)
-        }
+        val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
+        val result : Call<EdamamResponse> = apiCaller.listRecipes(type,"sal", appId, apiKey, ArrayList<String>())
+
+        result.enqueue(object: Callback<EdamamResponse> {
+            override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
+                Log.d("Response", "Error")
+                Log.d("Error: ", t.message.toString())
+            }
+
+            override fun onResponse(call: Call<EdamamResponse>, response: Response<EdamamResponse>) {
+                Log.d("Response","OK - CODE: " + response.code() +" Message: "+ response.message())
+                Log.d("Response",response.body().toString())
+                if(!response.isSuccessful){
+                    Log.d("Error", "No response")
+                    return
+                }
+                var apiResponse = response.body()
+                if (apiResponse != null) {
+                    listaRecetas = apiResponse.hitList
+                }
+
+                for (i in listaRecetas!!){
+                    Log.d("Response Nombre", i.label!!)
+                    Log.d("Response Imagen", i.image_url!!)
+                    recipes.add(Recipe(i.uri!!, i.label!!, "", 1, i.image_url!!, 1.1F, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+                }
+
+                recRecipe.setHasFixedSize(true)
+                recRecipe.layoutManager = LinearLayoutManager(context)
+                recRecipe.adapter = RecipeAdapter(recipes) { index ->
+                    onItemClick(index)
+                }
+            }
+        })
     }
 
     private fun initializeText() {
