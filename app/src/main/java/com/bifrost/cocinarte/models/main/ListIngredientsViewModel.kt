@@ -8,34 +8,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListIngredientsButtonsViewModel: ViewModel() {
+class ListIngredientsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
     var listaRecetas: MutableList<RecipeHit> = mutableListOf()
     var listaRecetasLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
 
-    //TEST
-    lateinit var button1 : Filter
-    lateinit var button2: Filter
-    lateinit var button3: Filter
-    lateinit var button4: Filter
-    lateinit var button5: Filter
-    lateinit var button6: Filter
 
 
-    fun cargarTest(){
+    fun loadButtons(){
 
-        button1 = Filter("Vegetarian", "vegetarian")
-
-        button2 = Filter("Celiac", "celiac")
-
-        button3 = Filter("Amigo", "amigo")
-
-        button4 = Filter("Carnivoro", "carnivoro")
-
-        button5 = Filter("Kosher", "kosher")
-
-        button6 = Filter("Otro", "otro")
-
+        var button1 = Filter("Vegetarian", "vegetarian")
+        var button2 = Filter("Gluten-Free", "gluten-free")
+        var button3 = Filter("Keto", "keto-friendly")
+        var button4 = Filter("Low Sugar", "low-sugar")
+        var button5 = Filter("Kosher", "kosher")
+        var button6 = Filter("Vegan", "vegan")
 
         buttonsList.add(button1)
         buttonsList.add(button2)
