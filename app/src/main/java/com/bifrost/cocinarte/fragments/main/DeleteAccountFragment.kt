@@ -7,15 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.main.DeleteAccountViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.android.material.snackbar.Snackbar
 
 class DeleteAccountFragment : Fragment() {
 
     lateinit var v: View
 
     lateinit var btnDeleteAccount: Button
+
+    lateinit var rootLayout: ConstraintLayout
+
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         fun newInstance() = DeleteAccountFragment()
@@ -31,6 +40,11 @@ class DeleteAccountFragment : Fragment() {
 
         btnDeleteAccount = v.findViewById(R.id.btnDeleteAccount)
 
+        rootLayout = v.findViewById(R.id.frameLayout)
+
+        database= FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
+
         return v
     }
 
@@ -38,9 +52,17 @@ class DeleteAccountFragment : Fragment() {
         super.onStart()
 
         btnDeleteAccount.setOnClickListener() {
-            // TODO Delete account
-            val action = DeleteAccountFragmentDirections.actionDeleteAccountFragmentToLoginActivity()
-            v.findNavController().navigate(action)
+            val user = auth.currentUser!!
+
+            user.delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val action = DeleteAccountFragmentDirections.actionDeleteAccountFragmentToLoginActivity()
+                        v.findNavController().navigate(action)
+                    } else {
+                        Snackbar.make(rootLayout, "The user cannot be deleted.", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
 
@@ -49,5 +71,4 @@ class DeleteAccountFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DeleteAccountViewModel::class.java)
         // TODO: Use the ViewModel
     }
-
 }
