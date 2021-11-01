@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.entities.Filter
 import com.bifrost.cocinarte.entities.RecipeHit
 import com.bifrost.cocinarte.entities.RecipesDataCollectionItem
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import kotlin.properties.Delegates
 
@@ -42,10 +44,12 @@ class RecipesListAdapter (
             e.message?.let { Log.d("Error", it) }
         }
 
+        holder.setImage(recipesListForAdapter[position].image_url!!)
+
 
 
         holder.getCardLayout().setOnClickListener() {
-            //TODO  onItemClick(buttonsList[position].nombreVino)
+            //TODO  onItemClick(buttonsList[position])
 
         }
     }
@@ -61,6 +65,13 @@ class RecipesListAdapter (
         val txt : TextView = view.findViewById(R.id.txtRecipe)
         txt.setText(name)
     }
+
+        fun setImage (urlImage : String) {
+            var imgMovie : ImageView = view.findViewById(R.id.imgRecipe)
+            Glide.with(getCardLayout())
+                .load(urlImage)
+                .into(imgMovie)
+        }
 
     fun getCardLayout (): CardView {
         return view.findViewById(R.id.cardRecipe)
