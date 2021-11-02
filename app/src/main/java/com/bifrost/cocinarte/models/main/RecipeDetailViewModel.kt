@@ -1,12 +1,10 @@
 package com.bifrost.cocinarte.models.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.bifrost.cocinarte.entities.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
+import com.bifrost.cocinarte.entities.RecipeHit
 
 class RecipeDetailViewModel : ViewModel() {
 
@@ -15,7 +13,7 @@ class RecipeDetailViewModel : ViewModel() {
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
 
-    fun prepare(recipeId : String) {
+    fun prepare(recipeId : String?) {
         // TODO Get User Data
         //getUser()
 
@@ -27,7 +25,7 @@ class RecipeDetailViewModel : ViewModel() {
         var rewards : MutableList<Reward> = ArrayList<Reward>()
         var favourites : MutableList<Favorite> = ArrayList<Favorite>()
         var preparedRecipes : MutableList<Prepared> = ArrayList<Prepared>()
-        preparedRecipes.add(Prepared(recipeId))
+        recipeId?.let { Prepared(it) }?.let { preparedRecipes.add(it) }
         var nuevoUsuario = User("Manu",
             "manuel@test.com",
             "test",
