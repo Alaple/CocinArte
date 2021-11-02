@@ -2,7 +2,6 @@ package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.entities.RecipeHit
+import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,6 +33,8 @@ class RecipeDetailFragment : Fragment() {
     lateinit var rootLayout: ConstraintLayout
 
     private lateinit var viewModel: RecipeDetailViewModel
+
+    lateinit var listIngredientsViewModel: ListIngredientsViewModel
 
     companion object {
         fun newInstance() = RecipeDetailFragment()
@@ -55,21 +57,22 @@ class RecipeDetailFragment : Fragment() {
         // For snackbar use
         rootLayout = v.findViewById(R.id.RecipeDetailLayout)
 
+        listIngredientsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
 
-        // TODO Take out comment lines after PR "[COC-113] Render recipes in List Screen" is rebased
-        //var recipe = viewModel.getRecipe(RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipePosition)
-        //initialize(recipe)
+        var recipe = listIngredientsViewModel.listaRecetas[RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipePosition]
+        initialize(recipe)
     }
 
     private fun initialize(recipe: RecipeHit?) {
         if (recipe != null) {
             txtRecipe.setText(recipe.label)
-            txtDescription.setText(recipe.ingredients?.joinToString("/n"))
+            txtDescription.setText(recipe.ingredients?.joinToString("\n"))
             txtMinutes.setText(recipe.time.toString() + " MIN")
             Glide.with(this)
                 .load(recipe.image_url)
