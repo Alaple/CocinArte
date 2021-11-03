@@ -1,6 +1,7 @@
 package com.bifrost.cocinarte.fragments.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +41,7 @@ class ListIngredients : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         v =inflater.inflate(R.layout.list_ingredients_fragment, container, false)
         searchBar = v.findViewById(R.id.searchBar)
         buttons = v.findViewById(R.id.buttonsRecView)
@@ -47,12 +49,13 @@ class ListIngredients : Fragment() {
         searchButton = v.findViewById(R.id.searchBarButton)
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
         filterArgList = ArrayList()
-        buttonsViewModel.loadButtons()
 
-
+        //Validate that buttons list only loads once
+        if (buttonsViewModel.buttonsList.size == 0){
+            buttonsViewModel.loadButtons()
+        }
 
         searchButton.setOnClickListener(){
-
             buttonsViewModel.searchRecipe(searchBar.text.toString(), filterArgList as ArrayList<String>)
         }
 
@@ -64,22 +67,19 @@ class ListIngredients : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        //Load RecyclerView for filters
         buttons.setHasFixedSize(true)
-        //linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager = GridLayoutManager(context, 3)
         buttons.layoutManager = linearLayoutManager
-
         buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList){ x,y -> onItemsClick(x,y) }
-
         buttons.adapter = buttonListAdapter
 
+        //Load RecyclerView for Recipes
         recipesRecView.setHasFixedSize(true)
         recipesRecView.layoutManager = LinearLayoutManager(context)
         recipesListAdapter = RecipesListAdapter{ x -> onCardItemClick(x) }
         recipesRecView.adapter = recipesListAdapter
-
-        //Observer
-
+        //Observer for listaRecetas
         buttonsViewModel.listaRecetasLiveData.observe(viewLifecycleOwner, Observer { result ->
             recipesListAdapter.setData(result)
             recipesRecView.adapter = recipesListAdapter
