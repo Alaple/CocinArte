@@ -77,6 +77,7 @@ class ListIngredients : Fragment() {
         //Load RecyclerView for Recipes
         recipesRecView.setHasFixedSize(true)
         recipesRecView.layoutManager = LinearLayoutManager(context)
+        //recipesRecView.layoutManager = GridLayoutManager(context, 2) --> GRID
         recipesListAdapter = RecipesListAdapter{ x -> onCardItemClick(x) }
         recipesRecView.adapter = recipesListAdapter
         //Observer for listaRecetas

@@ -9,6 +9,7 @@
     android:layout_height="88dp"
     android:layout_margin="8dp"
     android:backgroundTintMode="add"
+    app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,18 +21,21 @@
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:scaleType="fitStart"
+            android:background="@drawable/roundstyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtRecipe"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="116dp"
-            android:fontFamily="sans-serif-black"
+            android:layout_marginStart="100dp"
+            android:fontFamily="@font/poppins"
             android:text="Salad"
-            android:textSize="24sp"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

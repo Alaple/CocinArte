@@ -14,6 +14,9 @@ import com.bumptech.glide.Glide
 import java.io.InputStream
 import java.lang.Exception
 import java.net.URL
+import android.graphics.Color
+import android.graphics.Typeface
+import androidx.core.content.res.ResourcesCompat
 
 class RecipeAdapter (
     private var recipes : MutableList <Recipe>,
@@ -47,6 +50,7 @@ class RecipeAdapter (
         fun setTitle (title : String) {
             val txtRecipe : TextView = view.findViewById(R.id.txtRecipe)
             txtRecipe.text = title
+
         }
 
         fun setImage (urlImage : String) {
