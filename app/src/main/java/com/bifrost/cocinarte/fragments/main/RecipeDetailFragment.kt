@@ -16,6 +16,8 @@ import com.bifrost.cocinarte.entities.RecipeHit
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.pow
+import kotlin.math.round
 
 class RecipeDetailFragment : Fragment() {
 
@@ -87,6 +89,16 @@ class RecipeDetailFragment : Fragment() {
                 viewModel.prepare(recipe.uri?.substring(initPos!!))
             }
             Snackbar.make(rootLayout, "MARK AS PREPARE", Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    private fun userExperience(level : Double, recipesDone: Double){
+        var totalExperience = (recipesDone*3) + 3;
+        var newLevel = level + 1
+        var forNextLevel = round(0.04 * (newLevel.pow(3)) + 0.8 * (newLevel.pow(2)) + 2 * newLevel)
+
+        if(totalExperience>=forNextLevel){
+            //CARGAR NUEVO NIVEL DE USUARIO
         }
     }
 
