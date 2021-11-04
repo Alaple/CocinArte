@@ -95,7 +95,7 @@ class ListIngredients : Fragment() {
         }else{
             filterArgList.add(myFilter)
         }
-        Log.d("FilterList:", filterArgList.toString())
+
     }
 
     private fun onCardItemClick(position: Int): Boolean{
