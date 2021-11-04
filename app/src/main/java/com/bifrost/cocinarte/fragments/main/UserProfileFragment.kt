@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.fragments.login.StartedFragmentDirections
 import com.bifrost.cocinarte.models.main.UserProfileViewModel
 
 class UserProfileFragment : Fragment() {
@@ -23,6 +23,9 @@ class UserProfileFragment : Fragment() {
     lateinit var txtFavourites: TextView
     lateinit var txtPreparedMeals: TextView
     lateinit var txtLogout: TextView
+
+    lateinit var txtUserName: TextView
+    lateinit var txtLevel: TextView
 
     companion object {
         fun newInstance() = UserProfileFragment()
@@ -43,14 +46,28 @@ class UserProfileFragment : Fragment() {
         txtPreparedMeals = v.findViewById(R.id.txtPreparedMeals)
         txtLogout = v.findViewById(R.id.txtLogOut)
 
+        txtUserName = v.findViewById(R.id.txtUserName)
+        txtLevel = v.findViewById(R.id.txtLevel)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
 
+        // Initialize profile
+        viewModel.initializeProfile()
         // Initialize all buttons variables
         initializeButtons()
+        // Initialize text
+        initializeTextViews()
+    }
+
+    private fun initializeTextViews() {
+        viewModel.userLiveData.observe(viewLifecycleOwner, Observer { result ->
+            txtUserName.setText(result.name)
+            txtLevel.setText("Level " + result.level)
+        })
     }
 
     private fun initializeButtons() {
