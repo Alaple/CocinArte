@@ -11,32 +11,32 @@ import com.google.firebase.ktx.Firebase
 
 class UserProfileViewModel : ViewModel() {
 
+    // Firebase Authentication
     private lateinit var auth: FirebaseAuth
-
-    //lateinit var user : User
-    var userLiveData = MutableLiveData<User>()
-    lateinit var user : User
-
-    // Firebase
+    // Firebase Firestore
     val db = Firebase.firestore
+
+    var userLiveData = MutableLiveData<User>()
 
     fun initializeProfile() {
         auth = FirebaseAuth.getInstance()
         val authUser = auth.currentUser
         if (authUser != null) {
+            // Get User from Firestore
             getUser(authUser.email)
         }
     }
 
+    // Get User from Firestore
     private fun getUser(email: String?) {
         val docRef = db.collection("users").document(email!!)
         var TAG = "UserProfileViewModel - getUser"
         docRef.get()
             .addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot != null) {
-                    //user = dataSnapshot.toObject<User>()!!
-                    //user.value = userTest
-                    //Log.d("TESTTTTTTTTTTTTTTTTTTTTT", user.value.toString())
+                    // Parse de data and observe it
+                    var user = dataSnapshot.toObject<User>()!!
+                    userLiveData.value = user
                 } else {
                     Log.d(TAG, "No such document")
                 }

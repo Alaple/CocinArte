@@ -1,32 +1,29 @@
 package com.bifrost.cocinarte.entities
 
-import android.os.Parcel
-import android.os.Parcelable
-import android.security.identity.AccessControlProfile
+class User {
+    var name: String? = null
+    var email: String? = null
+    var password: String? = null
+    var enabled: Boolean? = true
+    var level: Int? = 0
+    var reward: MutableList<Reward>? = mutableListOf()
+    var userPrefence: Preference? = Preference()
+    var favorite: MutableList<Favorite>? = mutableListOf()
+    var preparedRecipe: MutableList<Prepared>? = mutableListOf()
+    var profile: Category? = null
 
-class User(
-        name: String,
-        email: String,
-        password: String,
-        reward: MutableList<Reward>,
-        userPrefence: Preference,
-        favorite: MutableList<Favorite>,
-        preparedRecipe: MutableList<Prepared>,
-        profile: Category
-)  {
-    var name: String
-    var email: String
-    var password: String
-    var enabled: Boolean
-    var level: Int
-    var reward: MutableList<Reward>
-    var userPrefence: Preference
-    var favorite: MutableList<Favorite>
-    var preparedRecipe: MutableList<Prepared>
-    var profile: Category
+    constructor() {}
 
-
-    init {
+    constructor(name: String,
+                email: String,
+                password: String,
+                enabled: Boolean,
+                level: Int,
+                reward: MutableList<Reward>,
+                userPrefence: Preference,
+                favorite: MutableList<Favorite>,
+                preparedRecipe: MutableList<Prepared>,
+                profile: Category) {
         this.name = name
         this.email = email
         this.password = password
@@ -38,8 +35,7 @@ class User(
         this.preparedRecipe = preparedRecipe
         this.profile = profile
     }
-
-
+/*
     fun deleteUser(user: User){
         //TODO
     }
@@ -74,5 +70,5 @@ class User(
 
     fun createAccount(email: String, password: String){
         //TODO
-    }
+    }*/
 }

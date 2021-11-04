@@ -31,6 +31,8 @@ class RecipeDetailViewModel : ViewModel() {
         var nuevoUsuario = User("Manu",
             "manuel@test.com",
             "test",
+            true,
+            4,
             rewards,
             Preference(true, true, true),
             favourites,

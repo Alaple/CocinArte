@@ -39,13 +39,14 @@ class UserProfileFragment : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.user_profile_fragment, container, false)
 
+        // Buttons
         txtAccountProfile = v.findViewById(R.id.txtAccountProfile)
         txtRewards = v.findViewById(R.id.txtRewards)
         txtPreferences = v.findViewById(R.id.txtPreferences)
         txtFavourites = v.findViewById(R.id.txtFavourites)
         txtPreparedMeals = v.findViewById(R.id.txtPreparedMeals)
         txtLogout = v.findViewById(R.id.txtLogOut)
-
+        // Texts
         txtUserName = v.findViewById(R.id.txtUserName)
         txtLevel = v.findViewById(R.id.txtLevel)
 
@@ -57,9 +58,9 @@ class UserProfileFragment : Fragment() {
 
         // Initialize profile
         viewModel.initializeProfile()
-        // Initialize all buttons variables
+        // Initialize buttons
         initializeButtons()
-        // Initialize text
+        // Initialize texts
         initializeTextViews()
     }
 
