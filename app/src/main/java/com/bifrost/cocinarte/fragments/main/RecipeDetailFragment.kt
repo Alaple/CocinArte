@@ -16,8 +16,6 @@ import com.bifrost.cocinarte.entities.RecipeHit
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import kotlin.math.pow
-import kotlin.math.round
 
 class RecipeDetailFragment : Fragment() {
 
