@@ -5,6 +5,8 @@ import com.bifrost.cocinarte.entities.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.bifrost.cocinarte.entities.RecipeHit
+import kotlin.math.pow
+import kotlin.math.round
 
 class RecipeDetailViewModel : ViewModel() {
 
@@ -36,12 +38,22 @@ class RecipeDetailViewModel : ViewModel() {
             Category.CELIAC)
 
         // Update user in Firestore
-        db.collection("users").document("BORRAR-MOCK-USER").set(nuevoUsuario)
-        // TODO replace above instruction with the following with the corresponding userId
-        //db.collection("users").document("userId").set(user)
+        //db.collection("users").document("BORRAR-MOCK-USER").set(nuevoUsuario)
+        this.userExperience(nuevoUsuario);
     }
 
     private fun getUser() {
         TODO("Not yet implemented")
+    }
+
+    private fun userExperience(user : User){
+        var totalExperience = (user.preparedRecipe.size*3) + 3
+        var newLevel = user.level + 1
+        var forNextLevel = round(0.04 * (newLevel.toDouble().pow(3)) + 0.8 * (newLevel.toDouble().pow(2)) + 2 * newLevel)
+
+        if(totalExperience>=forNextLevel){
+            user.level = newLevel;
+        }
+        db.collection("users").document(user.email).set(user)
     }
 }

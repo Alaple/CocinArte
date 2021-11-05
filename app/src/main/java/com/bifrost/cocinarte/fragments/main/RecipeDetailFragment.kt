@@ -92,16 +92,6 @@ class RecipeDetailFragment : Fragment() {
         }
     }
 
-    private fun userExperience(level : Double, recipesDone: Double){
-        var totalExperience = (recipesDone*3) + 3;
-        var newLevel = level + 1
-        var forNextLevel = round(0.04 * (newLevel.pow(3)) + 0.8 * (newLevel.pow(2)) + 2 * newLevel)
-
-        if(totalExperience>=forNextLevel){
-            //CARGAR NUEVO NIVEL DE USUARIO
-        }
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
