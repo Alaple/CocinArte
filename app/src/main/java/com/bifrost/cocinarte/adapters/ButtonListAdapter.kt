@@ -30,7 +30,6 @@ class ButtonListAdapter(
 
 
         holder.getCardLayout().setOnClickListener() {
-           //TODO  onItemClick(buttonsList[position].nombreVino)
             onItemsClick(position, "")
         }
     }
@@ -56,9 +55,6 @@ class ButtonListAdapter(
             val chip: Chip = view.findViewById(R.id.toggleButton)
             chip.closeIconTint
 
-
-            //TODO  val txt : TextView = view.findViewById(R.id.wineName)
-            //txt.text = name
         }
 
 

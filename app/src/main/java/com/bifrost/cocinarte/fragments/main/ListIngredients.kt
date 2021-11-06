@@ -88,7 +88,14 @@ class ListIngredients : Fragment() {
     }
 
     private fun onItemsClick(position: Int, y: String) {
-        filterArgList.add(buttonsViewModel.buttonsList[position].filterName)
+        var myFilter = buttonsViewModel.buttonsList[position].filterName
+        if(filterArgList.contains(myFilter)){
+            var value = filterArgList.indexOf(myFilter)
+            filterArgList.removeAt(value)
+        }else{
+            filterArgList.add(myFilter)
+        }
+
     }
 
     private fun onCardItemClick(position: Int): Boolean{
