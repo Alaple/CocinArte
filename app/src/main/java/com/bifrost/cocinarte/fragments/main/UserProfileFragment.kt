@@ -73,32 +73,38 @@ class UserProfileFragment : Fragment() {
 
     private fun initializeButtons() {
         txtAccountProfile.setOnClickListener() {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToAccountProfileFragment()
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToAccountProfileFragment()
             v.findNavController().navigate(action)
         }
 
         txtRewards.setOnClickListener() {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToRewardsFragment()
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToRewardsFragment()
             v.findNavController().navigate(action)
         }
 
         txtPreferences.setOnClickListener() {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToPreferenceActivity()
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToPreferenceActivity()
             v.findNavController().navigate(action)
         }
 
         txtFavourites.setOnClickListener() {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToFavouritesFragment()
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToFavouritesFragment()
             v.findNavController().navigate(action)
         }
 
         txtPreparedMeals.setOnClickListener() {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToPreparedFragment()
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToPreparedFragment()
             v.findNavController().navigate(action)
         }
 
         txtLogout.setOnClickListener() {
-            val action = UserProfileFragmentDirections.actionUserProfileFragmentToLogOutFragment()
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToLogOutFragment()
             v.findNavController().navigate(action)
         }
     }
@@ -106,7 +112,6 @@ class UserProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(UserProfileViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

@@ -19,22 +19,30 @@ class UserProfileViewModel : ViewModel() {
     var userLiveData = MutableLiveData<User>()
 
     fun initializeProfile() {
+        getUserDB()
+    }
+
+    // === GET USER ===
+
+    // Get User from Authentication
+    private fun getUserDB() {
         auth = FirebaseAuth.getInstance()
         val authUser = auth.currentUser
         if (authUser != null) {
             // Get User from Firestore
-            getUser(authUser.email)
+            getUserFirestore(authUser.email)
         }
     }
 
     // Get User from Firestore
-    private fun getUser(email: String?) {
+    private fun getUserFirestore(email: String?) {
         val docRef = db.collection("users").document(email!!)
         var TAG = "UserProfileViewModel - getUser"
         docRef.get()
             .addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot != null) {
-                    // Parse de data and observe it
+                    // DO SOMETHING
+                    // Parse the data and observe it
                     var user = dataSnapshot.toObject<User>()!!
                     userLiveData.value = user
                 } else {
