@@ -31,6 +31,8 @@ class RecipeDetailViewModel : ViewModel() {
         var nuevoUsuario = User("Manu",
             "manuel@test.com",
             "test",
+            true,
+            4,
             rewards,
             Preference(true, true, true),
             favourites,
@@ -47,13 +49,13 @@ class RecipeDetailViewModel : ViewModel() {
     }
 
     private fun userExperience(user : User){
-        var totalExperience = (user.preparedRecipe.size*3) + 3
-        var newLevel = user.level + 1
+        var totalExperience = (user.preparedRecipe!!.size*3) + 3
+        var newLevel = user.level!! + 1
         var forNextLevel = round(0.04 * (newLevel.toDouble().pow(3)) + 0.8 * (newLevel.toDouble().pow(2)) + 2 * newLevel)
 
         if(totalExperience>=forNextLevel){
             user.level = newLevel;
         }
-        db.collection("users").document(user.email).set(user)
+        db.collection("users").document(user.email!!).set(user)
     }
 }

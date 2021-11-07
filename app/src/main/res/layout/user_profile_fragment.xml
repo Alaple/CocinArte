@@ -13,16 +13,31 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:text="John Doe"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/txtLevel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/txtLevel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/txtAccountProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUserName"
+        app:layout_constraintVertical_bias="0.034" />
 
     <TextView
         android:id="@+id/txtAccountProfile"
@@ -39,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLevel" />
 
     <TextView
         android:id="@+id/txtLogOut"
@@ -242,22 +257,5 @@
         app:layout_constraintEnd_toStartOf="@+id/txtRewards"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="10dp"
-        android:text="Level 10"
-        android:fontFamily="@font/poppins"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/txtAccountProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUserName"
-        app:layout_constraintVertical_bias="0.034" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

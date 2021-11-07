@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/userProfileFragment"
         android:icon="@drawable/icon_user"
         android:title="Account And Profile" />
-
-    <!-- TODO Agregar item SEARCH (PR Julian Alvarez)-->
-
     <item
         android:id="@+id/listIngredients3"
         android:icon="@drawable/icon_search"
         android:title="Search" />
-
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/icon_home"

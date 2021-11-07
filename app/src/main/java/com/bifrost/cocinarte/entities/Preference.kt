@@ -1,11 +1,13 @@
 package com.bifrost.cocinarte.entities
 
-class Preference(appTheme: Boolean,pushNotif: Boolean,emailNotif:Boolean) {
-    var appTheme: Boolean = appTheme
-    var pushNotif: Boolean = pushNotif
-    var emailNotif: Boolean = emailNotif
+class Preference {
+    var appTheme: Boolean? = null
+    var pushNotif: Boolean? = null
+    var emailNotif: Boolean? = null
 
-    init {
+    constructor() {}
+
+    constructor(appTheme: Boolean,pushNotif: Boolean,emailNotif:Boolean) {
         this.appTheme = appTheme
         this.pushNotif = pushNotif
         this.emailNotif = emailNotif
