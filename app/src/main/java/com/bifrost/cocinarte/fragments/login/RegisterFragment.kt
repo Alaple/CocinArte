@@ -16,11 +16,14 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.entities.User
 import com.bifrost.cocinarte.models.login.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterFragment : Fragment() {
 
@@ -42,6 +45,7 @@ class RegisterFragment : Fragment() {
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
 
+
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
 
@@ -50,6 +54,8 @@ class RegisterFragment : Fragment() {
     }
 
     private lateinit var viewModel: RegisterViewModel
+
+    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,17 +111,26 @@ class RegisterFragment : Fragment() {
     private fun initializeButtons() {
         // REGISTER button
         btnRegister.setOnClickListener() {
-            // TODO Register
-            if (inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) auth.createUserWithEmailAndPassword(
-                inputEmail.text.toString(),
-                inputPassword.text.toString()
-            ).addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                    v.findNavController().navigate(action)
-                    val user = auth.currentUser
-                } else {
-                    Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+            var mail = inputEmail.text
+            var password = inputPassword.text
+            var name = inputFullName.text
+            if (mail.isNotEmpty() && password.isNotEmpty()) {
+                val user = User(name.toString(), mail.toString(), password.toString())
+                user.enabled = true
+                uploadUser(user)
+                auth.createUserWithEmailAndPassword(
+                    inputEmail.text.toString(),
+                    inputPassword.text.toString()
+
+                ).addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        val action =
+                            RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                        v.findNavController().navigate(action)
+                        val user = auth.currentUser
+                    } else {
+                        Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -125,6 +140,10 @@ class RegisterFragment : Fragment() {
             val action = RegisterFragmentDirections.actionRegisterFragmentToLogInFragment()
             v.findNavController().navigate(action)
         }
+    }
+
+    private fun uploadUser(user: User) {
+        db.collection("users").document(user.email).set(user)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
