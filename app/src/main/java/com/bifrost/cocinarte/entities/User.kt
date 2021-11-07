@@ -7,12 +7,7 @@ import android.security.identity.AccessControlProfile
 class User(
         name: String,
         email: String,
-        password: String,
-        reward: MutableList<Reward>,
-        userPrefence: Preference,
-        favorite: MutableList<Favorite>,
-        preparedRecipe: MutableList<Prepared>,
-        profile: Category
+        password: String
 )  {
     var name: String
     var email: String
@@ -20,10 +15,12 @@ class User(
     var enabled: Boolean
     var level: Int
     var reward: MutableList<Reward>
-    var userPrefence: Preference
+    //CHECK: Ponerlo en el UserRegister si es necesario
+    //var userPrefence: Preference
     var favorite: MutableList<Favorite>
     var preparedRecipe: MutableList<Prepared>
-    var profile: Category
+    //CHECK: Ponerlo en el UserRegister si se va a utilizar
+    //var profile: Category
 
 
     init {
@@ -32,11 +29,11 @@ class User(
         this.password = password
         this.enabled = false
         this.level = 0
-        this.reward = reward
-        this.userPrefence = userPrefence
-        this.favorite = favorite
-        this.preparedRecipe = preparedRecipe
-        this.profile = profile
+        this.reward = mutableListOf()
+        //this.userPrefence = userPrefence
+        this.favorite = mutableListOf()
+        this.preparedRecipe = mutableListOf()
+        //this.profile = profile
     }
 
 

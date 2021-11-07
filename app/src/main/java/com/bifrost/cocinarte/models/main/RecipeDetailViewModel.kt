@@ -30,12 +30,7 @@ class RecipeDetailViewModel : ViewModel() {
         recipeId?.let { Prepared(it) }?.let { preparedRecipes.add(it) }
         var nuevoUsuario = User("Manu",
             "manuel@test.com",
-            "test",
-            rewards,
-            Preference(true, true, true),
-            favourites,
-            preparedRecipes,
-            Category.CELIAC)
+            "test")
 
         // Update user in Firestore
         //db.collection("users").document("BORRAR-MOCK-USER").set(nuevoUsuario)
