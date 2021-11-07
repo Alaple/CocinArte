@@ -1,10 +1,13 @@
 package com.bifrost.cocinarte.models.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.bifrost.cocinarte.entities.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.bifrost.cocinarte.entities.RecipeHit
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.toObject
 import kotlin.math.pow
 import kotlin.math.round
 
@@ -14,38 +17,23 @@ class RecipeDetailViewModel : ViewModel() {
 
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
-
+    val auth = FirebaseAuth.getInstance()
     fun prepare(recipeId : String?) {
-        // TODO Get User Data
-        //getUser()
 
-        // TODO Add Recipe in PreparedRecipes
-        // Example preparedRecipes.add(Prepared(recipeId))
+        if (user != null){
+            recipeId?.let { Prepared(it) }?.let { user.preparedRecipe?.add(it) }
+            user.email?.let { db.collection("users").document(it).set(user) }
+            this.userExperience(user)
+        }else{
+            Log.d("RecipeDetail","No user found")
 
-        // TODO Delete mock User when getUser is implemented
-        // Mock user
-        var rewards : MutableList<Reward> = ArrayList<Reward>()
-        var favourites : MutableList<Favorite> = ArrayList<Favorite>()
-        var preparedRecipes : MutableList<Prepared> = ArrayList<Prepared>()
-        recipeId?.let { Prepared(it) }?.let { preparedRecipes.add(it) }
-        var nuevoUsuario = User("Manu",
-            "manuel@test.com",
-            "test",
-            true,
-            4,
-            rewards,
-            Preference(true, true, true),
-            favourites,
-            preparedRecipes,
-            Category.CELIAC)
+        }
 
-        // Update user in Firestore
-        //db.collection("users").document("BORRAR-MOCK-USER").set(nuevoUsuario)
-        this.userExperience(nuevoUsuario);
     }
 
-    private fun getUser() {
-        TODO("Not yet implemented")
+    fun getUser() {
+        val userEmail = auth.currentUser?.email
+        getUserFirestore(userEmail)
     }
 
     private fun userExperience(user : User){
@@ -57,5 +45,24 @@ class RecipeDetailViewModel : ViewModel() {
             user.level = newLevel;
         }
         db.collection("users").document(user.email!!).set(user)
+    }
+
+    private fun getUserFirestore(email: String?) {
+        val docRef = db.collection("users").document(email!!)
+        var TAG = "UserProfileViewModel - getUser"
+        docRef.get()
+            .addOnSuccessListener { dataSnapshot ->
+                if (dataSnapshot != null) {
+                    // DO SOMETHING
+                    // Parse the data and observe it
+                    user = dataSnapshot.toObject<User>()!!
+                    Log.d("GetUser", user.toString())
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
     }
 }
