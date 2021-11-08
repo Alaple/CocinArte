@@ -1,11 +1,15 @@
 package com.bifrost.cocinarte.entities
 
-class Prepared (
-        prep_id: String
-){
-        var prep_id: String = prep_id
+class Prepared {
+        var prep_id: String? = null
 
-        init {
+        /*init {
+                this.prep_id = prep_id
+        }*/
+
+        constructor(){}
+
+        constructor(prep_id: String){
                 this.prep_id = prep_id
         }
 }
