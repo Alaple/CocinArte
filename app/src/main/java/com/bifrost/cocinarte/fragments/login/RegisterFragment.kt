@@ -16,7 +16,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.entities.User
+import com.bifrost.cocinarte.entities.*
 import com.bifrost.cocinarte.models.login.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -115,8 +115,22 @@ class RegisterFragment : Fragment() {
             var password = inputPassword.text
             var name = inputFullName.text
             if (mail.isNotEmpty() && password.isNotEmpty()) {
-                val user = User(name.toString(), mail.toString(), password.toString())
-                user.enabled = true
+                var reward : MutableList<Reward> = mutableListOf()
+                var preference : Preference = Preference()
+                var favorite: MutableList<Favorite> = mutableListOf()
+                var prepared: MutableList<Prepared> = mutableListOf()
+                var profile: Category = Category.CELIAC
+                val user = User(name.toString(),
+                    mail.toString(),
+                    password.toString(),
+                    true,
+                    0,
+                    reward,
+                    preference,
+                    favorite,
+                    prepared,
+                    profile
+                    )
                 uploadUser(user)
                 auth.createUserWithEmailAndPassword(
                     inputEmail.text.toString(),
@@ -143,7 +157,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun uploadUser(user: User) {
-        db.collection("users").document(user.email).set(user)
+        user.email?.let { db.collection("users").document(it).set(user) }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
