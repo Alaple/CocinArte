@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bifrost.cocinarte.entities.RecipeHit
+import com.bifrost.cocinarte.entities.User
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -28,6 +29,8 @@ class RecipeDetailFragment : Fragment() {
     lateinit var txtDescription: TextView
     lateinit var btnPrepare: Button
     lateinit var txtMinutes: TextView
+
+
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
@@ -67,6 +70,7 @@ class RecipeDetailFragment : Fragment() {
 
         var recipe = listIngredientsViewModel.listaRecetas[RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipePosition]
         initialize(recipe)
+        viewModel.getUser()
     }
 
     private fun initialize(recipe: RecipeHit?) {
