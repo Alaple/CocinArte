@@ -1,12 +1,11 @@
 package com.bifrost.cocinarte.fragments.login
 
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +13,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.entities.*
 import com.bifrost.cocinarte.models.login.RegisterViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.*
 
 class RegisterFragment : Fragment() {
 
@@ -40,11 +35,6 @@ class RegisterFragment : Fragment() {
     lateinit var btnRegister: Button
     lateinit var txtLogIn: TextView
 
-    //FireBase
-    private lateinit var dbReference: DatabaseReference
-    private lateinit var database: FirebaseDatabase
-    private lateinit var auth: FirebaseAuth
-
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
@@ -54,8 +44,6 @@ class RegisterFragment : Fragment() {
     }
 
     private lateinit var viewModel: RegisterViewModel
-
-    val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,17 +66,11 @@ class RegisterFragment : Fragment() {
         // For snackbar use
         rootLayout = v.findViewById(R.id.registerLayout)
 
-        //Firebase
-        database= FirebaseDatabase.getInstance()
-        auth = FirebaseAuth.getInstance()
-
         return v
     }
 
     override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
-
         // Initialize all text variables
         initializeText()
 
@@ -111,53 +93,51 @@ class RegisterFragment : Fragment() {
     private fun initializeButtons() {
         // REGISTER button
         btnRegister.setOnClickListener() {
-            var mail = inputEmail.text
-            var password = inputPassword.text
-            var name = inputFullName.text
-            if (mail.isNotEmpty() && password.isNotEmpty()) {
-                var reward : MutableList<Reward> = mutableListOf()
-                var preference : Preference = Preference()
-                var favorite: MutableList<Favorite> = mutableListOf()
-                var prepared: MutableList<Prepared> = mutableListOf()
-                var profile: Category = Category.CELIAC
-                val user = User(name.toString(),
-                    mail.toString(),
-                    password.toString(),
-                    true,
-                    0,
-                    reward,
-                    preference,
-                    favorite,
-                    prepared,
-                    profile
-                    )
-                uploadUser(user)
-                auth.createUserWithEmailAndPassword(
-                    inputEmail.text.toString(),
-                    inputPassword.text.toString()
 
-                ).addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        val action =
-                            RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                        v.findNavController().navigate(action)
-                        val user = auth.currentUser
-                    } else {
-                        Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+            val userEmail = inputEmail.text.toString()
+            val userName = inputFullName.text.toString()
+            val userPassword = inputPassword.text.toString()
+            val job1 = Job()
+            val job2 = Job()
+            val scope = CoroutineScope(Dispatchers.Default + job1 + job2)
+
+            scope.launch{
+                val createUserJob = async{
+                    //Add user to Auth
+                    try{
+                        viewModel.createAuthUser(
+                            userEmail,
+                            userPassword
+                        )
+                        //Add user to DB
+                        viewModel.createDbUser(
+                            userName,
+                            userEmail,
+                            userPassword
+                        )
+
+                    }catch (e: Exception){
+                        Log.d("Coroutine: ", e.message.toString())
                     }
+
                 }
+                val navigate = async{
+                    val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                    v.findNavController().navigate(action)
+                }
+                createUserJob.await()
+                navigate.await()
             }
+
+
         }
+
 
         // LOGIN button
         txtLogIn.setOnClickListener() {
             val action = RegisterFragmentDirections.actionRegisterFragmentToLogInFragment()
             v.findNavController().navigate(action)
         }
-    }
-
-    private fun uploadUser(user: User) {
-        user.email?.let { db.collection("users").document(it).set(user) }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
