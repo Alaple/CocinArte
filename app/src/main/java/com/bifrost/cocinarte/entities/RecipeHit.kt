@@ -3,17 +3,7 @@ package com.bifrost.cocinarte.entities
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class RecipeHit(
-    uri : String,
-    label: String,
-    image_url: String,
-    url: String,
-    dietLabel: MutableList<String>,
-    ingredients: MutableList<String>,
-    calories: Float,
-    time: Int,
-    yield: Int
-) {
+class RecipeHit {
     @SerializedName("uri")
     var uri : String? = null
     @SerializedName("label")
@@ -40,22 +30,37 @@ class RecipeHit(
     @SerializedName("yield")
     @Expose
     var yield: Int? = 0
+    constructor(
+        uri : String,
+        label: String,
+        image_url: String,
+        url: String,
+        dietLabel: MutableList<String>,
+        ingredients: MutableList<String>,
+        calories: Float,
+        time: Int,
+        yield: Int
+    ){
+        var uri : String? = uri
 
-   /*init {
-        this.uri = uri
-        this.label = label
-        this.yield = `yield`
-        this.image_url = image_url
-        this.url = url
-        this.calories = calories
-        this.dietLabel = dietLabel
-        this.ingredients = ingredients
-        this.time = time
-    }*/
+        var label: String? = label
 
-    /*override fun toString(): String {
-        return label
-    }*/
+        var image_url: String? = image_url
+
+        var url: String? = url
+
+        var dietLabel: MutableList<String>? = dietLabel
+
+        var ingredients: MutableList<String>? = ingredients
+
+        var calories: Float = calories
+
+        var time: Int? = time
+
+        var yield: Int? = `yield`
+    }
+
+    constructor(){}
 
 
 

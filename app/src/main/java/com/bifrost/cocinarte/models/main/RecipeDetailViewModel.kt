@@ -18,10 +18,10 @@ class RecipeDetailViewModel : ViewModel() {
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
     val auth = FirebaseAuth.getInstance()
-    fun prepare(recipeId : String?) {
+    fun prepare(recipe: RecipeHit) {
 
         if (user != null){
-            recipeId?.let { Prepared(it) }?.let { user.preparedRecipe?.add(it) }
+            user.preparedRecipe?.add(recipe)
             user.email?.let { db.collection("users").document(it).set(user) }
             this.userExperience(user)
         }else{

@@ -9,7 +9,7 @@ class User {
     var reward: MutableList<Reward>? = mutableListOf()
     var userPrefence: Preference? = Preference()
     var favorite: MutableList<Favorite>? = mutableListOf()
-    var preparedRecipe: MutableList<Prepared>? = mutableListOf()
+    var preparedRecipe: MutableList<RecipeHit>? = mutableListOf()
     var profile: Category? = null
 
     constructor() {}
@@ -22,7 +22,7 @@ class User {
                 reward: MutableList<Reward>,
                 userPrefence: Preference,
                 favorite: MutableList<Favorite>,
-                preparedRecipe: MutableList<Prepared>,
+                preparedRecipe: MutableList<RecipeHit>,
                 profile: Category) {
         this.name = name
         this.email = email
@@ -34,6 +34,23 @@ class User {
         this.favorite = favorite
         this.preparedRecipe = preparedRecipe
         this.profile = profile
+    }
+
+    constructor(
+        name: String,
+        email: String,
+        password: String,
+    ){
+        this.name = name
+        this.email = email
+        this.password = password
+        this.enabled = true
+        this.level = 0
+        this.reward = mutableListOf()
+        this.userPrefence = Preference()
+        this.favorite = mutableListOf()
+        this.preparedRecipe = mutableListOf()
+        this.profile = Category.CELIAC
     }
 /*
     fun deleteUser(user: User){
