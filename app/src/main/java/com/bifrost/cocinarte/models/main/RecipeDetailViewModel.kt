@@ -20,7 +20,7 @@ class RecipeDetailViewModel : ViewModel() {
     val auth = FirebaseAuth.getInstance()
     fun prepare(recipe: RecipeHit) {
 
-        if (user != null){
+        if (user != null && this::user.isInitialized){
             user = this.userExperience(user)
             user.preparedRecipe?.add(recipe)
             user.email?.let { db.collection("users").document(it).set(user) }
@@ -28,7 +28,7 @@ class RecipeDetailViewModel : ViewModel() {
             Log.d("RecipeDetail","No user found")
 
         }
-        db.collection("users").document(user.email!!).set(user)
+        //db.collection("users").document(user.email!!).set(user)
     }
 
     fun getUser() {
