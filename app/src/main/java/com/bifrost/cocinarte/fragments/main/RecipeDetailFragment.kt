@@ -85,10 +85,11 @@ class RecipeDetailFragment : Fragment() {
 
         // PREPARE button
         btnPrepare.setOnClickListener() {
-            // TODO Reeplace "recipeId" with the real id
-            if (recipe != null) {
-                var initPos = recipe.uri?.length?.minus(32)
-                viewModel.prepare(recipe.uri?.substring(initPos!!))
+
+            if (recipe != null && viewModel.user!= null) {
+                viewModel.prepare(recipe)
+            }else{
+                Snackbar.make(rootLayout, "Something happened, please try again", Snackbar.LENGTH_LONG).show()
             }
             Snackbar.make(rootLayout, "MARK AS PREPARE", Snackbar.LENGTH_LONG).show()
         }
