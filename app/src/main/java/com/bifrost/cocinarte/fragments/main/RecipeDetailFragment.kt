@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import com.bifrost.cocinarte.entities.RecipeHit
 import com.bifrost.cocinarte.entities.User
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
@@ -85,13 +86,22 @@ class RecipeDetailFragment : Fragment() {
 
         // PREPARE button
         btnPrepare.setOnClickListener() {
-
             if (recipe != null && viewModel.user!= null) {
                 viewModel.prepare(recipe)
-            }else{
-                Snackbar.make(rootLayout, "Something happened, please try again", Snackbar.LENGTH_LONG).show()
+            }else {
+                Snackbar.make(
+                    rootLayout,
+                    "Something happened, please try again",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
-            Snackbar.make(rootLayout, "MARK AS PREPARE", Snackbar.LENGTH_LONG).show()
+
+            Snackbar.make(rootLayout, "GOING TO RECIPE", Snackbar.LENGTH_LONG).show()
+
+            // Navigation to RecipeUrlFragment
+            var action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeUrlFragment(
+                recipe?.url!!)
+            v.findNavController().navigate(action)
         }
     }
 
