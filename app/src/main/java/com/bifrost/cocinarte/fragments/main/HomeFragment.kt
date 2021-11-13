@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var recRecipe: RecyclerView
 
-    private var recipes: ArrayList<RecipeHit> = ArrayList<RecipeHit>()
+    private var recipes: MutableList<RecipeHit> = mutableListOf()
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -49,37 +49,44 @@ class HomeFragment : Fragment() {
         var listaRecetas: MutableList<RecipeHit>? = ArrayList<RecipeHit>()
 
         val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
+
         val result : Call<EdamamResponse> = apiCaller.listRecipes(type,"sal", appId, apiKey, ArrayList<String>())
 
-        result.enqueue(object: Callback<EdamamResponse> {
-            override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
-                Log.d("Response", "Error")
-                Log.d("Error: ", t.message.toString())
+
+        if (recipes.size==0){
+            Log.d("IF","ENTRE AL IF")
+            result.enqueue(object: Callback<EdamamResponse> {
+                override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
+                    Log.d("Response", "Error")
+                    Log.d("Error: ", t.message.toString())
+                }
+
+                override fun onResponse(call: Call<EdamamResponse>, response: Response<EdamamResponse>) {
+                    if(!response.isSuccessful){
+                        Log.d("Error", "No response")
+                        return
+                    }
+                    var apiResponse = response.body()
+                    if (apiResponse != null) {
+                        recipes = apiResponse.hitList
+                    }
+
+                    recRecipe.setHasFixedSize(true)
+                    recRecipe.layoutManager = LinearLayoutManager(context)
+                    recRecipe.adapter = RecipeAdapter(recipes) { index ->
+                        onItemClick(index)
+                    }
+                }
+            })
+        }else{
+            Log.d("IF","NO ENTRE AL IF")
+            recRecipe.setHasFixedSize(true)
+            recRecipe.layoutManager = LinearLayoutManager(context)
+            recRecipe.adapter = RecipeAdapter(recipes) { index ->
+                onItemClick(index)
             }
+        }
 
-            override fun onResponse(call: Call<EdamamResponse>, response: Response<EdamamResponse>) {
-                Log.d("Response","OK - CODE: " + response.code() +" Message: "+ response.message())
-                Log.d("Response",response.body().toString())
-                if(!response.isSuccessful){
-                    Log.d("Error", "No response")
-                    return
-                }
-                var apiResponse = response.body()
-                if (apiResponse != null) {
-                    listaRecetas = apiResponse.hitList
-                }
-
-                for (i in listaRecetas!!){
-                    recipes.add(RecipeHit(i.uri!!, i.label!!, i.image_url!!, i.url!!,i.dietLabel!!, i.ingredients!!, i.calories.toFloat()!!, i.time!!, i.yield!!))
-                }
-
-                recRecipe.setHasFixedSize(true)
-                recRecipe.layoutManager = LinearLayoutManager(context)
-                recRecipe.adapter = RecipeAdapter(recipes) { index ->
-                    onItemClick(index)
-                }
-            }
-        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
