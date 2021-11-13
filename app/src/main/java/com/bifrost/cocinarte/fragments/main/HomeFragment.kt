@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var recRecipe: RecyclerView
 
-    private var recipes: ArrayList<Recipe> = ArrayList<Recipe>()
+    private var recipes: ArrayList<RecipeHit> = ArrayList<RecipeHit>()
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -69,9 +70,7 @@ class HomeFragment : Fragment() {
                 }
 
                 for (i in listaRecetas!!){
-                    Log.d("Response Nombre", i.label!!)
-                    Log.d("Response Imagen", i.image_url!!)
-                    recipes.add(Recipe(i.uri!!, i.label!!, "", 1, i.image_url!!, 1.1F, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
+                    recipes.add(RecipeHit(i.uri!!, i.label!!, i.image_url!!, i.url!!,i.dietLabel!!, i.ingredients!!, i.calories.toFloat()!!, i.time!!, i.yield!!))
                 }
 
                 recRecipe.setHasFixedSize(true)
@@ -83,25 +82,15 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun initializeText() {
-
-    }
-
-    private fun initializeButtons() {
-
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     fun onItemClick(pos: Int) {
+        Log.d("RECIPE", recipes.toString())
+        var action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipes[pos]);
 
+        v.findNavController().navigate(action)
     }
 }
