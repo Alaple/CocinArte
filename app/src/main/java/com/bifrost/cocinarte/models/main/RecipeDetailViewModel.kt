@@ -20,15 +20,15 @@ class RecipeDetailViewModel : ViewModel() {
     val auth = FirebaseAuth.getInstance()
     fun prepare(recipe: RecipeHit) {
 
-        if (user != null){
+        if (user != null && this::user.isInitialized){
+            user = this.userExperience(user)
             user.preparedRecipe?.add(recipe)
             user.email?.let { db.collection("users").document(it).set(user) }
-            this.userExperience(user)
         }else{
             Log.d("RecipeDetail","No user found")
 
         }
-
+        //db.collection("users").document(user.email!!).set(user)
     }
 
     fun getUser() {
@@ -36,15 +36,19 @@ class RecipeDetailViewModel : ViewModel() {
         getUserFirestore(userEmail)
     }
 
-    private fun userExperience(user : User){
+    private fun userExperience(user : User): User{
+        Log.d("SIZE", user.preparedRecipe!!.size.toString())
         var totalExperience = (user.preparedRecipe!!.size*3) + 3
         var newLevel = user.level!! + 1
         var forNextLevel = round(0.04 * (newLevel.toDouble().pow(3)) + 0.8 * (newLevel.toDouble().pow(2)) + 2 * newLevel)
+        Log.d("FOR NEXT LEVEL",forNextLevel.toString())
 
         if(totalExperience>=forNextLevel){
             user.level = newLevel;
         }
-        db.collection("users").document(user.email!!).set(user)
+        Log.d("RESPONSE","El usario level "+user.level+" tiene "+totalExperience+" puntos de experiencia")
+
+        return user
     }
 
     private fun getUserFirestore(email: String?) {

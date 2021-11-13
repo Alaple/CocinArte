@@ -30,7 +30,7 @@ class RegisterViewModel : ViewModel() {
         var reward : MutableList<Reward> = mutableListOf()
         var preference : Preference = Preference()
         var favorite: MutableList<Favorite> = mutableListOf()
-        var prepared: MutableList<Prepared> = mutableListOf()
+        var prepared: MutableList<RecipeHit> = mutableListOf()
         var profile: Category = Category.CELIAC
         val user = User(name,
             email,
