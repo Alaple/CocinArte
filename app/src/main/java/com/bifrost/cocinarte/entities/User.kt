@@ -8,7 +8,7 @@ class User {
     var level: Int? = 0
     var reward: MutableList<Reward>? = mutableListOf()
     var userPrefence: Preference? = Preference()
-    var favorite: MutableList<Favorite>? = mutableListOf()
+    var favorite: MutableList<RecipeHit>? = mutableListOf()
     var preparedRecipe: MutableList<RecipeHit>? = mutableListOf()
     var profile: Category? = null
 
@@ -21,7 +21,7 @@ class User {
                 level: Int,
                 reward: MutableList<Reward>,
                 userPrefence: Preference,
-                favorite: MutableList<Favorite>,
+                favorite: MutableList<RecipeHit>,
                 preparedRecipe: MutableList<RecipeHit>,
                 profile: Category) {
         this.name = name

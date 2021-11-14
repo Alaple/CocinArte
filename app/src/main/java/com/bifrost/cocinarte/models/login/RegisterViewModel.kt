@@ -29,7 +29,7 @@ class RegisterViewModel : ViewModel() {
     suspend fun createDbUser(name: String, email: String, password: String) {
         var reward : MutableList<Reward> = mutableListOf()
         var preference : Preference = Preference()
-        var favorite: MutableList<Favorite> = mutableListOf()
+        var favorite: MutableList<RecipeHit> = mutableListOf()
         var prepared: MutableList<RecipeHit> = mutableListOf()
         var profile: Category = Category.CELIAC
         val user = User(name,
