@@ -27,7 +27,6 @@ class RecipeDetailViewModel : ViewModel() {
             user.email?.let { db.collection("users").document(it).set(user) }
         }else{
             Log.d("RecipeDetail","No user found")
-
         }
         //db.collection("users").document(user.email!!).set(user)
     }
