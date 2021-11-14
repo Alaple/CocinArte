@@ -26,7 +26,7 @@
             app:destination="@id/preparedFragment" />
         <action
             android:id="@+id/action_userProfileFragment_to_favouritesFragment"
-            app:destination="@id/favouritesFragment" />
+            app:destination="@id/favoritesFragment" />
         <action
             android:id="@+id/action_userProfileFragment_to_accountProfileFragment"
             app:destination="@id/accountProfileFragment" />
@@ -58,10 +58,27 @@
             app:destination="@id/recipeUrlFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favouritesFragment"
-        android:name="com.bifrost.cocinarte.fragments.main.FavouritesFragment"
-        android:label="favourites_fragment"
-        tools:layout="@layout/favourites_fragment" />
+        android:id="@+id/favoritesFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.FavoritesFragment"
+        android:label="favorites_fragment"
+        tools:layout="@layout/favorites_fragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_favoriteDetailFragment"
+            app:destination="@id/favoriteDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteDetailFragment"
+        android:name="com.bifrost.cocinarte.fragments.main.FavoriteDetailFragment"
+        android:label="favorite_detail_fragment"
+        tools:layout="@layout/favorite_detail_fragment" >
+        <argument
+            android:name="recipePosition"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_favoriteDetailFragment_to_recipeUrlFragment"
+            app:destination="@id/recipeUrlFragment" />
+    </fragment>
     <fragment
         android:id="@+id/preparedFragment"
         android:name="com.bifrost.cocinarte.fragments.main.PreparedFragment"

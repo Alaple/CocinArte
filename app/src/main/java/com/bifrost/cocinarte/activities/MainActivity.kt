@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity() {
         Log.d("CURRENT USER", auth.currentUser?.email.toString())
         if (auth.currentUser != null) {
             bottomNavView.menu.findItem(R.id.userProfileFragment).isVisible = true
-            bottomNavView.menu.findItem(R.id.favouritesFragment).isVisible = true
+            bottomNavView.menu.findItem(R.id.favoritesFragment).isVisible = true
             bottomNavView.menu.findItem(R.id.preparedFragment).isVisible = true
         } else {
             bottomNavView.menu.findItem(R.id.userProfileFragment).isVisible = false
-            bottomNavView.menu.findItem(R.id.favouritesFragment).isVisible = false
+            bottomNavView.menu.findItem(R.id.favoritesFragment).isVisible = false
             bottomNavView.menu.findItem(R.id.preparedFragment).isVisible = false
         }
     }

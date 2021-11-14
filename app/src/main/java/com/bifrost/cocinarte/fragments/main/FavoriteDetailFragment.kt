@@ -15,12 +15,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.entities.RecipeHit
-import com.bifrost.cocinarte.entities.User
+import com.bifrost.cocinarte.models.main.FavoritesViewModel
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
-class RecipeDetailFragment : Fragment() {
+class FavoriteDetailFragment : Fragment() {
 
     lateinit var v: View
 
@@ -33,17 +33,14 @@ class RecipeDetailFragment : Fragment() {
     lateinit var btnPrepare: Button
     lateinit var btnFavorite: ImageButton
 
-
-
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
 
-    private lateinit var viewModel: RecipeDetailViewModel
-
-    lateinit var listIngredientsViewModel: ListIngredientsViewModel
+    private lateinit var recipeViewModel: RecipeDetailViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel
 
     companion object {
-        fun newInstance() = RecipeDetailFragment()
+        fun newInstance() = FavoriteDetailFragment()
     }
 
     override fun onCreateView(
@@ -64,7 +61,7 @@ class RecipeDetailFragment : Fragment() {
         // For snackbar use
         rootLayout = v.findViewById(R.id.RecipeDetailLayout)
 
-        listIngredientsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
+        favoritesViewModel = ViewModelProvider(requireActivity()).get(FavoritesViewModel::class.java)
 
         return v
     }
@@ -72,9 +69,9 @@ class RecipeDetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        var recipe = listIngredientsViewModel.listaRecetas[RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipePosition]
+        var recipe = favoritesViewModel.favorites[FavoriteDetailFragmentArgs.fromBundle(requireArguments()).recipePosition]
         initialize(recipe)
-        viewModel.getUser()
+        recipeViewModel.getUser()
     }
 
     private fun initialize(recipe: RecipeHit?) {
@@ -89,8 +86,8 @@ class RecipeDetailFragment : Fragment() {
 
         // FAVORITE button
         btnFavorite.setOnClickListener() {
-            if (recipe != null && viewModel.user!= null) {
-                viewModel.favorite(recipe)
+            if (recipe != null && recipeViewModel.user!= null) {
+                recipeViewModel.favorite(recipe)
             }else {
                 Snackbar.make(
                     rootLayout,
@@ -104,8 +101,8 @@ class RecipeDetailFragment : Fragment() {
 
         // PREPARE button
         btnPrepare.setOnClickListener() {
-            if (recipe != null && viewModel.user!= null) {
-                viewModel.prepare(recipe)
+            if (recipe != null && recipeViewModel.user!= null) {
+                recipeViewModel.prepare(recipe)
             }else {
                 Snackbar.make(
                     rootLayout,
@@ -117,7 +114,7 @@ class RecipeDetailFragment : Fragment() {
             Snackbar.make(rootLayout, "GOING TO RECIPE", Snackbar.LENGTH_LONG).show()
 
             // Navigation to RecipeUrlFragment
-            var action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeUrlFragment(
+            var action = FavoriteDetailFragmentDirections.actionFavoriteDetailFragmentToRecipeUrlFragment(
                 recipe?.url!!)
             v.findNavController().navigate(action)
         }
@@ -125,7 +122,7 @@ class RecipeDetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
+        recipeViewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
     }
 
 }

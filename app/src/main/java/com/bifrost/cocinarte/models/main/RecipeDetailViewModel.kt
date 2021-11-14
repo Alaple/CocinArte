@@ -18,6 +18,7 @@ class RecipeDetailViewModel : ViewModel() {
     // Access a Cloud Firestore instance from your Activity
     val db = Firebase.firestore
     val auth = FirebaseAuth.getInstance()
+
     fun prepare(recipe: RecipeHit) {
 
         if (user != null){
@@ -26,9 +27,18 @@ class RecipeDetailViewModel : ViewModel() {
             this.userExperience(user)
         }else{
             Log.d("RecipeDetail","No user found")
-
         }
+    }
 
+    fun favorite(recipe: RecipeHit) {
+
+        if (user != null){
+            user.favorite?.add(recipe)
+            user.email?.let { db.collection("users").document(it).set(user) }
+            this.userExperience(user)
+        }else{
+            Log.d("Favorite","No user found")
+        }
     }
 
     fun getUser() {
