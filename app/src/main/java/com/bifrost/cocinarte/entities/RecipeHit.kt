@@ -71,6 +71,13 @@ class RecipeHit : Parcelable{
 
     }
 
+    fun getId(): String? {
+        var idLength = uri!!.length
+
+        return uri?.substring(idLength - 32)
+
+    }
+
 
     companion object {
         @JvmField
