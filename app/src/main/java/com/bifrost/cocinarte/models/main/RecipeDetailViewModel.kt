@@ -37,7 +37,6 @@ class RecipeDetailViewModel : ViewModel() {
         if (user != null){
             user.favorite?.add(recipe)
             user.email?.let { db.collection("users").document(it).set(user) }
-            this.userExperience(user)
         }else{
             Log.d("Favorite","No user found")
         }
