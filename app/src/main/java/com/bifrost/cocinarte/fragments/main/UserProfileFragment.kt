@@ -18,7 +18,6 @@ class UserProfileFragment : Fragment() {
 
     // Component variables
     lateinit var txtAccountProfile: TextView
-    lateinit var txtRewards: TextView
     lateinit var txtPreferences: TextView
     lateinit var txtFavourites: TextView
     lateinit var txtPreparedMeals: TextView
@@ -41,7 +40,6 @@ class UserProfileFragment : Fragment() {
 
         // Buttons
         txtAccountProfile = v.findViewById(R.id.txtAccountProfile)
-        txtRewards = v.findViewById(R.id.txtRewards)
         txtPreferences = v.findViewById(R.id.txtPreferences)
         txtFavourites = v.findViewById(R.id.txtFavourites)
         txtPreparedMeals = v.findViewById(R.id.txtPreparedMeals)
@@ -75,12 +73,6 @@ class UserProfileFragment : Fragment() {
         txtAccountProfile.setOnClickListener() {
             val action = UserProfileFragmentDirections
                 .actionUserProfileFragmentToAccountProfileFragment()
-            v.findNavController().navigate(action)
-        }
-
-        txtRewards.setOnClickListener() {
-            val action = UserProfileFragmentDirections
-                .actionUserProfileFragmentToRewardsFragment()
             v.findNavController().navigate(action)
         }
 
