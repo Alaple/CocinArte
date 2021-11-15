@@ -142,7 +142,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:padding="5dp"
-        android:src="@drawable/user_default"
+        android:src="@drawable/userprofile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
