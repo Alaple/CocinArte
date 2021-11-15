@@ -15,7 +15,6 @@ class FavoritesViewModel : ViewModel() {
     private val db = Firebase.firestore
     private lateinit var auth: FirebaseAuth
 
-    var favorites: MutableList<RecipeHit> = mutableListOf()
     var favoritesLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
 
     fun initializeProfile() {
@@ -37,7 +36,6 @@ class FavoritesViewModel : ViewModel() {
             .addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot != null) {
                     var user = dataSnapshot.toObject<User>()!!
-                    favorites = user.favorite!!
                     favoritesLiveData.value = user.favorite
                 } else {
                     Log.d(tag, "No such document")

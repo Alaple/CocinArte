@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapters.RecipesListAdapter
+import com.bifrost.cocinarte.entities.RecipeHit
 import com.bifrost.cocinarte.models.main.FavoritesViewModel
+import com.bifrost.cocinarte.models.main.PreparedViewModel
 
 class FavoritesFragment : Fragment() {
 
@@ -21,6 +23,8 @@ class FavoritesFragment : Fragment() {
 
     private lateinit var recFavorites: RecyclerView
     private lateinit var recipesListAdapter: RecipesListAdapter
+
+    private var recipes: MutableList<RecipeHit> = ArrayList()
 
     companion object {
         fun newInstance() = FavoritesFragment()
@@ -48,9 +52,14 @@ class FavoritesFragment : Fragment() {
         viewModel.initializeProfile()
 
         viewModel.favoritesLiveData.observe(viewLifecycleOwner, Observer { result ->
+            recipes = result
             recipesListAdapter.setData(result)
             recFavorites.adapter = recipesListAdapter
         })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,18 +67,13 @@ class FavoritesFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     fun onItemClick(pos: Int) {
 
     }
 
-    private fun onCardItemClick(position: Int): Boolean{
-        var action = FavoritesFragmentDirections.actionFavoritesFragmentToFavoriteDetailFragment(position)
-        var navController = v.findNavController()
-        navController.navigate(action)
+    fun onCardItemClick(int: Int): Boolean {
+        var action = FavoritesFragmentDirections.actionFavoritesFragmentToRecipeDetailFragment(recipes[int]);
+        v.findNavController().navigate(action)
         return true
     }
 }
