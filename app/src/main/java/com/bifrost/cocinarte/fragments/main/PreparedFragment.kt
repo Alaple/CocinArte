@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
@@ -27,7 +28,7 @@ class PreparedFragment : Fragment() {
     private lateinit var recPrepared: RecyclerView
     private lateinit var recipesListAdapter: RecipesListAdapter
 
-    private var recipes: ArrayList<RecipeHit> = ArrayList<RecipeHit>()
+    private var recipes: MutableList<RecipeHit> = ArrayList<RecipeHit>()
 
     companion object {
         fun newInstance() = PreparedFragment()
@@ -56,9 +57,9 @@ class PreparedFragment : Fragment() {
 
         viewModel.userLiveData.observe(viewLifecycleOwner, Observer { result ->
             recipesListAdapter.setData(result)
+            recipes = result
             recPrepared.adapter = recipesListAdapter
         })
-
     }
 
     fun onItemClick(pos: Int) {
@@ -71,6 +72,8 @@ class PreparedFragment : Fragment() {
     }
 
     fun onCardItemClick(int: Int): Boolean {
+        var action = PreparedFragmentDirections.actionPreparedFragmentToRecipeDetailFragment(recipes[int]);
+        v.findNavController().navigate(action)
         return true
     }
 
