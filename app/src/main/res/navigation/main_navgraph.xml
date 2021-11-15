@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.bifrost.cocinarte.fragments.main.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.bifrost.cocinarte.fragments.main.UserProfileFragment"
@@ -49,13 +53,12 @@
         android:name="com.bifrost.cocinarte.fragments.main.RecipeDetailFragment"
         android:label="recipe_detail_fragment"
         tools:layout="@layout/recipe_detail_fragment" >
-        <argument
-            android:name="recipePosition"
-            app:argType="integer"
-            android:defaultValue="0" />
         <action
             android:id="@+id/action_recipeDetailFragment_to_recipeUrlFragment"
             app:destination="@id/recipeUrlFragment" />
+        <argument
+            android:name="recipeHit"
+            app:argType="com.bifrost.cocinarte.entities.RecipeHit" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -83,7 +86,11 @@
         android:id="@+id/preparedFragment"
         android:name="com.bifrost.cocinarte.fragments.main.PreparedFragment"
         android:label="prepared_fragment"
-        tools:layout="@layout/prepared_fragment" />
+        tools:layout="@layout/prepared_fragment" >
+        <action
+            android:id="@+id/action_preparedFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountProfileFragment"
         android:name="com.bifrost.cocinarte.fragments.main.AccountProfileFragment"

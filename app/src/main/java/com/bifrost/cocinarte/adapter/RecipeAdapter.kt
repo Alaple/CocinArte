@@ -17,9 +17,10 @@ import java.net.URL
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.core.content.res.ResourcesCompat
+import com.bifrost.cocinarte.entities.RecipeHit
 
 class RecipeAdapter (
-    private var recipes : MutableList <Recipe>,
+    private var recipes : MutableList <RecipeHit>,
     private var onClick : (Int) -> Unit
 ) : RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
 
@@ -29,8 +30,8 @@ class RecipeAdapter (
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
-       holder.setTitle(recipes[position].title)
-       holder.setImage(recipes[position].image_url)
+       holder.setTitle(recipes[position].label!!)
+       holder.setImage(recipes[position].image_url!!)
        holder.getCardView().setOnClickListener {
            onClick(position)
        }
