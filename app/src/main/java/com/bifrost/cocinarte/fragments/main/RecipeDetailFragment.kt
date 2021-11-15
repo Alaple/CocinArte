@@ -69,7 +69,8 @@ class RecipeDetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        var recipe = listIngredientsViewModel.listaRecetas[RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipePosition]
+        val recipe = RecipeDetailFragmentArgs.fromBundle(requireArguments()).recipeHit
+
         initialize(recipe)
         viewModel.getUser()
     }

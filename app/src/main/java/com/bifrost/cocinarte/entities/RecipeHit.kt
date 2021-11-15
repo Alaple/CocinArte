@@ -1,9 +1,11 @@
 package com.bifrost.cocinarte.entities
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class RecipeHit {
+class RecipeHit : Parcelable{
     @SerializedName("uri")
     var uri : String? = null
     @SerializedName("label")
@@ -62,6 +64,26 @@ class RecipeHit {
 
     constructor(){}
 
+    constructor(source: Parcel) : this(
+    )
 
+    fun prepare(cocina:String){
+
+    }
+
+
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<RecipeHit> = object : Parcelable.Creator<RecipeHit> {
+            override fun createFromParcel(source: Parcel): RecipeHit = RecipeHit(source)
+            override fun newArray(size: Int): Array<RecipeHit?> = arrayOfNulls(size)
+        }
+    }
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(p0: Parcel?, p1: Int) {
+        TODO("Not yet implemented")
+    }
 
 }

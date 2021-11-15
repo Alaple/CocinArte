@@ -100,7 +100,8 @@ class ListIngredients : Fragment() {
     }
 
     private fun onCardItemClick(position: Int): Boolean{
-        var action = ListIngredientsDirections.actionListIngredients3ToRecipeDetailFragment(position)
+        var action = ListIngredientsDirections.actionListIngredients3ToRecipeDetailFragment(buttonsViewModel.listaRecetas[position]);
+
         var navController = v.findNavController()
         navController.navigate(action)
         return true

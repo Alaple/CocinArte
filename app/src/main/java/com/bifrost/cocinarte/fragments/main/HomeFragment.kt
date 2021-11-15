@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var recRecipe: RecyclerView
 
-    private var recipes: ArrayList<Recipe> = ArrayList<Recipe>()
+    private var recipes: MutableList<RecipeHit> = mutableListOf()
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -48,46 +49,43 @@ class HomeFragment : Fragment() {
         var listaRecetas: MutableList<RecipeHit>? = ArrayList<RecipeHit>()
 
         val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
+
         val result : Call<EdamamResponse> = apiCaller.listRecipes(type,"sal", appId, apiKey, ArrayList<String>())
 
-        result.enqueue(object: Callback<EdamamResponse> {
-            override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
-                Log.d("Response", "Error")
-                Log.d("Error: ", t.message.toString())
+
+        if (recipes.size==0){
+            Log.d("IF","ENTRE AL IF")
+            result.enqueue(object: Callback<EdamamResponse> {
+                override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
+                    Log.d("Response", "Error")
+                    Log.d("Error: ", t.message.toString())
+                }
+
+                override fun onResponse(call: Call<EdamamResponse>, response: Response<EdamamResponse>) {
+                    if(!response.isSuccessful){
+                        Log.d("Error", "No response")
+                        return
+                    }
+                    var apiResponse = response.body()
+                    if (apiResponse != null) {
+                        recipes = apiResponse.hitList
+                    }
+
+                    recRecipe.setHasFixedSize(true)
+                    recRecipe.layoutManager = LinearLayoutManager(context)
+                    recRecipe.adapter = RecipeAdapter(recipes) { index ->
+                        onItemClick(index)
+                    }
+                }
+            })
+        }else{
+            Log.d("IF","NO ENTRE AL IF")
+            recRecipe.setHasFixedSize(true)
+            recRecipe.layoutManager = LinearLayoutManager(context)
+            recRecipe.adapter = RecipeAdapter(recipes) { index ->
+                onItemClick(index)
             }
-
-            override fun onResponse(call: Call<EdamamResponse>, response: Response<EdamamResponse>) {
-                Log.d("Response","OK - CODE: " + response.code() +" Message: "+ response.message())
-                Log.d("Response",response.body().toString())
-                if(!response.isSuccessful){
-                    Log.d("Error", "No response")
-                    return
-                }
-                var apiResponse = response.body()
-                if (apiResponse != null) {
-                    listaRecetas = apiResponse.hitList
-                }
-
-                for (i in listaRecetas!!){
-                    Log.d("Response Nombre", i.label!!)
-                    Log.d("Response Imagen", i.image_url!!)
-                    recipes.add(Recipe(i.uri!!, i.label!!, "", 1, i.image_url!!, 1.1F, ArrayList<DietLabel>(), ArrayList<Ingredient>(), ArrayList<MealType>(), ArrayList<CuisineType>(), ArrayList<Category>()))
-                }
-
-                recRecipe.setHasFixedSize(true)
-                recRecipe.layoutManager = LinearLayoutManager(context)
-                recRecipe.adapter = RecipeAdapter(recipes) { index ->
-                    onItemClick(index)
-                }
-            }
-        })
-    }
-
-    private fun initializeText() {
-
-    }
-
-    private fun initializeButtons() {
+        }
 
     }
 
@@ -96,12 +94,10 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     fun onItemClick(pos: Int) {
+        Log.d("RECIPE", recipes.toString())
+        var action = HomeFragmentDirections.actionHomeFragmentToRecipeDetailFragment(recipes[pos]);
 
+        v.findNavController().navigate(action)
     }
 }

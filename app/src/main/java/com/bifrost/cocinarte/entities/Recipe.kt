@@ -1,5 +1,7 @@
 package com.bifrost.cocinarte.entities
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -16,7 +18,7 @@ class Recipe (
     cuisineType: MutableList<CuisineType>,
     category: MutableList<Category>
 
-) {
+) : Parcelable {
 
     @SerializedName("")
     @Expose
@@ -62,9 +64,36 @@ class Recipe (
         this.category = category
     }
 
+    constructor(source: Parcel) : this(
+        source.readString()!!,
+        source.readString()!!,
+        source.readString()!!,
+        source.readInt()!!,
+        source.readString()!!,
+        source.readFloat()!!,
+        source.createStringArrayList() as MutableList<DietLabel>,
+        source.createStringArrayList() as MutableList<Ingredient>,
+        source.createStringArrayList() as MutableList<MealType>,
+        source.createStringArrayList() as MutableList<CuisineType>,
+        source.createStringArrayList() as MutableList<Category>
+    )
+
     fun prepare(cocina:String){
 
     }
 
 
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<Recipe> = object : Parcelable.Creator<Recipe> {
+            override fun createFromParcel(source: Parcel): Recipe = Recipe(source)
+            override fun newArray(size: Int): Array<Recipe?> = arrayOfNulls(size)
+        }
+    }
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(p0: Parcel?, p1: Int) {
+        TODO("Not yet implemented")
+    }
 }
