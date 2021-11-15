@@ -82,7 +82,11 @@ class RecipeDetailFragment : Fragment() {
         if (recipe != null) {
             txtRecipe.setText(recipe.label)
             txtDescription.setText(recipe.ingredients?.joinToString("\n"))
-            txtMinutes.setText(recipe.time.toString() + " MIN")
+            if (recipe.time != 0) {
+                txtMinutes.setText(recipe.time.toString() + " MIN")
+            } else {
+                txtMinutes.setText("No estimated time")
+            }
             Glide.with(this)
                 .load(recipe.image_url)
                 .into(imageRecipe)

@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/imageIcon"
+        android:id="@+id/imageTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -113,7 +113,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="26dp"
         android:text="34 min"
-        app:layout_constraintTop_toBottomOf="@+id/imageIcon"
+        app:layout_constraintTop_toBottomOf="@+id/imageTime"
         app:layout_constraintBottom_toTopOf="@+id/txtDescription"
         app:layout_constraintEnd_toEndOf="parent" />
 
