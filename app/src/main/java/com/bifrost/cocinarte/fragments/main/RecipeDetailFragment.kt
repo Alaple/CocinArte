@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.main.RecipeDetailViewModel
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,8 +29,9 @@ class RecipeDetailFragment : Fragment() {
     lateinit var imageRecipe: ImageView
     lateinit var txtTitle: TextView
     lateinit var txtDescription: TextView
-    lateinit var btnPrepare: Button
     lateinit var txtMinutes: TextView
+    lateinit var btnPrepare: Button
+    lateinit var btnFavorite: ImageButton
 
 
 
@@ -55,8 +57,9 @@ class RecipeDetailFragment : Fragment() {
         imageRecipe = v.findViewById(R.id.imageRecipe)
         txtTitle = v.findViewById(R.id.txtTitle)
         txtDescription = v.findViewById(R.id.txtDescription)
-        btnPrepare = v.findViewById(R.id.btnPrepare)
         txtMinutes = v.findViewById(R.id.txtMinutes)
+        btnPrepare = v.findViewById(R.id.btnPrepare)
+        btnFavorite = v.findViewById(R.id.btnFavorite)
 
         // For snackbar use
         rootLayout = v.findViewById(R.id.RecipeDetailLayout)
@@ -83,6 +86,21 @@ class RecipeDetailFragment : Fragment() {
             Glide.with(this)
                 .load(recipe.image_url)
                 .into(imageRecipe)
+        }
+
+        // FAVORITE button
+        btnFavorite.setOnClickListener() {
+            if (recipe != null && viewModel.user!= null) {
+                viewModel.favorite(recipe)
+            }else {
+                Snackbar.make(
+                    rootLayout,
+                    "Something happened, please try again",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+
+            Snackbar.make(rootLayout, "MY FAVORITE TOO!", Snackbar.LENGTH_LONG).show()
         }
 
         // PREPARE button
