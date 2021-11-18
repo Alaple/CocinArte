@@ -12,7 +12,6 @@ import com.google.firebase.ktx.Firebase
 
 
 class PreparedViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
 
     // Firebase Authentication
     private lateinit var auth: FirebaseAuth
@@ -46,8 +45,10 @@ class PreparedViewModel : ViewModel() {
                 if (dataSnapshot != null) {
                     // DO SOMETHING
                     // Parse the data and observe it
-                    var user = dataSnapshot.toObject<User>()!!
-                    userLiveData.value = user.preparedRecipe
+                    var user = dataSnapshot.toObject<User>()
+                    if (user != null) {
+                        userLiveData.value = user.preparedRecipe
+                    }
                 } else {
                     Log.d(TAG, "No such document")
                 }

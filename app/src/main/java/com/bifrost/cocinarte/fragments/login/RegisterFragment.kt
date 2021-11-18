@@ -18,7 +18,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
+import okhttp3.internal.wait
 
 class RegisterFragment : Fragment() {
 
@@ -35,9 +38,10 @@ class RegisterFragment : Fragment() {
     lateinit var btnRegister: Button
     lateinit var txtLogIn: TextView
 
-
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
+
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     companion object {
         fun newInstance() = RegisterFragment()
@@ -94,44 +98,55 @@ class RegisterFragment : Fragment() {
         // REGISTER button
         btnRegister.setOnClickListener() {
 
-            val userEmail = inputEmail.text.toString()
-            val userName = inputFullName.text.toString()
-            val userPassword = inputPassword.text.toString()
-            val job1 = Job()
-            val job2 = Job()
-            val scope = CoroutineScope(Dispatchers.Default + job1 + job2)
+            if(inputFullName.text.isNotEmpty() &&
+                inputEmail.text.isNotEmpty() &&
+                inputPassword.text.isNotEmpty()) {
+                val userEmail = inputEmail.text.toString()
+                val userName = inputFullName.text.toString()
+                val userPassword = inputPassword.text.toString()
+                val scope = CoroutineScope(Dispatchers.Default)
 
-            scope.launch{
-                val createUserJob = async{
-                    //Add user to Auth
-                    try{
-                        viewModel.createAuthUser(
-                            userEmail,
-                            userPassword
-                        )
-                        //Add user to DB
-                        viewModel.createDbUser(
-                            userName,
-                            userEmail,
-                            userPassword
-                        )
-
-                    }catch (e: Exception){
-                        Log.d("Coroutine: ", e.message.toString())
+                scope.launch{
+                    val createUserJob = async{
+                        //Add user to Auth
+                        try{
+                            viewModel.createAuthUser(
+                                userEmail,
+                                userPassword
+                            )
+                            //Add user to DB
+                            viewModel.createDbUser(
+                                userName,
+                                userEmail,
+                                userPassword
+                            )
+                        } catch (e: Exception) {
+                            Log.d("Coroutine: ", e.message.toString())
+                        }
                     }
-
+                    val navigate = async {
+                        val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                        v.findNavController().navigate(action)
+                    }
+                    val logIn = async {
+                        auth.signInWithEmailAndPassword(
+                            inputEmail.text.toString(),
+                            inputPassword.text.toString()
+                        ).addOnCompleteListener(requireActivity()) { task ->
+                            if (task.isSuccessful) {
+                                val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
+                                v.findNavController().navigate(action)
+                            } else {
+                                Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                    createUserJob.await()
+                    logIn.await()
+                    navigate.await()
                 }
-                val navigate = async{
-                    val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                    v.findNavController().navigate(action)
-                }
-                createUserJob.await()
-                navigate.await()
             }
-
-
         }
-
 
         // LOGIN button
         txtLogIn.setOnClickListener() {
@@ -143,11 +158,9 @@ class RegisterFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     private fun coloredText() {
-
         val spannableString = SpannableString("ALREADY HAVE AN ACCOUNT? LOGIN")
 
         val fColor = ForegroundColorSpan(Color.rgb(47, 219, 188))
