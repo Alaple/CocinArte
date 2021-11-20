@@ -12,7 +12,6 @@ class RegisterViewModel : ViewModel() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     val db = Firebase.firestore
 
-
     suspend fun createAuthUser(email: String, password: String){
         auth.createUserWithEmailAndPassword(
             email,
@@ -31,7 +30,7 @@ class RegisterViewModel : ViewModel() {
         var preference : Preference = Preference()
         var favorite: MutableList<RecipeHit> = mutableListOf()
         var prepared: MutableList<RecipeHit> = mutableListOf()
-        var profile: Category = Category.CELIAC
+        var profile: Category = Category.NONE
         val user = User(name,
             email,
             password,
@@ -47,10 +46,6 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun uploadUser(user: User){
-        user.email?.let { db.collection("users").document(it).set(user) }
-    }
-
-    fun currentUser(): FirebaseUser? {
-        return auth.currentUser
+        db.collection("users").document(user.email!!).set(user)
     }
 }

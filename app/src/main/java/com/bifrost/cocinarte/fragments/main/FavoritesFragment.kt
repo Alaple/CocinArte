@@ -52,9 +52,11 @@ class FavoritesFragment : Fragment() {
         viewModel.initializeProfile()
 
         viewModel.favoritesLiveData.observe(viewLifecycleOwner, Observer { result ->
-            recipes = result
-            recipesListAdapter.setData(result)
-            recFavorites.adapter = recipesListAdapter
+            if (result != null) {
+                recipes = result
+                recipesListAdapter.setData(result)
+                recFavorites.adapter = recipesListAdapter
+            }
         })
     }
 
@@ -65,10 +67,6 @@ class FavoritesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
-    }
-
-    fun onItemClick(pos: Int) {
-
     }
 
     fun onCardItemClick(int: Int): Boolean {

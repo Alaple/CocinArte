@@ -56,14 +56,13 @@ class PreparedFragment : Fragment() {
         viewModel.initializeProfile()
 
         viewModel.userLiveData.observe(viewLifecycleOwner, Observer { result ->
-            recipesListAdapter.setData(result)
-            recipes = result
-            recPrepared.adapter = recipesListAdapter
+            // Check if prepared list is null
+            if (result != null) {
+                recipesListAdapter.setData(result)
+                recipes = result
+                recPrepared.adapter = recipesListAdapter
+            }
         })
-    }
-
-    fun onItemClick(pos: Int) {
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,9 +79,6 @@ class PreparedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PreparedViewModel::class.java)
-        // TODO: Use the ViewModel
     }
-
-
 
 }

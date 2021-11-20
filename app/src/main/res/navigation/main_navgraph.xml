@@ -20,9 +20,6 @@
         android:label="user_profile_fragment"
         tools:layout="@layout/user_profile_fragment" >
         <action
-            android:id="@+id/action_userProfileFragment_to_rewardsFragment"
-            app:destination="@id/rewardsFragment" />
-        <action
             android:id="@+id/action_userProfileFragment_to_preferenceActivity"
             app:destination="@id/preferenceActivity" />
         <action
@@ -43,11 +40,6 @@
         android:name="com.bifrost.cocinarte.activities.PreferenceActivity"
         android:label="activity_preference"
         tools:layout="@layout/activity_preference" />
-    <fragment
-        android:id="@+id/rewardsFragment"
-        android:name="com.bifrost.cocinarte.fragments.main.RewardsFragment"
-        android:label="rewards_fragment"
-        tools:layout="@layout/rewards_fragment" />
     <fragment
         android:id="@+id/recipeDetailFragment"
         android:name="com.bifrost.cocinarte.fragments.main.RecipeDetailFragment"

@@ -35,8 +35,10 @@ class FavoritesViewModel : ViewModel() {
         docRef.get()
             .addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot != null) {
-                    var user = dataSnapshot.toObject<User>()!!
-                    favoritesLiveData.value = user.favorite
+                    var user = dataSnapshot.toObject<User>()
+                    if(user != null) {
+                        favoritesLiveData.value = user.favorite
+                    }
                 } else {
                     Log.d(tag, "No such document")
                 }

@@ -82,8 +82,6 @@ class LogInFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val currentUser = auth.currentUser
-
         // Initialize image variables
         imageLogin.setImageResource(R.drawable.logo_cocinarte)
         // Initialize all text variables
@@ -107,22 +105,19 @@ class LogInFragment : Fragment() {
     private fun initializeButtons() {
         // LOGIN button
         btnLogin.setOnClickListener() {
-            // TODO Login
-
-            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) auth.signInWithEmailAndPassword(
-                inputEmail.text.toString(),
-                inputPassword.text.toString()
-            ).addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
-                    v.findNavController().navigate(action)
-                    val user = auth.currentUser
-                } else {
-                    Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty())
+                auth.signInWithEmailAndPassword(
+                    inputEmail.text.toString(),
+                    inputPassword.text.toString()
+                ).addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
+                        v.findNavController().navigate(action)
+                    } else {
+                        Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+                    }
                 }
-            }
         }
-
 
         // Forgot Password button
         txtForgotPassword.setOnClickListener() {
@@ -144,7 +139,6 @@ class LogInFragment : Fragment() {
     }
 
     private fun coloredText() {
-
         val spannableString = SpannableString("YOU DON'T HAVE AN ACCOUNT? REGISTER")
 
         val fColor = ForegroundColorSpan(Color.rgb(47, 219, 188))
