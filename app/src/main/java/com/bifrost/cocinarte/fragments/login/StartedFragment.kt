@@ -16,7 +16,7 @@ import com.bifrost.cocinarte.models.login.StartedViewModel
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class StartedFragment : Fragment() {
 
@@ -31,6 +31,9 @@ class StartedFragment : Fragment() {
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
+
+    // Firebase
+    lateinit var auth: FirebaseAuth
 
     companion object {
         fun newInstance() = StartedFragment()
@@ -53,12 +56,21 @@ class StartedFragment : Fragment() {
         txtSkip = v.findViewById(R.id.textSkip)
         // For snackbar use
         rootLayout = v.findViewById(R.id.getsLayout)
+        // Firebase
+        auth = FirebaseAuth.getInstance()
 
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        // If there is a Login user redirect to Main Activity.
+        val authUser = auth.currentUser
+        if (authUser != null) {
+            val action = StartedFragmentDirections.actionStartedFragmentToMainActivity()
+            v.findNavController().navigate(action)
+        }
 
         // Initialize all text variables
         initializeText()
@@ -68,13 +80,11 @@ class StartedFragment : Fragment() {
     }
 
     private fun initializeText() {
-
         msgStarted.setText("Get started and enjoy the awesome food recepies that we have for you!")
         btnLogin.setText("LOGIN")
         btnRegister.setText("REGISTER")
         txtSkip.setText("SKIP THIS PART")
         coloredText()
-
     }
 
     private fun initializeButtons() {
@@ -104,7 +114,6 @@ class StartedFragment : Fragment() {
     }
 
     private fun coloredText() {
-
         val spannableString = SpannableString("GET STARTED")
 
         val fColor = ForegroundColorSpan(Color.rgb(47, 219, 188))
@@ -112,7 +121,4 @@ class StartedFragment : Fragment() {
 
         txtStarted.text = spannableString
     }
-
-
-
 }
