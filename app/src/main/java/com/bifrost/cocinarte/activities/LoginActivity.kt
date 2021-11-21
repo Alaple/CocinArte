@@ -54,6 +54,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun signIn() {
+        // If there is no LogIn user also signOut from Google
+        if (auth.currentUser == null) {
+            mGoogleSignInClient.signOut();
+        }
+
         val signInIntent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
