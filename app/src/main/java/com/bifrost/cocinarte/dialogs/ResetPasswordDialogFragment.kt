@@ -47,7 +47,6 @@ class ResetPasswordDialogFragment : DialogFragment() {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_reset_password_dialog, container, false)
 
-        rootLayout = v.findViewById(R.id.ResetPasswordConstraintLayout)
 
         // Initialize variables
         txtTitle = v.findViewById(R.id.txtResetPasswordDialogTitle)
@@ -82,19 +81,14 @@ class ResetPasswordDialogFragment : DialogFragment() {
         btnAccept.setOnClickListener {
             val email: String =  auth.currentUser!!.email.toString()
 
-            if(email.isNotEmpty()) {
-                auth.sendPasswordResetEmail(email)
+            auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val action = ResetPasswordFragmentDirections.actionResetPasswordFragmentToResetEmailSentFragment2()
+                            val action =
+                                ResetPasswordFragmentDirections.actionResetPasswordFragmentToResetEmailSentFragment2()
                             v.findNavController().navigate(action)
-                        } else {
-                            Snackbar.make(rootLayout, "The e-mail is incorrect.", Snackbar.LENGTH_SHORT).show()
                         }
                     }
-            } else {
-                Snackbar.make(rootLayout, "The e-mail cannot be empty.", Snackbar.LENGTH_SHORT).show()
-            }
         }
     }
 
