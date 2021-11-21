@@ -21,7 +21,6 @@ import com.bifrost.cocinarte.models.login.RegisterViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
-import okhttp3.internal.wait
 
 class RegisterFragment : Fragment() {
 
@@ -124,10 +123,6 @@ class RegisterFragment : Fragment() {
                             Log.d("Coroutine: ", e.message.toString())
                         }
                     }
-                    val navigate = async {
-                        val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                        v.findNavController().navigate(action)
-                    }
                     val logIn = async {
                         auth.signInWithEmailAndPassword(
                             inputEmail.text.toString(),
@@ -141,6 +136,11 @@ class RegisterFragment : Fragment() {
                             }
                         }
                     }
+                    val navigate = async {
+                        val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                        v.findNavController().navigate(action)
+                    }
+
                     createUserJob.await()
                     logIn.await()
                     navigate.await()

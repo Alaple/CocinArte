@@ -16,6 +16,7 @@ import com.bifrost.cocinarte.models.login.StartedViewModel
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import com.bifrost.cocinarte.activities.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class StartedFragment : Fragment() {
@@ -25,6 +26,7 @@ class StartedFragment : Fragment() {
     // Component variables
     lateinit var txtStarted: TextView
     lateinit var msgStarted: TextView
+    lateinit var btnGoogleLogin: Button
     lateinit var btnLogin: Button
     lateinit var btnRegister: Button
     lateinit var txtSkip: TextView
@@ -51,6 +53,7 @@ class StartedFragment : Fragment() {
         // Initialize variables
         txtStarted = v.findViewById(R.id.textStarted)
         msgStarted = v.findViewById(R.id.messageStarted)
+        btnGoogleLogin = v.findViewById(R.id.buttonGoogleLogIn)
         btnLogin = v.findViewById(R.id.buttonLogIn)
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtSkip = v.findViewById(R.id.textSkip)
@@ -88,6 +91,12 @@ class StartedFragment : Fragment() {
     }
 
     private fun initializeButtons() {
+        // Google LOGIN button
+        btnGoogleLogin.setOnClickListener() {
+            val loginActivity: LoginActivity = activity as LoginActivity
+            loginActivity.signIn()
+        }
+
         // LOGIN button
         btnLogin.setOnClickListener() {
             val action = StartedFragmentDirections.actionStartedFragmentToLogInFragment()
