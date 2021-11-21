@@ -83,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     //Toast.makeText(this, "signInWithCredential:success", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Sign In With Credential Successfull", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
                     // If its a new user create it on Firestore
                     checkExistingUser(user)
@@ -108,6 +109,9 @@ class LoginActivity : AppCompatActivity() {
                         // IF THE FIRESTORE USER DONT EXIST CREATE IT
                         createDbUser(user.displayName!!, user.email!!)
                     }
+                    // NAVIGATE TO MAIN FRAGMENT
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
                 }
                 .addOnFailureListener { exception ->
                     //Log.d(TAG, "get failed with ", exception)
