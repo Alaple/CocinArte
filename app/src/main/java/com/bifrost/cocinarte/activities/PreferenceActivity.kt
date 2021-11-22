@@ -2,6 +2,7 @@ package com.bifrost.cocinarte.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import com.bifrost.cocinarte.models.PreferenceViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class PreferenceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,9 @@ class PreferenceActivity : AppCompatActivity() {
         private lateinit var dbReference: DatabaseReference
         private lateinit var database: FirebaseDatabase
         private lateinit var auth: FirebaseAuth
+
+        val db = Firebase.firestore
+        var authUser = FirebaseAuth.getInstance()
 
         // For snackbar use
         lateinit var rootLayout: ConstraintLayout
@@ -90,6 +96,9 @@ class PreferenceActivity : AppCompatActivity() {
             // Initialize all text variables
             initializeText()
 
+            //View model initialize
+            viewModel.initializeProfile()
+
             // Initialize all buttons variables
             initializeButtons()
         }
@@ -98,8 +107,8 @@ class PreferenceActivity : AppCompatActivity() {
             txtPreferences.setText("PREFERENCES")
             txtLanguage.setText("LANGUAGE")
             txtTheme.setText("APPLICATION THEME")
-            txtNotifications.setText("NOTIFICATIONS")
-            switchPush.setText("PUSH NOTIFICATIONS")
+            txtNotifications.setText("SETTINGS")
+            switchPush.setText("DARK MODE")
             switchEmail.setText("EMAIL NOTIFICATIONS")
         }
 
@@ -109,18 +118,31 @@ class PreferenceActivity : AppCompatActivity() {
             // spinnerLanguage.onItemSelectedListener() { }
             // spinnerTheme.onItemSelectedListener() { }
 
-            // NOTIFICATIONS
+            // DARK MODE
             switchPush.setOnCheckedChangeListener { _, isChecked ->
+
                 if (isChecked) {
                     // The toggle is enabled
+                    Log.d("CAMBIO","DARK MODE "+ isChecked)
+                    viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+                        Log.d("DARK MODE","CAMBIO EL USUARIO")
+                        result.userPrefence!!.pushNotif = true
+                        result.email?.let {db.collection("users").document(it).set(result)}
+                    })
                 } else {
                     // The toggle is disabled
+                    Log.d("CAMBIO","DARK MODE "+ isChecked)
+                    viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+                        Log.d("DARK MODE","CAMBIO EL USUARIO")
+                        result.userPrefence!!.pushNotif = false
+                        result.email?.let {db.collection("users").document(it).set(result)}
+                    })
                 }
             }
 
             switchEmail.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    // The toggle is enabled
+
                 } else {
                     // The toggle is disabled
                 }
