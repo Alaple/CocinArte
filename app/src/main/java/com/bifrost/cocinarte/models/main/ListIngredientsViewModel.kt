@@ -12,6 +12,9 @@ class ListIngredientsViewModel: ViewModel() {
     var buttonsList : MutableList<Filter> = ArrayList()
     var listaRecetas: MutableList<RecipeHit> = mutableListOf()
     var listaRecetasLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
+    var recipeListForHome: MutableList<RecipeHit> = mutableListOf()
+    var recipeListForHomeLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
+
 
 
 
@@ -34,7 +37,7 @@ class ListIngredientsViewModel: ViewModel() {
 
     }
 
-    fun searchRecipe(ingredient: String, filterList: ArrayList<String>) {
+    fun searchRecipe(ingredient: String, filterList: ArrayList<String>, fromHome: Boolean?) {
         val appId: String = "9f9ee2ec"
         val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
         val type: String = "public"
@@ -56,15 +59,19 @@ class ListIngredientsViewModel: ViewModel() {
                 }
                 var apiResponse = response.body()
                 if (apiResponse != null) {
-                    listaRecetas = apiResponse.getHits()
+                    if (fromHome == true){
+                        recipeListForHome = apiResponse.getHits()
+                        recipeListForHomeLiveData.value = recipeListForHome
+                    }else{
+                        listaRecetas = apiResponse.getHits()
+                        listaRecetasLiveData.value = listaRecetas
+                    }
 
-                    listaRecetasLiveData.value = listaRecetas
                 }
 
             }
         })
 
-       // return listaRecetas
     }
 
 

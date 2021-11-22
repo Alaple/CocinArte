@@ -67,7 +67,7 @@ class ListIngredients : Fragment() {
         }
 
         searchButton.setOnClickListener(){
-            buttonsViewModel.searchRecipe(searchBar.text.toString(), filterArgList as ArrayList<String>)
+            buttonsViewModel.searchRecipe(searchBar.text.toString(), filterArgList as ArrayList<String>, false)
         }
 
         // Inflate the layout for this fragment
