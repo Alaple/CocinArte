@@ -6,16 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment
 import com.bifrost.cocinarte.models.main.AccountProfileViewModel
+import com.bifrost.cocinarte.models.main.UserProfileViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AccountProfileFragment : Fragment() {
 
@@ -37,6 +40,10 @@ class AccountProfileFragment : Fragment() {
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
+
+    //Firebase
+    val db = Firebase.firestore
+    var auth = FirebaseAuth.getInstance()
 
     companion object {
         fun newInstance() = AccountProfileFragment()
@@ -72,6 +79,7 @@ class AccountProfileFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        viewModel.initializeProfile()
         // Initialize all text variables
         initializeText()
 
@@ -80,11 +88,15 @@ class AccountProfileFragment : Fragment() {
     }
 
     private fun initializeText() {
-        txtAccount.setText("ACCOUNT AND PROFILE")
-        txtFirstName.setText("FULL NAME")
-        txtEmail.setText("EMAIL")
-        txtDeleteAccount.setText("Delete account")
-        txtChangePassword.setText("Change Password")
+        viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+            txtAccount.setText("ACCOUNT AND PROFILE")
+            txtFirstName.setText("FULL NAME")
+            txtEmail.setText("EMAIL")
+            txtDeleteAccount.setText("Delete account")
+            txtChangePassword.setText("Change Password")
+            inputFirstName.setText(result.name.toString())
+            inputEmail.setText(result.email.toString())
+        })
     }
 
     private fun initializeButtons() {
@@ -108,8 +120,19 @@ class AccountProfileFragment : Fragment() {
 
         // Update button
         btnUpdate.setOnClickListener() {
-            // TODO Update Account and Profile
-            Snackbar.make(rootLayout, "TODO UPDATE", Snackbar.LENGTH_SHORT).show()
+            viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+                result.name = inputFirstName.text.toString()
+
+                if(result.email != inputEmail.text.toString()){
+                    result.email?.let {db.collection("users").document(it).delete()}
+                    result.email = inputEmail.text.toString()
+                    auth.currentUser!!.updateEmail(result.email.toString())
+                }
+
+                result.email?.let {db.collection("users").document(it).set(result)}
+                Toast.makeText(this.context,"UPDATED",Toast.LENGTH_LONG).show()
+            })
+
         }
     }
 
