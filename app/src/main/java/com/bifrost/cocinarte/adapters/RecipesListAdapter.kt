@@ -1,36 +1,36 @@
 package com.bifrost.cocinarte.adapters
 
-import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.entities.Filter
 import com.bifrost.cocinarte.entities.RecipeHit
-import com.bifrost.cocinarte.entities.RecipesDataCollectionItem
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import kotlin.properties.Delegates
 
 class RecipesListAdapter (
-    //private var recipesList: MutableList<RecipesDataCollectionItem>
+    //private var userRecipesList: MutableList<RecipeHit>,
 
     val onCardItemsClick: (Int) -> Boolean
 
 ): RecyclerView.Adapter<RecipesListAdapter.RecipeHolder>(){
 
     var recipesListForAdapter: List<RecipeHit> by Delegates.observable(emptyList()){ _, _, _ -> notifyDataSetChanged() }
-
+    var recipesFromUser: List<RecipeHit> by Delegates.observable(emptyList()){ _, _, _ -> notifyDataSetChanged() }
 
     fun setData(data: List<RecipeHit>){
         recipesListForAdapter = data
+
+    }
+
+    fun setPrepared(userRecipesList: List<RecipeHit>){
+        recipesFromUser = userRecipesList
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -55,7 +55,36 @@ class RecipesListAdapter (
             onCardItemsClick(position)
 
         }
+
+        //marcar como preparado
+        if (checkPrepared(recipesListForAdapter[position],
+                recipesFromUser as List<RecipeHit>
+            )){
+                //Log.d("List Position", position.toString())
+                //Log.d("Adapter Position", holder.adapterPosition.toString())
+            holder.getCardLayout().setCardBackgroundColor(0xFF2fdbbc.toInt())
+
+        }
+
+
+
     }
+    fun checkPrepared(recipeHit: RecipeHit, userRecipesList: List<RecipeHit>): Boolean{
+        var found = false
+        for(recipe in userRecipesList){
+            if (recipeHit.getId().equals(recipe.getId()) ){
+                //Log.d("RecipeParameter",recipeHit.getId().toString())
+                //Log.d("RecipeInList", recipe.getId().toString())
+                found = true
+                //markPrepared(recipeHit)
+            }
+        }
+        return found
+
+    }
+
+
+
     class RecipeHolder(v: View) : RecyclerView.ViewHolder(v) {
     private var view: View
 
@@ -86,19 +115,15 @@ class RecipesListAdapter (
         val chip: Chip = view.findViewById(R.id.toggleButton)
         chip.closeIconTint
 
-
-        //TODO  val txt : TextView = view.findViewById(R.id.wineName)
-        //txt.text = name
     }
 
 
-    //val txt : Button = view.findViewById(R.id.toggleButton)
 
 }
 
-override fun getItemCount(): Int {
+    override fun getItemCount(): Int {
 
-    return recipesListForAdapter.size
+        return recipesListForAdapter.size
 
-}
+    }
 }
