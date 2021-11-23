@@ -12,11 +12,7 @@ import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment
 import com.bifrost.cocinarte.models.main.AccountProfileViewModel
-import com.bifrost.cocinarte.models.main.UserProfileViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -37,9 +33,6 @@ class AccountProfileFragment : Fragment() {
     lateinit var imgChangePassword: ImageView
     lateinit var txtChangePassword: TextView
     lateinit var btnUpdate: Button
-
-    // For snackbar use
-    lateinit var rootLayout: ConstraintLayout
 
     //Firebase
     val db = Firebase.firestore
@@ -69,9 +62,6 @@ class AccountProfileFragment : Fragment() {
         imgChangePassword = v.findViewById(R.id.imgChangePassword)
         txtChangePassword = v.findViewById(R.id.txtChangePassword)
         btnUpdate = v.findViewById(R.id.btnUpdate)
-
-        // For snackbar use
-        rootLayout = v.findViewById(R.id.accountProfileLayout)
 
         return v
     }

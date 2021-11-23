@@ -12,13 +12,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.RegisterViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
 
@@ -36,9 +36,6 @@ class RegisterFragment : Fragment() {
     lateinit var inputPassword: EditText
     lateinit var btnRegister: Button
     lateinit var txtLogIn: TextView
-
-    // For snackbar use
-    lateinit var rootLayout: ConstraintLayout
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -65,9 +62,6 @@ class RegisterFragment : Fragment() {
         inputPassword = v.findViewById(R.id.inputPassword)
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtLogIn = v.findViewById(R.id.textLogin)
-
-        // For snackbar use
-        rootLayout = v.findViewById(R.id.registerLayout)
 
         return v
     }
@@ -132,7 +126,7 @@ class RegisterFragment : Fragment() {
                                 val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
                                 v.findNavController().navigate(action)
                             } else {
-                                Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+                                Toast.makeText(null,"WRONG DATA", Toast.LENGTH_LONG).show()
                             }
                         }
                     }

@@ -9,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.ResetPasswordViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -65,11 +65,11 @@ class ResetPasswordFragment : Fragment() {
                             val action = ResetPasswordFragmentDirections.actionResetPasswordFragmentToResetEmailSentFragment2()
                             v.findNavController().navigate(action)
                         } else {
-                            Snackbar.make(rootLayout, "The e-mail is incorrect.", Snackbar.LENGTH_SHORT).show()
+                            Toast.makeText(this.context,"The e-mail is incorrect", Toast.LENGTH_LONG).show()
                         }
                     }
             } else {
-                Snackbar.make(rootLayout, "The e-mail cannot be empty.", Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(this.context,"The e-mail cannot be empty", Toast.LENGTH_LONG).show()
             }
         }
     }

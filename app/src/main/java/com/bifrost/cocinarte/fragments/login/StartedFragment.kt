@@ -31,9 +31,6 @@ class StartedFragment : Fragment() {
     lateinit var btnRegister: Button
     lateinit var txtSkip: TextView
 
-    // For snackbar use
-    lateinit var rootLayout: ConstraintLayout
-
     // Firebase
     lateinit var auth: FirebaseAuth
 
@@ -57,8 +54,7 @@ class StartedFragment : Fragment() {
         btnLogin = v.findViewById(R.id.buttonLogIn)
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtSkip = v.findViewById(R.id.textSkip)
-        // For snackbar use
-        rootLayout = v.findViewById(R.id.getsLayout)
+
         // Firebase
         auth = FirebaseAuth.getInstance()
 
