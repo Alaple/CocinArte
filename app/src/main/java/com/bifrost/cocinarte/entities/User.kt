@@ -50,42 +50,6 @@ class User {
         this.userPrefence = Preference()
         this.favorite = mutableListOf()
         this.preparedRecipe = mutableListOf()
-        this.profile = Category.CELIAC
+        this.profile = Category.NONE
     }
-/*
-    fun deleteUser(user: User){
-        //TODO
-    }
-
-    fun updateUser(user:User){
-        //TODO
-    }
-
-    fun logout(){
-        //TODO
-    }
-
-    fun login(email: String, password: String){
-        //TODO
-    }
-
-    fun addToFavorite(favorite: Favorite){
-        //TODO
-    }
-
-    fun removeFromFavotire(favorite: String){
-        //TODO
-    }
-
-    fun addToPrep(prepared: Prepared){
-        //TODO
-    }
-
-    fun removeFromPrep(prepared: String){
-        //TODO
-    }
-
-    fun createAccount(email: String, password: String){
-        //TODO
-    }*/
 }
