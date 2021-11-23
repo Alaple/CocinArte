@@ -38,13 +38,8 @@ class PreferenceActivity : AppCompatActivity() {
 
         // Component variables
         lateinit var txtPreferences: TextView
-        lateinit var txtLanguage: TextView
-        lateinit var spinnerLanguage: Spinner
         lateinit var txtTheme: TextView
-        lateinit var spinnerTheme: Spinner
-        lateinit var txtNotifications: TextView
-        lateinit var switchPush: Switch
-        lateinit var switchEmail: Switch
+         lateinit var switchPush: Switch
 
         //FireBase
         private lateinit var dbReference: DatabaseReference
@@ -72,13 +67,8 @@ class PreferenceActivity : AppCompatActivity() {
 
             // Initialize variables
             txtPreferences = v.findViewById(R.id.textPreferences)
-            txtLanguage = v.findViewById(R.id.textLanguage)
-            spinnerLanguage = v.findViewById(R.id.spinnerLanguage)
             txtTheme = v.findViewById(R.id.textTheme)
-            spinnerTheme = v.findViewById(R.id.spinnerTheme)
-            txtNotifications = v.findViewById(R.id.textNotifications)
             switchPush = v.findViewById(R.id.switchPush)
-            switchEmail = v.findViewById(R.id.switchEmail)
 
             // For snackbar use
             rootLayout = v.findViewById(R.id.preferenceLayout)
@@ -105,12 +95,9 @@ class PreferenceActivity : AppCompatActivity() {
         }
 
         private fun initializeText() {
-            txtPreferences.setText("PREFERENCES")
-            txtLanguage.setText("LANGUAGE")
+            txtPreferences.setText("SETTINGS")
             txtTheme.setText("APPLICATION THEME")
-            txtNotifications.setText("SETTINGS")
             switchPush.setText("DARK MODE")
-            switchEmail.setText("EMAIL NOTIFICATIONS")
         }
 
         private fun initializeButtons() {
@@ -143,13 +130,6 @@ class PreferenceActivity : AppCompatActivity() {
                 }
             }
 
-            switchEmail.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-
-                } else {
-                    // The toggle is disabled
-                }
-            }
         }
 
         override fun onActivityCreated(savedInstanceState: Bundle?) {
