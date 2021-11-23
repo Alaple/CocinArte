@@ -21,7 +21,6 @@ import com.google.android.material.textfield.TextInputEditText
 
 class ListIngredients : Fragment() {
 
-
     lateinit var searchBar : TextInputEditText
     lateinit var buttons: RecyclerView
     lateinit var recipesRecView : RecyclerView
@@ -32,9 +31,9 @@ class ListIngredients : Fragment() {
     private lateinit var buttonsViewModel: ListIngredientsViewModel
     private lateinit var filterArgList: MutableList<String>
     lateinit var v: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -71,7 +70,7 @@ class ListIngredients : Fragment() {
         buttons.setHasFixedSize(true)
         linearLayoutManager = GridLayoutManager(context, 3)
         buttons.layoutManager = linearLayoutManager
-        buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList){ x,y -> onItemsClick(x,y) }
+        buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList) { x,y -> onItemsClick(x,y) }
         buttons.adapter = buttonListAdapter
 
         //Load RecyclerView for Recipes
@@ -85,7 +84,6 @@ class ListIngredients : Fragment() {
             recipesListAdapter.setData(result)
             recipesRecView.adapter = recipesListAdapter
         })
-
     }
 
     private fun onItemsClick(position: Int, y: String) {
@@ -96,7 +94,6 @@ class ListIngredients : Fragment() {
         }else{
             filterArgList.add(myFilter)
         }
-
     }
 
     private fun onCardItemClick(position: Int): Boolean{
@@ -106,6 +103,4 @@ class ListIngredients : Fragment() {
         navController.navigate(action)
         return true
     }
-
-
 }

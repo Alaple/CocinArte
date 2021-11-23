@@ -1,5 +1,6 @@
 package com.bifrost.cocinarte.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,9 @@ import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
 
 class ButtonListAdapter(
-    private var buttonsList: MutableList<Filter>,
-    val onItemsClick: (Int, String) -> Unit
-
-
-        ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>(){
+        private var buttonsList: MutableList<Filter>,
+        val onItemsClick: (Int, String) -> Unit
+    ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,9 +24,12 @@ class ButtonListAdapter(
     }
 
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
-
+        Log.d(buttonsList[position].name, "default :: " + buttonsList[position].default)
         holder.setName(buttonsList[position].name)
 
+        if (buttonsList[position].default) {
+            holder.onClick()
+        }
 
         holder.getCardLayout().setOnClickListener() {
             onItemsClick(position, "")
@@ -42,7 +44,6 @@ class ButtonListAdapter(
         }
 
         fun setName(name: String){
-
             val txt : Button = view.findViewById(R.id.toggleButton)
             txt.setText(name)
         }
@@ -54,20 +55,15 @@ class ButtonListAdapter(
         fun onClick(){
             val chip: Chip = view.findViewById(R.id.toggleButton)
             chip.closeIconTint
-
         }
 
-
-            val txt : Button = view.findViewById(R.id.toggleButton)
-
+        val txt : Button = view.findViewById(R.id.toggleButton)
     }
 
-        override fun getItemCount(): Int {
-
+    override fun getItemCount(): Int {
         return buttonsList.size
-
-            }
-        }
+    }
+}
 
 
 

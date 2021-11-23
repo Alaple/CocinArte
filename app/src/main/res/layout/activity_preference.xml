@@ -74,10 +74,37 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
-        app:layout_constraintBottom_toTopOf="@+id/textNotifications"
+        app:layout_constraintBottom_toTopOf="@+id/textProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTheme" />
+
+    <TextView
+        android:id="@+id/textProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="PROFILE"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTheme" />
+
+    <Spinner
+        android:id="@+id/spinnerProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        app:layout_constraintBottom_toTopOf="@+id/textNotifications"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textProfile" />
 
     <TextView
         android:id="@+id/textNotifications"
@@ -105,7 +132,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNotifications" />
-
 
     <Switch
         android:id="@+id/switchEmail"
