@@ -38,7 +38,6 @@ class LogInFragment : Fragment() {
     lateinit var btnLogin: Button
     lateinit var txtRegister: TextView
     //FireBase
-    private lateinit var dbReference: DatabaseReference
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
 

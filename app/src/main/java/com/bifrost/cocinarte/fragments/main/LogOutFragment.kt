@@ -41,7 +41,6 @@ class LogOutFragment : Fragment() {
         super.onStart()
 
         btnLogOut.setOnClickListener() {
-            // TODO Logout
             auth.signOut()
             val action = LogOutFragmentDirections.actionLogOutFragmentToLoginActivity()
             v.findNavController().navigate(action)

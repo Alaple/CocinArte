@@ -16,7 +16,8 @@ import com.bifrost.cocinarte.models.login.StartedViewModel
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import com.google.android.material.snackbar.Snackbar
+import com.bifrost.cocinarte.activities.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class StartedFragment : Fragment() {
 
@@ -25,12 +26,16 @@ class StartedFragment : Fragment() {
     // Component variables
     lateinit var txtStarted: TextView
     lateinit var msgStarted: TextView
+    lateinit var btnGoogleLogin: Button
     lateinit var btnLogin: Button
     lateinit var btnRegister: Button
     lateinit var txtSkip: TextView
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
+
+    // Firebase
+    lateinit var auth: FirebaseAuth
 
     companion object {
         fun newInstance() = StartedFragment()
@@ -48,17 +53,27 @@ class StartedFragment : Fragment() {
         // Initialize variables
         txtStarted = v.findViewById(R.id.textStarted)
         msgStarted = v.findViewById(R.id.messageStarted)
+        btnGoogleLogin = v.findViewById(R.id.buttonGoogleLogIn)
         btnLogin = v.findViewById(R.id.buttonLogIn)
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtSkip = v.findViewById(R.id.textSkip)
         // For snackbar use
         rootLayout = v.findViewById(R.id.getsLayout)
+        // Firebase
+        auth = FirebaseAuth.getInstance()
 
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        // If there is a Login user redirect to Main Activity.
+        val authUser = auth.currentUser
+        if (authUser != null) {
+            val action = StartedFragmentDirections.actionStartedFragmentToMainActivity()
+            v.findNavController().navigate(action)
+        }
 
         // Initialize all text variables
         initializeText()
@@ -68,16 +83,20 @@ class StartedFragment : Fragment() {
     }
 
     private fun initializeText() {
-
         msgStarted.setText("Get started and enjoy the awesome food recepies that we have for you!")
         btnLogin.setText("LOGIN")
         btnRegister.setText("REGISTER")
         txtSkip.setText("SKIP THIS PART")
         coloredText()
-
     }
 
     private fun initializeButtons() {
+        // Google LOGIN button
+        btnGoogleLogin.setOnClickListener() {
+            val loginActivity: LoginActivity = activity as LoginActivity
+            loginActivity.signIn()
+        }
+
         // LOGIN button
         btnLogin.setOnClickListener() {
             val action = StartedFragmentDirections.actionStartedFragmentToLogInFragment()
@@ -104,7 +123,6 @@ class StartedFragment : Fragment() {
     }
 
     private fun coloredText() {
-
         val spannableString = SpannableString("GET STARTED")
 
         val fColor = ForegroundColorSpan(Color.rgb(47, 219, 188))
@@ -112,7 +130,4 @@ class StartedFragment : Fragment() {
 
         txtStarted.text = spannableString
     }
-
-
-
 }
