@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -126,16 +127,18 @@ class PreferenceActivity : AppCompatActivity() {
                     Log.d("CAMBIO","DARK MODE "+ isChecked)
                     viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
                         Log.d("DARK MODE","CAMBIO EL USUARIO")
-                        result.userPrefence!!.pushNotif = true
+                        result.userPrefence!!.appTheme = true
                         result.email?.let {db.collection("users").document(it).set(result)}
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     })
                 } else {
                     // The toggle is disabled
                     Log.d("CAMBIO","DARK MODE "+ isChecked)
                     viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
                         Log.d("DARK MODE","CAMBIO EL USUARIO")
-                        result.userPrefence!!.pushNotif = false
+                        result.userPrefence!!.appTheme = false
                         result.email?.let {db.collection("users").document(it).set(result)}
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     })
                 }
             }
