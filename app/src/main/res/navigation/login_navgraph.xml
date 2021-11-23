@@ -70,4 +70,12 @@
             android:id="@+id/action_resetEmailSentFragment2_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/resetPasswordDialogFragment2"
+        android:name="com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment"
+        android:label="ResetPasswordDialogFragment" >
+        <action
+            android:id="@+id/action_resetPasswordDialogFragment2_to_startedFragment"
+            app:destination="@id/startedFragment" />
+    </dialog>
 </navigation>

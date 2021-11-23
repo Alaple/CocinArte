@@ -4,22 +4,17 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.fragments.login.ResetPasswordFragmentDirections
-import com.bifrost.cocinarte.fragments.main.AccountProfileFragment
-import com.bifrost.cocinarte.models.main.AccountProfileViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -84,9 +79,8 @@ class ResetPasswordDialogFragment : DialogFragment() {
             auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val action =
-                                ResetPasswordFragmentDirections.actionResetPasswordFragmentToResetEmailSentFragment2()
-                            v.findNavController().navigate(action)
+                            dismiss()
+                            Toast.makeText(this.context, "EMAIL SENT", Toast.LENGTH_LONG).show()
                         }
                     }
         }
