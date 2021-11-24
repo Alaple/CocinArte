@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.entities.Category
 import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
 
 class ButtonListAdapter(
-    private var buttonsList: MutableList<Filter>,
-    val onItemsClick: (Int, String) -> Unit
+        val onItemsClick: (Int) -> Unit
+    ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>() {
 
-
-        ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>(){
+    lateinit var defaultFilter: Category
+    lateinit var buttonsList: MutableList<Filter>
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,49 +26,46 @@ class ButtonListAdapter(
     }
 
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
-
         holder.setName(buttonsList[position].name)
 
+        if (defaultFilter == buttonsList[position].category) {
+            holder.check()
+        }
 
         holder.getCardLayout().setOnClickListener() {
-            onItemsClick(position, "")
+            onItemsClick(position)
         }
     }
 
     class ButtonHolder(v: View) : RecyclerView.ViewHolder(v) {
-        private var view:View
-
-        init{
-            this.view = v
-        }
+        private var view = v
 
         fun setName(name: String){
-
             val txt : Button = view.findViewById(R.id.toggleButton)
-            txt.setText(name)
+            txt.text = name
+        }
+
+        fun check() {
+            val chip: Chip = view.findViewById(R.id.toggleButton)
+            chip.isChecked = true
         }
 
         fun getCardLayout (): Button {
             return view.findViewById(R.id.toggleButton)
         }
 
-        fun onClick(){
+        fun onClick() {
             val chip: Chip = view.findViewById(R.id.toggleButton)
             chip.closeIconTint
-
         }
 
-
-            val txt : Button = view.findViewById(R.id.toggleButton)
-
+        val txt : Button = view.findViewById(R.id.toggleButton)
     }
 
-        override fun getItemCount(): Int {
-
+    override fun getItemCount(): Int {
         return buttonsList.size
-
-            }
-        }
+    }
+}
 
 
 

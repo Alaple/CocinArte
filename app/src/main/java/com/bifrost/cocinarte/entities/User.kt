@@ -1,6 +1,7 @@
 package com.bifrost.cocinarte.entities
 
 class User {
+
     var name: String? = null
     var email: String? = null
     var password: String? = null
@@ -10,7 +11,7 @@ class User {
     var userPrefence: Preference? = Preference()
     var favorite: MutableList<RecipeHit>? = mutableListOf()
     var preparedRecipe: MutableList<RecipeHit>? = mutableListOf()
-    var profile: Category? = null
+    var profile: Category = Category.NONE
 
     constructor() {}
 
@@ -40,7 +41,7 @@ class User {
         name: String,
         email: String,
         password: String,
-    ){
+    ) {
         this.name = name
         this.email = email
         this.password = password
@@ -50,42 +51,6 @@ class User {
         this.userPrefence = Preference()
         this.favorite = mutableListOf()
         this.preparedRecipe = mutableListOf()
-        this.profile = Category.CELIAC
+        this.profile = Category.NONE
     }
-/*
-    fun deleteUser(user: User){
-        //TODO
-    }
-
-    fun updateUser(user:User){
-        //TODO
-    }
-
-    fun logout(){
-        //TODO
-    }
-
-    fun login(email: String, password: String){
-        //TODO
-    }
-
-    fun addToFavorite(favorite: Favorite){
-        //TODO
-    }
-
-    fun removeFromFavotire(favorite: String){
-        //TODO
-    }
-
-    fun addToPrep(prepared: Prepared){
-        //TODO
-    }
-
-    fun removeFromPrep(prepared: String){
-        //TODO
-    }
-
-    fun createAccount(email: String, password: String){
-        //TODO
-    }*/
 }

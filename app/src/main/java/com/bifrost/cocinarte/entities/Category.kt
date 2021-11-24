@@ -1,5 +1,5 @@
 package com.bifrost.cocinarte.entities
 
 enum class Category {
-    CELIAC,KOSHER,LOW_CALORIES, VEGGIE, IRON_RICH, NONE
+    NONE, GLUTEN_FREE, KETO, KOSHER, LOW_SUGAR, VEGAN, VEGETARIAN
 }
