@@ -25,23 +25,17 @@ class ListIngredients : Fragment() {
     lateinit var buttons: RecyclerView
     lateinit var recipesRecView : RecyclerView
     lateinit var searchButton: ImageButton
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var buttonListAdapter: ButtonListAdapter
     private lateinit var recipesListAdapter: RecipesListAdapter
     private lateinit var buttonsViewModel: ListIngredientsViewModel
     private lateinit var filterArgList: MutableList<String>
     lateinit var v: View
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        v =inflater.inflate(R.layout.list_ingredients_fragment, container, false)
+        v = inflater.inflate(R.layout.list_ingredients_fragment, container, false)
         searchBar = v.findViewById(R.id.searchBar)
         buttons = v.findViewById(R.id.buttonsRecView)
         recipesRecView = v.findViewById(R.id.recipesRecView)
@@ -49,16 +43,12 @@ class ListIngredients : Fragment() {
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
         filterArgList = ArrayList()
 
-        //Validate that buttons list only loads once
-        if (buttonsViewModel.buttonsList.size == 0){
-            buttonsViewModel.loadButtons()
+        buttonsViewModel.loadUserProfile()
+
+        searchButton.setOnClickListener() {
+            buttonsViewModel.searchRecipe(searchBar.text.toString())
         }
 
-        searchButton.setOnClickListener(){
-            buttonsViewModel.searchRecipe(searchBar.text.toString(), filterArgList as ArrayList<String>)
-        }
-
-        // Inflate the layout for this fragment
         return v
     }
 
@@ -66,19 +56,21 @@ class ListIngredients : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        var buttonListAdapter = ButtonListAdapter(buttonsViewModel.filters, { i -> onItemsClick(i) })
+
         //Load RecyclerView for filters
         buttons.setHasFixedSize(true)
-        linearLayoutManager = GridLayoutManager(context, 3)
-        buttons.layoutManager = linearLayoutManager
-        buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList) { x,y -> onItemsClick(x,y) }
+        buttons.layoutManager = GridLayoutManager(context, 3)
         buttons.adapter = buttonListAdapter
 
         //Load RecyclerView for Recipes
         recipesRecView.setHasFixedSize(true)
         recipesRecView.layoutManager = LinearLayoutManager(context)
+
         //recipesRecView.layoutManager = GridLayoutManager(context, 2) --> GRID
-        recipesListAdapter = RecipesListAdapter{ x -> onCardItemClick(x) }
+        recipesListAdapter = RecipesListAdapter { x -> onCardItemClick(x) }
         recipesRecView.adapter = recipesListAdapter
+
         //Observer for listaRecetas
         buttonsViewModel.listaRecetasLiveData.observe(viewLifecycleOwner, Observer { result ->
             recipesListAdapter.setData(result)
@@ -86,14 +78,8 @@ class ListIngredients : Fragment() {
         })
     }
 
-    private fun onItemsClick(position: Int, y: String) {
-        var myFilter = buttonsViewModel.buttonsList[position].filterName
-        if(filterArgList.contains(myFilter)){
-            var value = filterArgList.indexOf(myFilter)
-            filterArgList.removeAt(value)
-        }else{
-            filterArgList.add(myFilter)
-        }
+    private fun onItemsClick(position: Int) {
+        buttonsViewModel.selectFilter(position)
     }
 
     private fun onCardItemClick(position: Int): Boolean{

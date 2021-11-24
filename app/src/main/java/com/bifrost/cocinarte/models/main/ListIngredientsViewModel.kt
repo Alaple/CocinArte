@@ -12,53 +12,50 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ListIngredientsViewModel: ViewModel() {
+class ListIngredientsViewModel: ViewModel {
 
-    val db = Firebase.firestore
-    val auth = FirebaseAuth.getInstance()
+    private val db = Firebase.firestore
+    private val auth = FirebaseAuth.getInstance()
 
-    var buttonsList : MutableList<Filter> = ArrayList()
     var listaRecetas: MutableList<RecipeHit> = mutableListOf()
     var listaRecetasLiveData: MutableLiveData<MutableList<RecipeHit>> = MutableLiveData()
 
-    fun loadButtons() {
+    val filters: ArrayList<Filter> = ArrayList()
+    val selectedFilters: ArrayList<String> = ArrayList()
 
-        val email = auth.currentUser?.email
-        val user = getUser(email)
+    var defaultProfile = Category.NONE
 
-        var category = user.profile
-        Log.d("Category", "user.profile :: " + user.profile + (Category.VEGGIE == category))
-
-        // Category.IRON_RICH
-        // Category.CELIAC
-        // Category.KOSHER == category
-        // Category.VEGGIE == category
-        // Category.LOW_CALORIES
-
-        var button1 = Filter("Vegetarian", "vegetarian", Category.VEGGIE == category)
-        var button2 = Filter("Gluten-Free", "gluten-free")
-        var button3 = Filter("Keto", "keto-friendly")
-        var button4 = Filter("Low Sugar", "low-sugar")
-        var button5 = Filter("Kosher", "kosher", Category.KOSHER == category)
-        var button6 = Filter("Vegan", "vegan")
-
-        buttonsList.add(button1)
-        buttonsList.add(button2)
-        buttonsList.add(button3)
-        buttonsList.add(button4)
-        buttonsList.add(button5)
-        buttonsList.add(button6)
+    constructor() {
+        filters.add(Filter("Vegetarian", "vegetarian", Category.VEGETARIAN))
+        filters.add(Filter("Gluten-Free", "gluten-free", Category.GLUTEN_FREE))
+        filters.add(Filter("Keto", "keto-friendly", Category.KETO))
+        filters.add(Filter("Low Sugar", "low-sugar", Category.LOW_SUGAR))
+        filters.add(Filter("Kosher", "kosher", Category.KOSHER))
+        filters.add(Filter("Vegan", "vegan", Category.VEGAN))
     }
 
-    fun searchRecipe(ingredient: String, filterList: ArrayList<String>) {
-        val appId: String = "9f9ee2ec"
-        val apiKey: String = "93ef30f07a4f979e4f5cf2fe6626bce7"
-        val type: String = "public"
+    fun selectFilter(i: Int) {
+        val filter = filters[i].filterName
+        if (selectedFilters.contains(filter)) {
+            selectedFilters.remove(filter)
+        } else {
+            selectedFilters.add(filter)
+        }
+    }
+
+    fun searchRecipe(ingredient: String /*, filterList: ArrayList<String> */) {
+        val appId = "9f9ee2ec"
+        val apiKey = "93ef30f07a4f979e4f5cf2fe6626bce7"
+        val type = "public"
+
+        selectedFilters.forEach {
+            Log.d("selectedFilters", it)
+        }
 
         val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
-        val result : Call<EdamamResponse> = apiCaller.listRecipes(type,ingredient, appId, apiKey, filterList)
+        val result : Call<EdamamResponse> = apiCaller.listRecipes(type,ingredient, appId, apiKey, selectedFilters)
 
-       result.enqueue(object: Callback<EdamamResponse> {
+        result.enqueue(object: Callback<EdamamResponse> {
             override fun onFailure(call: Call<EdamamResponse>, t: Throwable) {
                 Log.d("Response", "Error")
                 Log.d("Error: ", t.message.toString())
@@ -70,7 +67,7 @@ class ListIngredientsViewModel: ViewModel() {
                     Log.d("Error", "No response")
                     return
                 }
-                var apiResponse = response.body()
+                val apiResponse = response.body()
                 if (apiResponse != null) {
                     listaRecetas = apiResponse.getHits()
                     listaRecetasLiveData.value = listaRecetas
@@ -79,17 +76,23 @@ class ListIngredientsViewModel: ViewModel() {
             }
         })
 
-       // return listaRecetas
+        // return listaRecetas
     }
 
-    private fun getUser(email: String?): User {
+    fun loadUserProfile() {
+        val email = auth.currentUser?.email
         val docRef = db.collection("users").document(email!!)
-        var user = User()
+
+        cleanFilters()
 
         docRef.get()
             .addOnSuccessListener { dataSnapshot ->
                 if (dataSnapshot != null) {
-                    user = dataSnapshot.toObject<User>()!!
+                    val user = dataSnapshot.toObject<User>()!!
+                    if (user.profile != null) {
+                        defaultProfile = Category.valueOf(user.profile!!)
+                        loadDefaultFilters()
+                    }
                 } else {
                     Log.d("PreferenceViewModel", "No such document.")
                 }
@@ -97,7 +100,21 @@ class ListIngredientsViewModel: ViewModel() {
             .addOnFailureListener { exception ->
                 Log.d("PreferenceViewModel", "Failure.", exception)
             }
+    }
 
-        return user;
+    private fun cleanFilters() {
+        selectedFilters.clear()
+        filters.forEach { it.filterDefault = false }
+    }
+
+    private fun loadDefaultFilters() {
+        if (defaultProfile != Category.NONE) {
+            filters.forEach {
+                if (it.category == defaultProfile) {
+                    it.filterDefault = true
+                    selectedFilters.add(it.filterName)
+                }
+            }
+        }
     }
 }
