@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         listRecipesViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
 
         //Busco la receta
-        listRecipesViewModel.searchRecipe("sal", arrayListOf(), true)
+        listRecipesViewModel.searchRecipe("sal", true)
 
         v = inflater.inflate(R.layout.home_fragment, container, false)
         recRecipe = v.findViewById(R.id.recyclerRecommended)
