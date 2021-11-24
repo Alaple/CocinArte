@@ -20,6 +20,7 @@ import com.bifrost.cocinarte.entities.User
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class RecipeDetailFragment : Fragment() {
 
@@ -34,7 +35,8 @@ class RecipeDetailFragment : Fragment() {
     lateinit var btnPrepare: Button
     lateinit var btnFavorite: ImageButton
 
-
+    //Firebase
+    val auth = FirebaseAuth.getInstance()
 
     // For snackbar use
     lateinit var rootLayout: ConstraintLayout
@@ -97,7 +99,7 @@ class RecipeDetailFragment : Fragment() {
 
         // FAVORITE button
         btnFavorite.setOnClickListener() {
-            if (recipe != null && viewModel.user!= null) {
+            if (recipe != null && auth.currentUser!=null) {
                 viewModel.favorite(recipe)
             }else {
                 Snackbar.make(
@@ -112,7 +114,7 @@ class RecipeDetailFragment : Fragment() {
 
         // PREPARE button
         btnPrepare.setOnClickListener() {
-            if (recipe != null && viewModel.user!= null) {
+            if (recipe != null && auth.currentUser!=null) {
                 viewModel.prepare(recipe)
             }else {
                 Snackbar.make(

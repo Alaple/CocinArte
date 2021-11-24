@@ -43,7 +43,9 @@ class RecipeDetailViewModel : ViewModel() {
     
     fun getUser() {
         val userEmail = auth.currentUser?.email
-        getUserFirestore(userEmail)
+        if(userEmail!=null){
+            getUserFirestore(userEmail)
+        }
     }
 
     private fun userExperience(user : User): User{
