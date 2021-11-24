@@ -30,7 +30,7 @@ class RegisterViewModel : ViewModel() {
         var preference : Preference = Preference()
         var favorite: MutableList<RecipeHit> = mutableListOf()
         var prepared: MutableList<RecipeHit> = mutableListOf()
-        var profile: Category = Category.NONE
+        var profile: String = Category.NONE.toString()
         val user = User(name,
             email,
             password,

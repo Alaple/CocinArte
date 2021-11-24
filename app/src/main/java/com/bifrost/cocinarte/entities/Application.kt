@@ -50,7 +50,7 @@ class Application(
         }
 
         var categories = MutableList<Category>(1){
-            Category.CELIAC
+            Category.NONE
         }
         return Array(20) { Recipe(
                 "1",

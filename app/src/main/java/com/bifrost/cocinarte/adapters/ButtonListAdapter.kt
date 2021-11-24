@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.entities.Category
 import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
 
 class ButtonListAdapter(
         private var buttonsList: MutableList<Filter>,
-        val onItemsClick: (Int, String) -> Unit
+        val onItemsClick: (Int) -> Unit
     ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>() {
 
     override fun onCreateViewHolder(
@@ -24,24 +25,19 @@ class ButtonListAdapter(
     }
 
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
-        Log.d(buttonsList[position].name, "default :: " + buttonsList[position].default)
         holder.setName(buttonsList[position].name)
 
-        if (buttonsList[position].default) {
+        if (buttonsList[position].filterDefault) {
             holder.onClick()
         }
 
         holder.getCardLayout().setOnClickListener() {
-            onItemsClick(position, "")
+            onItemsClick(position)
         }
     }
 
     class ButtonHolder(v: View) : RecyclerView.ViewHolder(v) {
-        private var view:View
-
-        init{
-            this.view = v
-        }
+        private var view = v
 
         fun setName(name: String){
             val txt : Button = view.findViewById(R.id.toggleButton)

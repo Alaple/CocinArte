@@ -14,12 +14,10 @@ class PreferenceViewModel : ViewModel() {
     val auth = FirebaseAuth.getInstance()
 
     fun updateUserProfile(category: Category) {
-        // var profile: Category = Category.NONE
-
         val email = auth.currentUser?.email
 
         val user = getUser(email)
-        user.profile = category
+        user.profile = category.toString()
 
         db.collection("users").document(email!!).set(user)
     }

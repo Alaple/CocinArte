@@ -10,7 +10,7 @@ class User {
     var userPrefence: Preference? = Preference()
     var favorite: MutableList<RecipeHit>? = mutableListOf()
     var preparedRecipe: MutableList<RecipeHit>? = mutableListOf()
-    var profile: Category? = null
+    var profile: String? = null
 
     constructor() {}
 
@@ -23,7 +23,7 @@ class User {
                 userPrefence: Preference,
                 favorite: MutableList<RecipeHit>,
                 preparedRecipe: MutableList<RecipeHit>,
-                profile: Category) {
+                profile: String) {
         this.name = name
         this.email = email
         this.password = password
@@ -50,6 +50,6 @@ class User {
         this.userPrefence = Preference()
         this.favorite = mutableListOf()
         this.preparedRecipe = mutableListOf()
-        this.profile = Category.NONE
+        this.profile = null
     }
 }
