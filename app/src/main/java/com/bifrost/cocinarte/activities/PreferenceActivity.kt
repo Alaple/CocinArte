@@ -35,25 +35,11 @@ class PreferenceActivity : AppCompatActivity() {
 
         lateinit var v: View
 
-        // var categories = listOf("Vegetarian", "Gluten-Free", "Keto", "Low Sugar", "Kosher", "Vegan")
         var categories = Category.values()
 
-        // Component variables
         lateinit var txtPreferences: TextView
-        lateinit var txtLanguage: TextView
         lateinit var txtProfile: TextView
-        lateinit var spinnerLanguage: Spinner
         lateinit var spinnerProfile: Spinner
-        lateinit var txtTheme: TextView
-        lateinit var spinnerTheme: Spinner
-        lateinit var txtNotifications: TextView
-        lateinit var switchPush: Switch
-        lateinit var switchEmail: Switch
-
-        //FireBase
-        private lateinit var dbReference: DatabaseReference
-        private lateinit var database: FirebaseDatabase
-        private lateinit var auth: FirebaseAuth
 
         // For snackbar use
         lateinit var rootLayout: ConstraintLayout
@@ -73,15 +59,8 @@ class PreferenceActivity : AppCompatActivity() {
 
             // Initialize variables
             txtPreferences = v.findViewById(R.id.textPreferences)
-            txtLanguage = v.findViewById(R.id.textLanguage)
-            spinnerLanguage = v.findViewById(R.id.spinnerLanguage)
-            txtTheme = v.findViewById(R.id.textTheme)
-            spinnerTheme = v.findViewById(R.id.spinnerTheme)
             txtProfile = v.findViewById(R.id.textProfile)
             spinnerProfile = v.findViewById(R.id.spinnerProfile)
-            txtNotifications = v.findViewById(R.id.textNotifications)
-            switchPush = v.findViewById(R.id.switchPush)
-            switchEmail = v.findViewById(R.id.switchEmail)
 
             // For snackbar use
             rootLayout = v.findViewById(R.id.preferenceLayout)
@@ -107,14 +86,10 @@ class PreferenceActivity : AppCompatActivity() {
                 getUser.await()
             }
 
-            // Initialize all text variables
-            initializeText()
+            txtPreferences.setText("PREFERENCES")
+            txtProfile.setText("PROFILE")
 
-            // Initialize all spinners variables
             initializeSpinners()
-
-            // Initialize all buttons variables
-            initializeButtons()
 
             viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
                 if (result.profile == null) {
@@ -129,20 +104,7 @@ class PreferenceActivity : AppCompatActivity() {
             })
         }
 
-        private fun initializeText() {
-            txtPreferences.setText("PREFERENCES")
-            txtLanguage.setText("LANGUAGE")
-            txtProfile.setText("PROFILE")
-            txtTheme.setText("APPLICATION THEME")
-            txtNotifications.setText("NOTIFICATIONS")
-            switchPush.setText("PUSH NOTIFICATIONS")
-            switchEmail.setText("EMAIL NOTIFICATIONS")
-        }
-
         private fun initializeSpinners() {
-
-            // spinnerLanguage.onItemSelectedListener() { }
-            // spinnerTheme.onItemSelectedListener() { }
 
             populateSpinner(spinnerProfile, categories, requireContext())
 
@@ -157,25 +119,6 @@ class PreferenceActivity : AppCompatActivity() {
 
                 }
             })
-        }
-
-        private fun initializeButtons() {
-
-            switchPush.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    // The toggle is enabled
-                } else {
-                    // The toggle is disabled
-                }
-            }
-
-            switchEmail.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    // The toggle is enabled
-                } else {
-                    // The toggle is disabled
-                }
-            }
         }
 
         private fun populateSpinner(spinner: Spinner, list : Array<Category>, context : Context) {
