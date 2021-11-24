@@ -50,12 +50,6 @@ class ListIngredients : Fragment() {
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
         userViewModel = ViewModelProvider(requireActivity()).get(UserProfileViewModel::class.java)
 
-        // CURRENT USER
-        userViewModel.initializeProfile()
-
-        // CURRENT USER PROFILE
-        buttonsViewModel.loadUserProfile()
-
         searchButton.setOnClickListener() {
             buttonsViewModel.searchRecipe(searchBar.text.toString(), false)
         }
@@ -67,14 +61,15 @@ class ListIngredients : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //Get User Recipes List (Coroutine)
+        // LOAD USER (Coroutine)
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         scope.launch {
-            val getUser = async{
-                try{
+            val getUser = async {
+                try {
                     userViewModel.initializeProfile()
-                }catch (e: Exception){
+                    buttonsViewModel.loadUserProfile()
+                } catch (e: Exception) {
                     e.message?.let { Log.d("Error", it) }
                 }
             }
@@ -86,12 +81,11 @@ class ListIngredients : Fragment() {
         buttons.setHasFixedSize(true)
         linearLayoutManager = GridLayoutManager(context, 3)
         buttons.layoutManager = linearLayoutManager
-        buttonListAdapter = ButtonListAdapter(buttonsViewModel.filters) { i -> onItemsClick(i) }
+        buttonListAdapter = ButtonListAdapter { i -> onItemsClick(i) }
 
         //Load RecyclerView for filters
         buttons.setHasFixedSize(true)
         buttons.layoutManager = GridLayoutManager(context, 3)
-        buttons.adapter = buttonListAdapter
 
         //Load RecyclerView for Recipes
         recipesRecView.setHasFixedSize(true)
@@ -101,11 +95,17 @@ class ListIngredients : Fragment() {
         recipesListAdapter = RecipesListAdapter { x -> onCardItemClick(x) }
         recipesRecView.adapter = recipesListAdapter
 
+        buttonsViewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+            buttonListAdapter.defaultFilter = result.profile
+            buttonListAdapter.buttonsList = buttonsViewModel.filters
+            buttons.adapter = buttonListAdapter
+        })
+
         //Observer for listaRecetas
         buttonsViewModel.listaRecetasLiveData.observe(viewLifecycleOwner, { result ->
             recipesListAdapter.setData(result)
             recipesRecView.adapter = recipesListAdapter
-    })
+        })
 
         userViewModel.userLiveData.observe(viewLifecycleOwner, { result ->
             recipesListAdapter.setPrepared(result.preparedRecipe!! as List<RecipeHit>)

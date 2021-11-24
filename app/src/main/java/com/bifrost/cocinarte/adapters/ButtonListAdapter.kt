@@ -1,6 +1,5 @@
 package com.bifrost.cocinarte.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,11 @@ import com.bifrost.cocinarte.entities.Filter
 import com.google.android.material.chip.Chip
 
 class ButtonListAdapter(
-        private var buttonsList: MutableList<Filter>,
         val onItemsClick: (Int) -> Unit
     ): RecyclerView.Adapter<ButtonListAdapter.ButtonHolder>() {
+
+    lateinit var defaultFilter: Category
+    lateinit var buttonsList: MutableList<Filter>
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,8 +28,8 @@ class ButtonListAdapter(
     override fun onBindViewHolder(holder: ButtonHolder, position: Int) {
         holder.setName(buttonsList[position].name)
 
-        if (buttonsList[position].filterDefault) {
-            holder.onClick()
+        if (defaultFilter == buttonsList[position].category) {
+            holder.check()
         }
 
         holder.getCardLayout().setOnClickListener() {
@@ -41,14 +42,19 @@ class ButtonListAdapter(
 
         fun setName(name: String){
             val txt : Button = view.findViewById(R.id.toggleButton)
-            txt.setText(name)
+            txt.text = name
+        }
+
+        fun check() {
+            val chip: Chip = view.findViewById(R.id.toggleButton)
+            chip.isChecked = true
         }
 
         fun getCardLayout (): Button {
             return view.findViewById(R.id.toggleButton)
         }
 
-        fun onClick(){
+        fun onClick() {
             val chip: Chip = view.findViewById(R.id.toggleButton)
             chip.closeIconTint
         }

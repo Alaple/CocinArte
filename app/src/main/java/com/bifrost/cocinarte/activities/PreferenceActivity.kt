@@ -3,6 +3,7 @@ package com.bifrost.cocinarte.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.*
 
 class PreferenceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,16 +86,26 @@ class PreferenceActivity : AppCompatActivity() {
             // For snackbar use
             rootLayout = v.findViewById(R.id.preferenceLayout)
 
-            //Firebase
-            database= FirebaseDatabase.getInstance()
-            auth = FirebaseAuth.getInstance()
-
             return v
         }
 
         override fun onStart() {
             super.onStart()
-            val currentUser = auth.currentUser
+
+            // LOAD USER (Coroutine)
+            val job = Job()
+            val scope = CoroutineScope(Dispatchers.Default + job)
+            scope.launch {
+                val getUser = async{
+                    try {
+                        viewModel.loadUserProfile()
+                    } catch (e: Exception) {
+                        e.message?.let { Log.d("Error", it) }
+                    }
+                }
+
+                getUser.await()
+            }
 
             // Initialize all text variables
             initializeText()
@@ -103,6 +115,18 @@ class PreferenceActivity : AppCompatActivity() {
 
             // Initialize all buttons variables
             initializeButtons()
+
+            viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+                if (result.profile == null) {
+                    spinnerProfile.setSelection(0, false)
+                } else {
+                    categories.forEachIndexed { i, c ->
+                        if (c == result.profile) {
+                            spinnerProfile.setSelection(i, false)
+                        }
+                    }
+                }
+            })
         }
 
         private fun initializeText() {
@@ -122,10 +146,9 @@ class PreferenceActivity : AppCompatActivity() {
 
             populateSpinner(spinnerProfile, categories, requireContext())
 
-            spinnerProfile.setSelection(0, false) // evita la primer falsa entrada
             spinnerProfile.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
 
+                override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                     viewModel.updateUserProfile(categories[position])
                     // Snackbar.make(v, categories[position], Snackbar.LENGTH_SHORT).show()
                 }
@@ -155,15 +178,10 @@ class PreferenceActivity : AppCompatActivity() {
             }
         }
 
-        private fun populateSpinner(spinner: Spinner, list : Array<Category>, context : Context)
-        {
-            //   val aa = ArrayAdapter( context!!, android.R.layout.simple_spinner_item, list)
-            val ad = ArrayAdapter(context,android.R.layout.simple_spinner_item, list)
-
-            // Set layout to use when the list of choices appear
-            ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Set Adapter to Spinner
-            spinner.setAdapter(ad)
+        private fun populateSpinner(spinner: Spinner, list : Array<Category>, context : Context) {
+            val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
         }
 
         override fun onActivityCreated(savedInstanceState: Bundle?) {

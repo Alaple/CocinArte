@@ -24,6 +24,7 @@ class ListIngredientsViewModel: ViewModel {
     val filters: ArrayList<Filter> = ArrayList()
     val selectedFilters: ArrayList<String> = ArrayList()
 
+    var userLiveData = MutableLiveData<User>()
     var defaultProfile = Category.NONE
 
     constructor() {
@@ -52,10 +53,6 @@ class ListIngredientsViewModel: ViewModel {
 
         if (fromHome == true) {
             sfilter = arrayListOf()
-        }
-
-        sfilter.forEach {
-            Log.d("selectedFilters", it)
         }
 
         val apiCaller: ApiCaller = RestEngine.getRestEngine().create(ApiCaller::class.java)
@@ -99,6 +96,7 @@ class ListIngredientsViewModel: ViewModel {
                 if (dataSnapshot != null) {
                     val user = dataSnapshot.toObject<User>()!!
                     if (user.profile != null) {
+                        userLiveData.value = user
                         defaultProfile = user.profile
                         loadDefaultFilters()
                     }
