@@ -101,7 +101,7 @@ class ListIngredients : Fragment() {
         buttons.setHasFixedSize(true)
         linearLayoutManager = GridLayoutManager(context, 3)
         buttons.layoutManager = linearLayoutManager
-        buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList){ x,y -> onItemsClick(x,y) }
+        buttonListAdapter = ButtonListAdapter(buttonsViewModel.buttonsList) { i -> onItemsClick(i) }
         buttons.adapter = buttonListAdapter
 
         //Load RecyclerView for Recipes
@@ -125,7 +125,7 @@ class ListIngredients : Fragment() {
 
     }
 
-    private fun onItemsClick(position: Int, y: String) {
+    private fun onItemsClick(position: Int) {
         var myFilter = buttonsViewModel.buttonsList[position].filterName
         if(filterArgList.contains(myFilter)){
             var value = filterArgList.indexOf(myFilter)

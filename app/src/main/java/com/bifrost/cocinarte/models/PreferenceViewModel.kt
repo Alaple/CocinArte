@@ -17,7 +17,7 @@ class PreferenceViewModel : ViewModel() {
         val email = auth.currentUser?.email
 
         val user = getUser(email)
-        user.profile = category.toString()
+        user.profile = category
 
         db.collection("users").document(email!!).set(user)
     }
