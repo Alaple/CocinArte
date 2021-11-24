@@ -72,11 +72,10 @@ class LoginActivity : AppCompatActivity() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-                //Toast.makeText(this, "firebaseAuthWithGoogle: " + account.id, Toast.LENGTH_LONG).show()
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                //Toast.makeText(this, "Google sign in failed " + e.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Google sign in failed " + e.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -87,30 +86,23 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    //Toast.makeText(this, "signInWithCredential:success", Toast.LENGTH_LONG).show()
                     Toast.makeText(this, "Sign In With Credential Successfull", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
                     // If its a new user create it on Firestore
                     checkExistingUser(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    //Toast.makeText(this, "signInWithCredential:failure" + task.exception, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Sign In With Credential Failure" + task.exception, Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun checkExistingUser(user: FirebaseUser?) {
         if (user != null) {
-            Toast.makeText(this, user.email + " Auth User", Toast.LENGTH_LONG).show()
             val docRef = db.collection("users").document(user.email!!)
             docRef.get()
                 .addOnSuccessListener { document ->
-                    if (document.data != null) {
-                        //Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                        //Toast.makeText(this, "DocumentSnapshot data: ${document.data}", Toast.LENGTH_LONG).show()
-                    } else {
-                        //Log.d(TAG, "No such document")
-                        //Toast.makeText(this, "No such document", Toast.LENGTH_LONG).show()
+                    if (document.data == null) {
                         // IF THE FIRESTORE USER DONT EXIST CREATE IT
                         createDbUser(user.displayName!!, user.email!!)
                     }
@@ -119,7 +111,6 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 .addOnFailureListener { exception ->
-                    //Log.d(TAG, "get failed with ", exception)
                     //Toast.makeText(this, "get failed with " + exception.message, Toast.LENGTH_LONG).show()
                 }
         }
