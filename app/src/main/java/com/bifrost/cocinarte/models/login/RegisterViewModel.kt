@@ -12,7 +12,7 @@ class RegisterViewModel : ViewModel() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     val db = Firebase.firestore
 
-    suspend fun createAuthUser(email: String, password: String){
+    fun createAuthUser(email: String, password: String){
         auth.createUserWithEmailAndPassword(
             email,
             password
@@ -25,7 +25,7 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    suspend fun createDbUser(name: String, email: String, password: String) {
+    fun createDbUser(name: String, email: String, password: String) {
         var reward : MutableList<Reward> = mutableListOf()
         var preference : Preference = Preference()
         var favorite: MutableList<RecipeHit> = mutableListOf()

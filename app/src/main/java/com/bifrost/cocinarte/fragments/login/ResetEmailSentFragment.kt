@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.entities.Login
 import com.bifrost.cocinarte.models.login.ResetEmailSentViewModel
 
 class ResetEmailSentFragment : Fragment() {
@@ -39,7 +38,6 @@ class ResetEmailSentFragment : Fragment() {
         super.onStart()
 
         btnBackToLogin.setOnClickListener() {
-            // TODO Delete account
             val action = ResetEmailSentFragmentDirections.actionResetEmailSentFragment2ToLogInFragment();
             v.findNavController().navigate(action)
         }

@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.main.DeleteAccountViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.android.material.snackbar.Snackbar
 
 class DeleteAccountFragment : Fragment() {
 
@@ -60,7 +60,7 @@ class DeleteAccountFragment : Fragment() {
                         val action = DeleteAccountFragmentDirections.actionDeleteAccountFragmentToLoginActivity()
                         v.findNavController().navigate(action)
                     } else {
-                        Snackbar.make(rootLayout, "The user cannot be deleted.", Snackbar.LENGTH_SHORT).show()
+                        Toast.makeText(this.context,"The user cannot be deleted", Toast.LENGTH_LONG).show()
                     }
                 }
         }

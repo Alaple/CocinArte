@@ -10,17 +10,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.*
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.LogInViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class LogInFragment : Fragment() {
@@ -40,9 +34,6 @@ class LogInFragment : Fragment() {
     //FireBase
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
-
-    // For snackbar use
-    lateinit var rootLayout: ConstraintLayout
 
     companion object {
         fun newInstance() = LogInFragment()
@@ -67,8 +58,6 @@ class LogInFragment : Fragment() {
         txtForgotPassword = v.findViewById(R.id.textForgotPassword)
         btnLogin = v.findViewById(R.id.buttonLogIn)
         txtRegister = v.findViewById(R.id.textRegister)
-        // For snackbar use
-        rootLayout = v.findViewById(R.id.LoginLayout)
 
         //Firebase
         database= FirebaseDatabase.getInstance()
@@ -104,7 +93,7 @@ class LogInFragment : Fragment() {
     private fun initializeButtons() {
         // LOGIN button
         btnLogin.setOnClickListener() {
-            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty())
+            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) {
                 auth.signInWithEmailAndPassword(
                     inputEmail.text.toString(),
                     inputPassword.text.toString()
@@ -113,9 +102,12 @@ class LogInFragment : Fragment() {
                         val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
                         v.findNavController().navigate(action)
                     } else {
-                        Snackbar.make(rootLayout, "WRONG DATA", Snackbar.LENGTH_SHORT).show()
+                        Toast.makeText(this.context,"Wrong Data", Toast.LENGTH_SHORT).show()
                     }
                 }
+            } else {
+                Toast.makeText(this.context,"Wrong Data", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Forgot Password button

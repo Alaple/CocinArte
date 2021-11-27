@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.StartedViewModel
@@ -30,9 +29,6 @@ class StartedFragment : Fragment() {
     lateinit var btnLogin: Button
     lateinit var btnRegister: Button
     lateinit var txtSkip: TextView
-
-    // For snackbar use
-    lateinit var rootLayout: ConstraintLayout
 
     // Firebase
     lateinit var auth: FirebaseAuth
@@ -57,8 +53,7 @@ class StartedFragment : Fragment() {
         btnLogin = v.findViewById(R.id.buttonLogIn)
         btnRegister = v.findViewById(R.id.buttonRegister)
         txtSkip = v.findViewById(R.id.textSkip)
-        // For snackbar use
-        rootLayout = v.findViewById(R.id.getsLayout)
+
         // Firebase
         auth = FirebaseAuth.getInstance()
 
