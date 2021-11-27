@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -118,27 +117,28 @@ class RegisterFragment : Fragment() {
                         }
                     }
                     val logIn = async {
+
+                        createUserJob.await()
+
                         auth.signInWithEmailAndPassword(
                             inputEmail.text.toString(),
                             inputPassword.text.toString()
                         ).addOnCompleteListener(requireActivity()) { task ->
                             if (task.isSuccessful) {
-                                val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
-                                v.findNavController().navigate(action)
+
                             } else {
-                                Toast.makeText(null,"WRONG DATA", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context,"Wrong Data", Toast.LENGTH_SHORT).show()
                             }
+
+                            val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                            v.findNavController().navigate(action)
                         }
                     }
-                    val navigate = async {
-                        val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                        v.findNavController().navigate(action)
-                    }
 
-                    createUserJob.await()
                     logIn.await()
-                    navigate.await()
                 }
+            } else {
+                Toast.makeText(context,"Input fields cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
 

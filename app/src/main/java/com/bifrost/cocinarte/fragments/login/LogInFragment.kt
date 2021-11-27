@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.login.LogInViewModel
@@ -94,7 +93,7 @@ class LogInFragment : Fragment() {
     private fun initializeButtons() {
         // LOGIN button
         btnLogin.setOnClickListener() {
-            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty())
+            if(inputEmail.text.isNotEmpty() && inputPassword.text.isNotEmpty()) {
                 auth.signInWithEmailAndPassword(
                     inputEmail.text.toString(),
                     inputPassword.text.toString()
@@ -103,9 +102,12 @@ class LogInFragment : Fragment() {
                         val action = LogInFragmentDirections.actionLogInFragmentToMainActivity()
                         v.findNavController().navigate(action)
                     } else {
-                        Toast.makeText(this.context, "WRONG DATA", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this.context,"Wrong Data", Toast.LENGTH_SHORT).show()
                     }
                 }
+            } else {
+                Toast.makeText(this.context,"Wrong Data", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Forgot Password button
