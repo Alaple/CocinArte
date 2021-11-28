@@ -8,16 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.entities.Category
 import com.bifrost.cocinarte.models.PreferenceViewModel
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.*
 
 class PreferenceActivity : AppCompatActivity() {
@@ -41,9 +36,6 @@ class PreferenceActivity : AppCompatActivity() {
         lateinit var txtProfile: TextView
         lateinit var spinnerProfile: Spinner
 
-        // For snackbar use
-        lateinit var rootLayout: ConstraintLayout
-
         companion object {
             fun newInstance() = PreferenceFragment()
         }
@@ -61,9 +53,6 @@ class PreferenceActivity : AppCompatActivity() {
             txtPreferences = v.findViewById(R.id.textPreferences)
             txtProfile = v.findViewById(R.id.textProfile)
             spinnerProfile = v.findViewById(R.id.spinnerProfile)
-
-            // For snackbar use
-            rootLayout = v.findViewById(R.id.preferenceLayout)
 
             return v
         }
@@ -112,7 +101,6 @@ class PreferenceActivity : AppCompatActivity() {
 
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                     viewModel.updateUserProfile(categories[position])
-                    // Snackbar.make(v, categories[position], Snackbar.LENGTH_SHORT).show()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {

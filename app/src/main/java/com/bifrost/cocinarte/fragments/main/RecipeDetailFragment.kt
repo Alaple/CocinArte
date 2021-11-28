@@ -7,19 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.models.main.RecipeDetailViewModel
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.entities.RecipeHit
-import com.bifrost.cocinarte.entities.User
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class RecipeDetailFragment : Fragment() {
@@ -38,7 +33,6 @@ class RecipeDetailFragment : Fragment() {
     //Firebase
     val auth = FirebaseAuth.getInstance()
 
-    // For snackbar use
     lateinit var rootLayout: ConstraintLayout
 
     private lateinit var viewModel: RecipeDetailViewModel
@@ -66,7 +60,6 @@ class RecipeDetailFragment : Fragment() {
         btnPrepare = v.findViewById(R.id.btnPrepare)
         btnFavorite = v.findViewById(R.id.btnFavorite)
 
-        // For snackbar use
         rootLayout = v.findViewById(R.id.RecipeDetailLayout)
 
         listIngredientsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
@@ -102,14 +95,9 @@ class RecipeDetailFragment : Fragment() {
             if (recipe != null && auth.currentUser!=null) {
                 viewModel.favorite(recipe)
             }else {
-                Snackbar.make(
-                    rootLayout,
-                    "Something happened, please try again",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                Toast.makeText(this.context, "Something happened, please try again", Toast.LENGTH_LONG).show()
             }
-
-            Snackbar.make(rootLayout, "MY FAVORITE TOO!", Snackbar.LENGTH_LONG).show()
+            Toast.makeText(this.context, "MY FAVORITE TOO!", Toast.LENGTH_SHORT).show()
         }
 
         // PREPARE button
@@ -117,14 +105,9 @@ class RecipeDetailFragment : Fragment() {
             if (recipe != null && auth.currentUser!=null) {
                 viewModel.prepare(recipe)
             }else {
-                Snackbar.make(
-                    rootLayout,
-                    "Something happened, please try again",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                Toast.makeText(this.context, "Something happened, please try again", Toast.LENGTH_LONG).show()
             }
-
-            Snackbar.make(rootLayout, "GOING TO RECIPE", Snackbar.LENGTH_LONG).show()
+            Toast.makeText(this.context, "GOING TO RECIPE", Toast.LENGTH_SHORT).show()
 
             // Navigation to RecipeUrlFragment
             var action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeUrlFragment(
