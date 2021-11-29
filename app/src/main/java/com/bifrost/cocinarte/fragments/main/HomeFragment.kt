@@ -12,16 +12,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
-import com.bifrost.cocinarte.adapter.RecipeAdapter
 import com.bifrost.cocinarte.adapters.RecipesListAdapter
 import com.bifrost.cocinarte.entities.*
 import com.bifrost.cocinarte.models.main.HomeViewModel
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bifrost.cocinarte.models.main.UserProfileViewModel
 import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -51,7 +48,7 @@ class HomeFragment : Fragment() {
         listRecipesViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
 
         //Busco la receta
-        listRecipesViewModel.searchRecipe("sal", true)
+        listRecipesViewModel.searchRecipe(randomElementFromGivenList(), true)
 
         v = inflater.inflate(R.layout.home_fragment, container, false)
         recRecipe = v.findViewById(R.id.recyclerRecommended)
@@ -106,5 +103,22 @@ class HomeFragment : Fragment() {
 
         v.findNavController().navigate(action)
         return true
+    }
+
+    fun randomElementFromGivenList() : String {
+        val list = listOf(
+            "meat",
+            "coffee",
+            "chicken",
+            "carrot",
+            "sal",
+            "watermelon",
+            "water",
+            "bread",
+            "strawberry",
+            "pasta",
+            "spicy"
+        )
+        return list[kotlin.random.Random.nextInt(list.size)]
     }
 }
