@@ -26,6 +26,8 @@ class PreferenceActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+
+
     class PreferenceFragment : Fragment() {
 
         lateinit var v: View
@@ -117,5 +119,9 @@ class PreferenceActivity : AppCompatActivity() {
             viewModel = ViewModelProvider(this).get(PreferenceViewModel::class.java)
             // TODO: Use the ViewModel
         }
+
+        
+
+
     }
 }
