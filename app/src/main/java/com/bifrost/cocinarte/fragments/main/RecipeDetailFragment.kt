@@ -107,7 +107,7 @@ class RecipeDetailFragment : Fragment() {
             }else {
                 Toast.makeText(this.context, "Something happened, please try again", Toast.LENGTH_LONG).show()
             }
-            Toast.makeText(this.context, "GOING TO RECIPE", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this.context, "GOING TO RECIPE", Toast.LENGTH_LONG).show()
 
             // Navigation to RecipeUrlFragment
             var action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeUrlFragment(
