@@ -75,9 +75,6 @@ class PreferenceActivity : AppCompatActivity() {
                 getUser.await()
             }
 
-            txtPreferences.setText("PREFERENCES")
-            txtProfile.setText("PROFILE")
-
             initializeSpinners()
 
             viewModel.userLiveData.observe(viewLifecycleOwner, { result ->
