@@ -5,7 +5,7 @@
     android:id="@+id/newRecipeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.main.AccountProfileFragment">
+    tools:context=".fragments.main.NewRecipeFragment">
 
     <TextView
         android:id="@+id/txtAccountProfileTitle"
@@ -14,48 +14,18 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="ACCOUNT AND PROFILE"
+        android:text="NEW RECEPIE"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtFirstName"
+        app:layout_constraintBottom_toTopOf="@+id/txtRName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.029" />
 
-    <TextView
-        android:id="@+id/txtDeleteAccount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/poppins"
-        android:text="txtDeleteAccount"
-        android:textColor="#ef3a58"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgDeleteAccount"
-        app:layout_constraintTop_toBottomOf="@+id/txtChangePassword" />
-
-    <ImageView
-        android:id="@+id/imgChangePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="21dp"
-        android:src="@drawable/icon_password"
-        app:layout_constraintBottom_toTopOf="@+id/imgDeleteAccount"
-        app:layout_constraintEnd_toStartOf="@+id/txtChangePassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAccountProfileTitle"
-        app:tint="@color/CocinArte_primary" />
-
     <EditText
-        android:id="@+id/inputFirstName"
+        android:id="@+id/inputRName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -68,10 +38,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRName" />
 
     <EditText
-        android:id="@+id/inputAPEmail"
+        android:id="@+id/inputREmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -88,24 +58,23 @@
         app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
     <TextView
-        android:id="@+id/txtFirstName"
+        android:id="@+id/txtRName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="10dp"
-        android:text="FULL NAME"
+        android:text="NAME"
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textColor="@color/CocinArte_primary"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/inputFirstName"
+        app:layout_constraintBottom_toTopOf="@+id/inputRName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDeleteAccount" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAccountProfileTitle" />
 
     <TextView
         android:id="@+id/txtEmail"
@@ -114,47 +83,17 @@
         android:layout_marginStart="60dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="10dp"
-        android:text="EMAIL"
+        android:text="DESCRIPTION"
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textColor="@color/CocinArte_primary"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/inputAPEmail"
+        app:layout_constraintBottom_toTopOf="@+id/inputREmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFirstName" />
-
-    <ImageView
-        android:id="@+id/imgDeleteAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/icon_trash"
-        app:tint="#ef3a58"
-        app:layout_constraintEnd_toStartOf="@+id/txtDeleteAccount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgChangePassword" />
-
-    <TextView
-        android:id="@+id/txtChangePassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/poppins"
-        android:text="txtChangePassword"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtDeleteAccount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imgChangePassword"
-        app:layout_constraintTop_toBottomOf="@+id/txtAccountProfileTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/inputRName" />
 
     <Button
         android:id="@+id/btnCreate"
@@ -164,11 +103,11 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="60dp"
         android:background="@drawable/roundstyle"
-        android:text="UPDATE"
+        android:text="CREATE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputAPEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/inputREmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

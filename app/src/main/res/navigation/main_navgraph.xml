@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_userProfileFragment_to_logOutFragment"
             app:destination="@id/logOutFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_newRecipeFragment3"
+            app:destination="@id/newRecipeFragment3" />
     </fragment>
     <activity
         android:id="@+id/preferenceActivity"
@@ -128,4 +131,9 @@
             android:name="recipeUrl"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/newRecipeFragment3"
+        android:name="com.bifrost.cocinarte.fragments.main.NewRecipeFragment"
+        android:label="new_recepie_fragment"
+        tools:layout="@layout/new_recepie_fragment" />
 </navigation>
