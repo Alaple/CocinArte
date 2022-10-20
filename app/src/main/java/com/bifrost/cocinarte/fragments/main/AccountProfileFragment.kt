@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.dialogs.ResetPasswordDialogFragment
@@ -53,15 +52,15 @@ class AccountProfileFragment : Fragment() {
 
         // Initialize variables
         txtAccount = v.findViewById(R.id.txtAccountProfileTitle)
-        txtFirstName = v.findViewById(R.id.txtFirstName)
-        inputFirstName = v.findViewById(R.id.inputFirstName)
-        txtEmail = v.findViewById(R.id.txtEmail)
-        inputEmail = v.findViewById(R.id.inputAPEmail)
+        txtFirstName = v.findViewById(R.id.txtRName)
+        inputFirstName = v.findViewById(R.id.inputRName)
+        txtEmail = v.findViewById(R.id.txtDescription)
+        inputEmail = v.findViewById(R.id.inputREmail)
         imgDeleteAccount = v.findViewById(R.id.imgDeleteAccount)
         txtDeleteAccount = v.findViewById(R.id.txtDeleteAccount)
         imgChangePassword = v.findViewById(R.id.imgChangePassword)
         txtChangePassword = v.findViewById(R.id.txtChangePassword)
-        btnUpdate = v.findViewById(R.id.btnUpdate)
+        btnUpdate = v.findViewById(R.id.btnCreate)
 
         return v
     }
