@@ -55,7 +55,7 @@ class AccountProfileFragment : Fragment() {
         txtFirstName = v.findViewById(R.id.txtRName)
         inputFirstName = v.findViewById(R.id.inputRName)
         txtEmail = v.findViewById(R.id.txtDescription)
-        inputEmail = v.findViewById(R.id.inputREmail)
+        inputEmail = v.findViewById(R.id.inputRDescription)
         imgDeleteAccount = v.findViewById(R.id.imgDeleteAccount)
         txtDeleteAccount = v.findViewById(R.id.txtDeleteAccount)
         imgChangePassword = v.findViewById(R.id.imgChangePassword)
