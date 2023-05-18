@@ -12,6 +12,7 @@ class User {
     var favorite: MutableList<RecipeHit>? = mutableListOf()
     var preparedRecipe: MutableList<RecipeHit>? = mutableListOf()
     var profile: Category = Category.NONE
+    var myRecipes: MutableList<RecipeHit>? = mutableListOf()
 
     constructor() {}
 
@@ -24,6 +25,7 @@ class User {
                 userPrefence: Preference,
                 favorite: MutableList<RecipeHit>,
                 preparedRecipe: MutableList<RecipeHit>,
+                myRecipes: MutableList<RecipeHit>,
                 profile: Category) {
         this.name = name
         this.email = email
@@ -34,6 +36,7 @@ class User {
         this.userPrefence = userPrefence
         this.favorite = favorite
         this.preparedRecipe = preparedRecipe
+        this.myRecipes = myRecipes
         this.profile = profile
     }
 
@@ -51,6 +54,7 @@ class User {
         this.userPrefence = Preference()
         this.favorite = mutableListOf()
         this.preparedRecipe = mutableListOf()
+        this.myRecipes = mutableListOf()
         this.profile = Category.NONE
     }
 }

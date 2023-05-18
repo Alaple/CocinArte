@@ -24,9 +24,12 @@ class RecipesListAdapter (
     var recipesListForAdapter: List<RecipeHit> by Delegates.observable(emptyList()){ _, _, _ -> notifyDataSetChanged() }
     var recipesFromUser: List<RecipeHit> by Delegates.observable(emptyList()){ _, _, _ -> notifyDataSetChanged() }
 
+    fun clear(){
+        this.recipesListForAdapter = emptyList()
+    }
+
     fun setData(data: List<RecipeHit>){
         recipesListForAdapter = data
-
     }
 
     fun setPrepared(userRecipesList: List<RecipeHit>){

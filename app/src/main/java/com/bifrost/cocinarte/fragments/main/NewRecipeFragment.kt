@@ -9,11 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.entities.UserRecipe
 import com.bifrost.cocinarte.fragments.login.RegisterFragmentDirections
+import com.bifrost.cocinarte.models.main.AccountProfileViewModel
 import com.bifrost.cocinarte.models.main.NewRecipeModel
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +28,10 @@ class NewRecipeFragment : Fragment() {
     lateinit var btnCreate: Button
     lateinit var inputRName: EditText
     lateinit var inputRDescription: EditText
+    lateinit var inputRCalories: EditText
+    lateinit var inputRImageUrl: EditText
+    lateinit var inputRRecepieUrl: EditText
+    lateinit var inputRTime: EditText
     private lateinit var auth: FirebaseAuth
 
     companion object {
@@ -44,6 +49,10 @@ class NewRecipeFragment : Fragment() {
         btnCreate = v.findViewById(R.id.btnCreate)
         inputRName = v.findViewById(R.id.inputRName)
         inputRDescription = v.findViewById(R.id.inputRDescription)
+        inputRCalories = v.findViewById(R.id.inputRCalories)
+        inputRImageUrl = v.findViewById(R.id.inputRImageUrl)
+        inputRRecepieUrl = v.findViewById(R.id.inputRRecepieUrl)
+        inputRTime = v.findViewById(R.id.inputRTime)
 
         auth = FirebaseAuth.getInstance()
 
@@ -55,48 +64,57 @@ class NewRecipeFragment : Fragment() {
 
         // Initialize all buttons variables
         initializeButtons()
+
+        // TEXTOS PARA PRUEBAS
+        initializeText()
+    }
+
+    private fun initializeText() {
+        inputRName.setText("Curry básico")
+        inputRDescription.setText("Curry básico")
+        inputRCalories.setText("200")
+        inputRImageUrl.setText("https://c8i5i9x9.stackpathcdn.com/download/bancorecursos/recetas/receta-curry-basico.jpg")
+        inputRRecepieUrl.setText("https://www.cocinista.es/web/es/recetas/cocina-internacional/india/curry-basico.html")
+        inputRTime.setText("60")
     }
 
     private fun initializeButtons() {
 
         btnCreate.setOnClickListener() {
             if(inputRName.text.isNotEmpty() &&
-                inputRDescription.text.isNotEmpty()) {
-                val recipeName = inputRName.text.toString()
+                inputRDescription.text.isNotEmpty() &&
+                inputRCalories.text.isNotEmpty() &&
+                inputRImageUrl.text.isNotEmpty() &&
+                inputRRecepieUrl.text.isNotEmpty() &&
+                inputRTime.text.isNotEmpty()) {
+                val recipeLabel = inputRName.text.toString()
                 val recipeDescription = inputRDescription.text.toString()
+                val recipeCalories = inputRCalories.text.toString().toDouble()
+                val recipeImageUrl = inputRImageUrl.text.toString()
+                val recipeURL = inputRRecepieUrl.text.toString()
+                val recipeTime = inputRTime.text.toString().toDouble()
                 val scope = CoroutineScope(Dispatchers.Default)
 
                 scope.launch{
                     val createUserJob = async{
-                        //Add user to Auth
+                        //Add recepie to Auth
                         try{
-                            viewModel.createNewRecipe(
-                                recipeName,
-                                recipeDescription
-                            )
-                            //Add user to DB
+                            //Add recepie to DB
                             viewModel.createDbNewRecipe(
-                                recipeName,
-                                recipeDescription
+                                recipeCalories,
+                                recipeDescription,
+                                recipeImageUrl,
+                                recipeLabel,
+                                recipeTime,
+                                recipeURL
                             )
                         } catch (e: Exception) {
                             Log.d("Coroutine: ", e.message.toString())
                         }
                     }
-                    val logIn = async {
 
-                        createUserJob.await()
-
-                        auth.signInWithEmailAndPassword(
-                            inputRName.text.toString(),
-                            inputRDescription.text.toString()
-                        ).addOnCompleteListener(requireActivity()) {
-                            val action = RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                            v.findNavController().navigate(action)
-                        }
-                    }
-
-                    logIn.await()
+                    val action = NewRecipeFragmentDirections.actionNewRecipeFragment3ToMyRecipesFragment() //RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                    v.findNavController().navigate(action)
                 }
             } else {
                 Toast.makeText(context,"Input fields cannot be empty", Toast.LENGTH_SHORT).show()

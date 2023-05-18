@@ -13,29 +13,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapters.RecipesListAdapter
 import com.bifrost.cocinarte.entities.RecipeHit
-import com.bifrost.cocinarte.models.main.FavoritesViewModel
+import com.bifrost.cocinarte.entities.UserRecipe
+import com.bifrost.cocinarte.models.main.MyRecipesViewModel
 
-class FavoritesFragment : Fragment() {
+class MyRecipesFragment : Fragment() {
 
     private lateinit var v: View
-    private lateinit var viewModel: FavoritesViewModel
+    private lateinit var viewModel: MyRecipesViewModel
 
-    private lateinit var recFavorites: RecyclerView
+    private lateinit var recMyRecipes: RecyclerView
     private lateinit var recipesListAdapter: RecipesListAdapter
 
     private var recipes: MutableList<RecipeHit> = ArrayList()
 
     companion object {
-        fun newInstance() = FavoritesFragment()
+        fun newInstance() = MyRecipesFragment()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.favorites_fragment, container, false)
-        recFavorites = v.findViewById(R.id.recyclerMyRecipes)
-        viewModel = ViewModelProvider(requireActivity()).get(FavoritesViewModel::class.java)
+        v = inflater.inflate(R.layout.my_recipe_fragment, container, false)
+        recMyRecipes = v.findViewById(R.id.recyclerMyRecipes)
+        viewModel = ViewModelProvider(requireActivity()).get(MyRecipesViewModel::class.java)
 
         return v
     }
@@ -43,18 +44,18 @@ class FavoritesFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        recFavorites.setHasFixedSize(true)
-        recFavorites.layoutManager = LinearLayoutManager(context)
+        recMyRecipes.setHasFixedSize(true)
+        recMyRecipes.layoutManager = LinearLayoutManager(context)
 
         recipesListAdapter = RecipesListAdapter { x -> onCardItemClick(x) }
-        recFavorites.adapter = recipesListAdapter
+        recMyRecipes.adapter = recipesListAdapter
         viewModel.initializeProfile()
 
-        viewModel.favoritesLiveData.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.myRecipesLiveData.observe(viewLifecycleOwner, Observer { result ->
             if (result != null) {
                 recipes = result
                 recipesListAdapter.setData(result)
-                recFavorites.adapter = recipesListAdapter
+                recMyRecipes.adapter = recipesListAdapter
             }
         })
     }
@@ -65,11 +66,11 @@ class FavoritesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoritesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
     }
 
     fun onCardItemClick(int: Int): Boolean {
-        var action = FavoritesFragmentDirections.actionFavoritesFragmentToRecipeDetailFragment(recipes[int]);
+       var action = MyRecipesFragmentDirections.actionMyRecipesFragmentToRecipeDetailFragment(recipes[int]);
         v.findNavController().navigate(action)
         return true
     }

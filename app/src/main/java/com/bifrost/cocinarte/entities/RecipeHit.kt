@@ -32,34 +32,41 @@ class RecipeHit : Parcelable{
     @SerializedName("yield")
     @Expose
     var yield: Int? = 0
+    @SerializedName("description")
+    @Expose
+    var description: String? = null
+
     constructor(
         uri : String,
         label: String,
         image_url: String,
         url: String,
         dietLabel: MutableList<String>,
+        description: String,
         ingredients: MutableList<String>,
         calories: Float,
         time: Int,
         yield: Int
     ){
-        var uri : String? = uri
+        this.uri = uri
 
-        var label: String? = label
+        this.label = label
 
-        var image_url: String? = image_url
+        this.image_url = image_url
 
-        var url: String? = url
+        this.url = url
 
-        var dietLabel: MutableList<String>? = dietLabel
+        this.description = description
 
-        var ingredients: MutableList<String>? = ingredients
+        this.dietLabel = dietLabel
 
-        var calories: Float = calories
+        this.ingredients = ingredients
 
-        var time: Int? = time
+        this.calories = calories.toDouble()
 
-        var yield: Int? = `yield`
+        this.time = time
+
+        this.yield = `yield`
     }
 
     constructor(){}
@@ -69,6 +76,16 @@ class RecipeHit : Parcelable{
 
     fun prepare(cocina:String){
 
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is RecipeHit) return false
+        return getId() == other.getId()
+    }
+
+    override fun hashCode(): Int {
+        return getId().hashCode()
     }
 
     fun getId(): String? {

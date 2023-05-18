@@ -25,6 +25,7 @@ class RecipeDetailFragment : Fragment() {
     lateinit var txtRecipe: TextView
     lateinit var imageRecipe: ImageView
     lateinit var txtTitle: TextView
+    lateinit var txtIngredients: TextView
     lateinit var txtDescription: TextView
     lateinit var txtMinutes: TextView
     lateinit var btnPrepare: Button
@@ -53,8 +54,10 @@ class RecipeDetailFragment : Fragment() {
         txtRecipe = v.findViewById(R.id.txtRecipe)
         imageRecipe = v.findViewById(R.id.imageRecipe)
         txtTitle = v.findViewById(R.id.txtTitle)
+        txtIngredients = v.findViewById(R.id.txtIngredients)
         txtDescription = v.findViewById(R.id.txtDescription)
         // Make Text to be Scrolling
+        txtIngredients.movementMethod = ScrollingMovementMethod()
         txtDescription.movementMethod = ScrollingMovementMethod()
         txtMinutes = v.findViewById(R.id.txtMinutes)
         btnPrepare = v.findViewById(R.id.btnPrepare)
@@ -79,7 +82,8 @@ class RecipeDetailFragment : Fragment() {
     private fun initialize(recipe: RecipeHit?) {
         if (recipe != null) {
             txtRecipe.setText(recipe.label)
-            txtDescription.setText(recipe.ingredients?.joinToString("\n"))
+            txtIngredients.setText(recipe.ingredients?.joinToString("\n"))
+            txtDescription.setText(recipe.description)
             if (recipe.time != 0) {
                 txtMinutes.setText(recipe.time.toString() + " MIN")
             } else {

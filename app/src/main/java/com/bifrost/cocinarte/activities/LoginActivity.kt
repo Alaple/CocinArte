@@ -121,6 +121,7 @@ class LoginActivity : AppCompatActivity() {
         var preference : Preference = Preference()
         var favorite: MutableList<RecipeHit> = mutableListOf()
         var prepared: MutableList<RecipeHit> = mutableListOf()
+        var myRecipes: MutableList<RecipeHit> = mutableListOf()
         var profile: Category = Category.NONE
         val user = User(name,
             email,
@@ -131,6 +132,7 @@ class LoginActivity : AppCompatActivity() {
             preference,
             favorite,
             prepared,
+            myRecipes,
             profile
         )
         uploadUser(user)

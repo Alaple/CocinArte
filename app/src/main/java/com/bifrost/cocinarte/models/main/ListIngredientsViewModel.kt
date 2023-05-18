@@ -45,7 +45,7 @@ class ListIngredientsViewModel: ViewModel {
         }
     }
 
-    fun searchRecipe(ingredient: String, fromHome: Boolean?) {
+    /*fun searchRecipe(ingredient: String, fromHome: Boolean?) {
         val appId = "9f9ee2ec"
         val apiKey = "93ef30f07a4f979e4f5cf2fe6626bce7"
         val type = "public"
@@ -83,6 +83,31 @@ class ListIngredientsViewModel: ViewModel {
                 }
             }
         })
+    }*/
+
+    fun searchRecipe(ingredient: String, fromHome: Boolean?) {
+        val recipeRef = db.collection("userRecipe")
+
+        recipeRef.get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val recipe = document.toObject(RecipeHit::class.java)
+                    if (fromHome == true) {
+                        if (!recipeListForHome.contains(recipe)) {
+                            recipeListForHome.add(recipe)
+                            recipeListForHomeLiveData.value = recipeListForHome
+                        }
+                    } else {
+                        if (!listaRecetas.contains(recipe)) {
+                            listaRecetas.add(recipe)
+                            listaRecetasLiveData.value = listaRecetas
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Error", "Error getting documents: ", exception)
+            }
     }
 
     fun loadUserProfile() {

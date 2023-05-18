@@ -14,7 +14,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="Favorites"
+        android:text="MY RECIPES"
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textSize="24sp"

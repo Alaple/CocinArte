@@ -52,10 +52,10 @@ class AccountProfileFragment : Fragment() {
 
         // Initialize variables
         txtAccount = v.findViewById(R.id.txtAccountProfileTitle)
-        txtFirstName = v.findViewById(R.id.txtRName)
-        inputFirstName = v.findViewById(R.id.inputRName)
-        txtEmail = v.findViewById(R.id.txtDescription)
-        inputEmail = v.findViewById(R.id.inputRDescription)
+        txtFirstName = v.findViewById(R.id.txtFirstName)
+        inputFirstName = v.findViewById(R.id.inputFirstName)
+        txtEmail = v.findViewById(R.id.txtEmail)
+        inputEmail = v.findViewById(R.id.inputAPEmail)
         imgDeleteAccount = v.findViewById(R.id.imgDeleteAccount)
         txtDeleteAccount = v.findViewById(R.id.txtDeleteAccount)
         imgChangePassword = v.findViewById(R.id.imgChangePassword)

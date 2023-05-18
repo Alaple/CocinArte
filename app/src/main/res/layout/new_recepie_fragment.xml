@@ -9,105 +9,232 @@
 
     <TextView
         android:id="@+id/txtAccountProfileTitle"
-        android:layout_width="0dp"
+        android:layout_width="308dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="71dp"
         android:text="NEW RECEPIE"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtRName"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/inputRName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/input_round_style"
-        android:ems="10"
-        android:paddingLeft="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRName" />
-
-    <EditText
-        android:id="@+id/inputRDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/input_round_style"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:paddingLeft="30dp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="374dp"
+        android:layout_height="521dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnCreate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAccountProfileTitle">
 
-    <TextView
-        android:id="@+id/txtRName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="10dp"
-        android:text="NAME"
-        android:textAlignment="viewStart"
-        android:textAllCaps="true"
-        android:textColor="@color/CocinArte_primary"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/inputRName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAccountProfileTitle" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="10dp"
-        android:text="DESCRIPTION"
-        android:textAlignment="viewStart"
-        android:textAllCaps="true"
-        android:textColor="@color/CocinArte_primary"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/inputRDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputRName" />
+            <TextView
+                android:id="@+id/txtRName"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="32dp"
+                android:text="NAME"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputRName"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/input_round_style"
+                android:ems="10"
+                android:paddingLeft="30dp" />
+
+            <TextView
+                android:id="@+id/txtRDescription"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:text="DESCRIPTION"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputRDescription"
+                android:layout_width="311dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/input_round_style"
+                android:ems="10"
+                android:paddingLeft="30dp" />
+
+            <TextView
+                android:id="@+id/txtImageUrl"
+                android:layout_width="297dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="32dp"
+                android:text="IMAGE URL"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputRImageUrl"
+                android:layout_width="313dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/input_round_style"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="30dp" />
+
+            <TextView
+                android:id="@+id/txtRecepieUrl"
+                android:layout_width="319dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:text="RECEPÍE URL"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputRRecepieUrl"
+                android:layout_width="309dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/input_round_style"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="30dp" />
+
+            <TextView
+                android:id="@+id/txtTime"
+                android:layout_width="299dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="32dp"
+                android:text="TIME"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputRTime"
+                android:layout_width="322dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/txtCalories"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:text="CALORIES"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputRCalories"
+                android:layout_width="311dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="36dp"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/txtIngredientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:text="INGREDIENTES"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inputIngridients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/input_round_style"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="30dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD +" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnCreate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="344dp"
+        android:layout_height="47dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/roundstyle"
         android:text="CREATE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputRDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

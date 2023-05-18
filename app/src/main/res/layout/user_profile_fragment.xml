@@ -43,9 +43,10 @@
         android:id="@+id/txtLogOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="126dp"
         android:text="Logout"
         android:textAlignment="viewStart"
         android:textAllCaps="true"
@@ -53,16 +54,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/txtMyRecipe" />
 
     <TextView
         android:id="@+id/txtAccountProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="370dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="355dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="15dp"
         android:text="Account and profile"
         android:textAlignment="viewStart"
@@ -71,17 +72,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtPreferences"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtPreferences"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="184dp"
         android:layout_marginBottom="15dp"
         android:text="Settings"
         android:textAlignment="viewStart"
@@ -90,16 +90,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtFavourites"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/txtAccountProfile" />
 
     <TextView
         android:id="@+id/txtFavourites"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="15dp"
         android:text="Favourites"
@@ -109,16 +108,16 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtPreparedMeals"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/txtPreferences" />
 
     <TextView
         android:id="@+id/txtPreparedMeals"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="15dp"
         android:text="Prepared meals"
@@ -126,28 +125,46 @@
         android:textAllCaps="true"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtLogOut"
+        app:layout_constraintBottom_toTopOf="@+id/txtNewRecipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/txtFavourites" />
 
     <TextView
         android:id="@+id/txtNewRecipe"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="15dp"
         android:text="NEW RECEPIE"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtMyRecipe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toBottomOf="@+id/txtPreparedMeals" />
+
+    <TextView
+        android:id="@+id/txtMyRecipe"
+        android:layout_width="290dp"
+        android:layout_height="11dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="15dp"
+        android:text="MY RECEPIES"
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtLogOut"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/txtPreparedMeals" />
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/txtNewRecipe" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView2"
@@ -172,12 +189,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/icon_gear"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toStartOf="@+id/txtPreferences"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -186,15 +202,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="450dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/icon_user"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toStartOf="@+id/txtAccountProfile"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/CocinArte_primary" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/icon_user"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintEnd_toStartOf="@+id/txtMyRecipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
         app:tint="@color/CocinArte_primary" />
 
     <ImageView
@@ -203,15 +233,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/icon_heart"
-        app:tint="@color/CocinArte_primary"
         app:layout_constraintBottom_toTopOf="@+id/imageView6"
         app:layout_constraintEnd_toStartOf="@+id/txtFavourites"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:tint="@color/CocinArte_primary" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -219,10 +248,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="37dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/icon_knife"
+        app:layout_constraintBottom_toTopOf="@+id/imageView9"
         app:layout_constraintEnd_toStartOf="@+id/txtPreparedMeals"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:tint="@color/CocinArte_primary" />
@@ -232,14 +262,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/icon_knife"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintBottom_toTopOf="@+id/imageView12"
         app:layout_constraintEnd_toStartOf="@+id/txtNewRecipe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:tint="@color/CocinArte_primary" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:rotationY="180"
+        android:src="@drawable/icon_knife"
+        app:layout_constraintBottom_toTopOf="@+id/imageView12"
+        app:layout_constraintEnd_toStartOf="@+id/txtNewRecipe"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:tint="@color/CocinArte_primary" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-13dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:rotationY="180"
+        android:src="@drawable/icon_knife"
+        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9"
         app:tint="@color/CocinArte_primary" />
 
     <ImageView
@@ -247,13 +308,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="115dp"
         android:src="@drawable/icon_logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtLogOut"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView12"
         app:tint="@color/CocinArte_primary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

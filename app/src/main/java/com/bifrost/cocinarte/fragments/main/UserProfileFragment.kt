@@ -22,6 +22,7 @@ class UserProfileFragment : Fragment() {
     lateinit var txtFavourites: TextView
     lateinit var txtPreparedMeals: TextView
     lateinit var txtNewRecipe: TextView
+    lateinit var txtMyRecipe: TextView
     lateinit var txtLogout: TextView
 
     lateinit var txtUserName: TextView
@@ -45,6 +46,7 @@ class UserProfileFragment : Fragment() {
         txtFavourites = v.findViewById(R.id.txtFavourites)
         txtPreparedMeals = v.findViewById(R.id.txtPreparedMeals)
         txtNewRecipe = v.findViewById(R.id.txtNewRecipe)
+        txtMyRecipe = v.findViewById(R.id.txtMyRecipe)
         txtLogout = v.findViewById(R.id.txtLogOut)
         // Texts
         txtUserName = v.findViewById(R.id.txtUserName)
@@ -99,6 +101,12 @@ class UserProfileFragment : Fragment() {
         txtNewRecipe.setOnClickListener() {
             val action = UserProfileFragmentDirections
                 .actionUserProfileFragmentToNewRecipeFragment3()
+            v.findNavController().navigate(action)
+        }
+
+        txtMyRecipe.setOnClickListener() {
+            val action = UserProfileFragmentDirections
+                .actionUserProfileFragmentToMyRecipesFragment()
             v.findNavController().navigate(action)
         }
 

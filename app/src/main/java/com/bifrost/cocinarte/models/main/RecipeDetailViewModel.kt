@@ -28,7 +28,6 @@ class RecipeDetailViewModel : ViewModel() {
         }else{
             Log.d("RecipeDetail","No user found")
         }
-        //db.collection("users").document(user.email!!).set(user)
     }
 
     fun favorite(recipe: RecipeHit) {
