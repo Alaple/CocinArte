@@ -60,9 +60,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/input_round_style"
-                android:ems="10"
-                android:paddingLeft="30dp" />
+                android:background="@drawable/input_round_style" />
 
             <TextView
                 android:id="@+id/txtRDescription"
@@ -85,9 +83,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/input_round_style"
-                android:ems="10"
-                android:paddingLeft="30dp" />
+                android:background="@drawable/input_round_style" />
 
             <TextView
                 android:id="@+id/txtImageUrl"
@@ -111,9 +107,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/input_round_style"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="30dp" />
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/txtRecepieUrl"
@@ -137,9 +131,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/input_round_style"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="30dp" />
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/txtTime"
@@ -161,7 +153,6 @@
                 android:layout_height="54dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
-                android:ems="10"
                 android:inputType="time" />
 
             <TextView
@@ -185,7 +176,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="36dp"
-                android:ems="10"
                 android:inputType="number" />
 
             <TextView
@@ -202,26 +192,34 @@
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/inputIngridients"
+            <LinearLayout
+                android:id="@+id/containerIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/input_round_style"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:paddingLeft="30dp" />
+                android:layout_marginBottom="20dp">
+
+                <EditText
+                    android:id="@+id/inputIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input_round_style"
+                    android:inputType="textEmailAddress" />
+
+            </LinearLayout>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/inputAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="ADD +" />
+
 
             <TextView
                 android:id="@+id/txtCategories"

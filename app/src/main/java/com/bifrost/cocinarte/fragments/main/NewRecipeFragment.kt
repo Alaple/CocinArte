@@ -2,34 +2,26 @@ package com.bifrost.cocinarte.fragments.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
 import com.bifrost.cocinarte.adapters.ButtonListAdapter
-import com.bifrost.cocinarte.adapters.RecipesListAdapter
-import com.bifrost.cocinarte.entities.UserRecipe
-import com.bifrost.cocinarte.fragments.login.RegisterFragmentDirections
-import com.bifrost.cocinarte.models.main.AccountProfileViewModel
 import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bifrost.cocinarte.models.main.NewRecipeModel
-import com.bifrost.cocinarte.models.main.UserProfileViewModel
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import android.widget.LinearLayout
+import android.widget.EditText
+import kotlinx.coroutines.*
+
 
 class NewRecipeFragment : Fragment() {
 
@@ -48,6 +40,8 @@ class NewRecipeFragment : Fragment() {
     private lateinit var buttonListAdapter: ButtonListAdapter
     private lateinit var buttonsViewModel: ListIngredientsViewModel
 
+    private lateinit var containerIngredients: LinearLayout
+    private lateinit var addButton: Button
 
     companion object {
         fun newInstance() = NewRecipeFragment()
@@ -69,13 +63,37 @@ class NewRecipeFragment : Fragment() {
         inputRRecepieUrl = v.findViewById(R.id.inputRRecepieUrl)
         inputRTime = v.findViewById(R.id.inputRTime)
 
+        // Para las categorias
+        containerIngredients = v.findViewById(R.id.containerIngredients);
+        addButton = v.findViewById(R.id.inputAdd);
+
+        // Para la lista de ingredientes
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
         buttons = v.findViewById(R.id.buttonsRecView)
         buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
 
         auth = FirebaseAuth.getInstance()
 
+
+        addButton.setOnClickListener { addIngredientField() }
+
         return v
+    }
+
+    private fun addIngredientField() {
+        val newIngredientField = EditText(activity)
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(16, 30, 16, 30) // Agrega los márgenes deseados (en píxeles)
+        newIngredientField.layoutParams = params
+        newIngredientField.setBackgroundResource(R.drawable.input_round_style)
+        newIngredientField.setEms(10)
+        newIngredientField.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        newIngredientField.setPadding(30, 0, 0, 0)
+        containerIngredients.addView(newIngredientField)
     }
 
     override fun onStart() {
@@ -86,6 +104,21 @@ class NewRecipeFragment : Fragment() {
 
         // TEXTOS PARA PRUEBAS
         initializeText()
+
+        // LOAD USER (Coroutine)
+        val job = Job()
+        val scope = CoroutineScope(Dispatchers.Default + job)
+        scope.launch {
+            val getUser = async {
+                try {
+                    buttonsViewModel.loadUserProfile()
+                } catch (e: Exception) {
+                    e.message?.let { Log.d("Error", it) }
+                }
+            }
+
+            getUser.await()
+        }
 
         //Load RecyclerView for filters
         buttons.setHasFixedSize(true)
