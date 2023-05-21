@@ -79,7 +79,6 @@ class NewRecipeFragment : Fragment() {
     }
 
     private fun initializeButtons() {
-
         btnCreate.setOnClickListener() {
             if(inputRName.text.isNotEmpty() &&
                 inputRDescription.text.isNotEmpty() &&
@@ -87,35 +86,25 @@ class NewRecipeFragment : Fragment() {
                 inputRImageUrl.text.isNotEmpty() &&
                 inputRRecepieUrl.text.isNotEmpty() &&
                 inputRTime.text.isNotEmpty()) {
+
                 val recipeLabel = inputRName.text.toString()
                 val recipeDescription = inputRDescription.text.toString()
                 val recipeCalories = inputRCalories.text.toString().toDouble()
                 val recipeImageUrl = inputRImageUrl.text.toString()
                 val recipeURL = inputRRecepieUrl.text.toString()
                 val recipeTime = inputRTime.text.toString().toDouble()
-                val scope = CoroutineScope(Dispatchers.Default)
 
-                scope.launch{
-                    val createUserJob = async{
-                        //Add recepie to Auth
-                        try{
-                            //Add recepie to DB
-                            viewModel.createDbNewRecipe(
-                                recipeCalories,
-                                recipeDescription,
-                                recipeImageUrl,
-                                recipeLabel,
-                                recipeTime,
-                                recipeURL
-                            )
-                        } catch (e: Exception) {
-                            Log.d("Coroutine: ", e.message.toString())
-                        }
-                    }
+                viewModel.createDbNewRecipe(
+                    recipeCalories,
+                    recipeDescription,
+                    recipeImageUrl,
+                    recipeLabel,
+                    recipeTime,
+                    recipeURL
+                )
 
-                    val action = NewRecipeFragmentDirections.actionNewRecipeFragment3ToMyRecipesFragment() //RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                    v.findNavController().navigate(action)
-                }
+                val action = NewRecipeFragmentDirections.actionNewRecipeFragment3ToMyRecipesFragment() //RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
+                v.findNavController().navigate(action)
             } else {
                 Toast.makeText(context,"Input fields cannot be empty", Toast.LENGTH_SHORT).show()
             }
@@ -128,4 +117,7 @@ class NewRecipeFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    interface RecipeCreationCallback {
+        fun onRecipeCreated()
+    }
 }
