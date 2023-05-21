@@ -84,7 +84,11 @@ class NewRecipeFragment : Fragment() {
         super.onStart()
 
         // Initialize all buttons variables
-        initializeButtons()
+        initializeButtons {
+            // Código que se ejecutará después de que viewModel.createDbNewRecipe() haya terminado
+            val action = NewRecipeFragmentDirections.actionNewRecipeFragment3ToMyRecipesFragment()
+            v.findNavController().navigate(action)
+        }
 
         // TEXTOS PARA PRUEBAS
         initializeText()
@@ -134,7 +138,7 @@ class NewRecipeFragment : Fragment() {
         inputRTime.setText("60")
     }
 
-    private fun initializeButtons() {
+    private fun initializeButtons(onRecipeCreated: () -> Unit) {
         btnCreate.setOnClickListener() {
             if(inputRName.text.isNotEmpty() &&
                 inputRDescription.text.isNotEmpty() &&
@@ -173,10 +177,10 @@ class NewRecipeFragment : Fragment() {
                     recipeURL,
                     recipeIngredients,
                     recipeCategory
-                )
+                ) {
+                    onRecipeCreated()
+                }
 
-                val action = NewRecipeFragmentDirections.actionNewRecipeFragment3ToMyRecipesFragment() //RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
-                v.findNavController().navigate(action)
             } else {
                 Toast.makeText(context,"Input fields cannot be empty", Toast.LENGTH_SHORT).show()
             }

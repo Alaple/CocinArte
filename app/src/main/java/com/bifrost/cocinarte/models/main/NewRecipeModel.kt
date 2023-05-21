@@ -14,7 +14,17 @@ class NewRecipeModel : ViewModel() {
     val db = Firebase.firestore
     val auth = FirebaseAuth.getInstance()
 
-    fun createDbNewRecipe(calories: Number, description: String, image_url: String, label: String, time: Number, url: String, ingredients: MutableList<String>, categories: MutableList<String>) {
+    fun createDbNewRecipe(
+        calories: Number,
+        description: String,
+        image_url: String,
+        label: String,
+        time: Number,
+        url: String,
+        ingredients: MutableList<String>,
+        categories: MutableList<String>,
+        function: () -> Unit
+    ) {
         var userRecipe = RecipeHit(getRandomUri(),
             label,
             image_url,
@@ -26,7 +36,9 @@ class NewRecipeModel : ViewModel() {
             time.toInt(),
             getRandom()
         )
-        uploadRecipe(userRecipe)
+        uploadRecipe(userRecipe) {
+            function()
+        }
     }
 
     private fun getRandom(): Int {
@@ -44,7 +56,7 @@ class NewRecipeModel : ViewModel() {
     }
 
 
-    fun uploadRecipe(userRecipe: RecipeHit) {
+    fun uploadRecipe(userRecipe: RecipeHit, callback: () -> Unit) {
         getUser { user, exception ->
             if (exception != null) {
                 // Manejar cualquier excepción que ocurra durante la obtención del usuario
@@ -57,6 +69,7 @@ class NewRecipeModel : ViewModel() {
                     // Guardo la receta creada en el usuario que la creó
                     this.user.myRecipes?.add(userRecipe)
                     this.user.email?.let { db.collection("users").document(it).set(this.user) }
+                    callback()
                 }
             }
         }
