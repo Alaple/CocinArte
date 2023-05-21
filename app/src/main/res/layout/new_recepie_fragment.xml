@@ -216,9 +216,36 @@
 
             <Button
                 android:id="@+id/button2"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ADD +" />
+
+            <TextView
+                android:id="@+id/txtCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                android:text="Categories"
+                android:textAlignment="viewStart"
+                android:textAllCaps="true"
+                android:textColor="@color/CocinArte_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/buttonsRecView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="32dp"
+                tools:layout_editor_absoluteX="341dp"
+                tools:layout_editor_absoluteY="170dp" />
 
         </LinearLayout>
     </ScrollView>

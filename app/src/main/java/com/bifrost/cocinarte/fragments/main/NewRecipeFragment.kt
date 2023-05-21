@@ -9,13 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bifrost.cocinarte.R
+import com.bifrost.cocinarte.adapters.ButtonListAdapter
+import com.bifrost.cocinarte.adapters.RecipesListAdapter
 import com.bifrost.cocinarte.entities.UserRecipe
 import com.bifrost.cocinarte.fragments.login.RegisterFragmentDirections
 import com.bifrost.cocinarte.models.main.AccountProfileViewModel
+import com.bifrost.cocinarte.models.main.ListIngredientsViewModel
 import com.bifrost.cocinarte.models.main.NewRecipeModel
+import com.bifrost.cocinarte.models.main.UserProfileViewModel
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +42,12 @@ class NewRecipeFragment : Fragment() {
     lateinit var inputRRecepieUrl: EditText
     lateinit var inputRTime: EditText
     private lateinit var auth: FirebaseAuth
+
+    lateinit var buttons: RecyclerView
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var buttonListAdapter: ButtonListAdapter
+    private lateinit var buttonsViewModel: ListIngredientsViewModel
+
 
     companion object {
         fun newInstance() = NewRecipeFragment()
@@ -54,6 +69,10 @@ class NewRecipeFragment : Fragment() {
         inputRRecepieUrl = v.findViewById(R.id.inputRRecepieUrl)
         inputRTime = v.findViewById(R.id.inputRTime)
 
+        buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
+        buttons = v.findViewById(R.id.buttonsRecView)
+        buttonsViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
+
         auth = FirebaseAuth.getInstance()
 
         return v
@@ -67,6 +86,26 @@ class NewRecipeFragment : Fragment() {
 
         // TEXTOS PARA PRUEBAS
         initializeText()
+
+        //Load RecyclerView for filters
+        buttons.setHasFixedSize(true)
+        linearLayoutManager = GridLayoutManager(context, 3)
+        buttons.layoutManager = linearLayoutManager
+        buttonListAdapter = ButtonListAdapter { i -> onItemsClick(i) }
+
+        //Load RecyclerView for filters
+        buttons.setHasFixedSize(true)
+        buttons.layoutManager = GridLayoutManager(context, 3)
+
+        buttonsViewModel.userLiveData.observe(viewLifecycleOwner, { result ->
+            buttonListAdapter.defaultFilter = result.profile
+            buttonListAdapter.buttonsList = buttonsViewModel.filters
+            buttons.adapter = buttonListAdapter
+        })
+    }
+
+    private fun onItemsClick(position: Int) {
+        buttonsViewModel.selectFilter(position)
     }
 
     private fun initializeText() {
