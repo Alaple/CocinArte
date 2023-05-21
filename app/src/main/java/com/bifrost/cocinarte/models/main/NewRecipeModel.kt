@@ -14,14 +14,14 @@ class NewRecipeModel : ViewModel() {
     val db = Firebase.firestore
     val auth = FirebaseAuth.getInstance()
 
-    fun createDbNewRecipe(calories: Number, description: String, image_url: String, label: String, time: Number, url: String) {
+    fun createDbNewRecipe(calories: Number, description: String, image_url: String, label: String, time: Number, url: String, ingredients: MutableList<String>, categories: MutableList<String>) {
         var userRecipe = RecipeHit(getRandomUri(),
             label,
             image_url,
             url,
-            mutableListOf("KOSHER"),
+            categories,
             description,
-            mutableListOf("pan", "queso"),
+            ingredients,
             calories.toFloat(),
             time.toInt(),
             getRandom()

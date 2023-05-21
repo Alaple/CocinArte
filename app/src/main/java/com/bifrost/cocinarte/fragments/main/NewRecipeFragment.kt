@@ -80,22 +80,6 @@ class NewRecipeFragment : Fragment() {
         return v
     }
 
-    private fun addIngredientField() {
-        val newIngredientField = EditText(activity)
-        val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        params.setMargins(16, 30, 16, 30) // Agrega los márgenes deseados (en píxeles)
-        newIngredientField.layoutParams = params
-        newIngredientField.setBackgroundResource(R.drawable.input_round_style)
-        newIngredientField.setEms(10)
-        newIngredientField.inputType =
-            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-        newIngredientField.setPadding(30, 0, 0, 0)
-        containerIngredients.addView(newIngredientField)
-    }
-
     override fun onStart() {
         super.onStart()
 
@@ -166,13 +150,29 @@ class NewRecipeFragment : Fragment() {
                 val recipeURL = inputRRecepieUrl.text.toString()
                 val recipeTime = inputRTime.text.toString().toDouble()
 
+                // INGREDIENTS
+                val recipeIngredients = mutableListOf<String>()
+                for (i in 0 until containerIngredients.childCount) {
+                    val ingredientView = containerIngredients.getChildAt(i) as? TextView
+                    val ingredientText = ingredientView?.text.toString()
+                    recipeIngredients.add(ingredientText)
+                }
+
+                // CATEGORIES
+                val recipeCategory = mutableListOf<String>()
+                for (i in buttonsViewModel.selectedFilters) {
+                    recipeCategory.add(i.uppercase())
+                }
+
                 viewModel.createDbNewRecipe(
                     recipeCalories,
                     recipeDescription,
                     recipeImageUrl,
                     recipeLabel,
                     recipeTime,
-                    recipeURL
+                    recipeURL,
+                    recipeIngredients,
+                    recipeCategory
                 )
 
                 val action = NewRecipeFragmentDirections.actionNewRecipeFragment3ToMyRecipesFragment() //RegisterFragmentDirections.actionRegisterFragmentToMainActivity()
@@ -183,13 +183,24 @@ class NewRecipeFragment : Fragment() {
         }
     }
 
+    private fun addIngredientField() {
+        val newIngredientField = EditText(activity)
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(0, 30, 0, 30) // Agrega los márgenes deseados (en píxeles)
+        newIngredientField.layoutParams = params
+        newIngredientField.setBackgroundResource(R.drawable.input_round_style)
+        newIngredientField.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        newIngredientField.setPadding(0, 0, 0, 0)
+        containerIngredients.addView(newIngredientField)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewRecipeModel::class.java)
         // TODO: Use the ViewModel
-    }
-
-    interface RecipeCreationCallback {
-        fun onRecipeCreated()
     }
 }
