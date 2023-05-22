@@ -35,13 +35,15 @@ class NewRecipeFragment : Fragment() {
     lateinit var inputRTime: EditText
     private lateinit var auth: FirebaseAuth
 
+    // INGRIDIENTS
+    private lateinit var containerIngredients: LinearLayout
+    private lateinit var addButton: Button
+
+    // CATEGORIES
     lateinit var buttons: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var buttonListAdapter: ButtonListAdapter
     private lateinit var buttonsViewModel: ListIngredientsViewModel
-
-    private lateinit var containerIngredients: LinearLayout
-    private lateinit var addButton: Button
 
     companion object {
         fun newInstance() = NewRecipeFragment()
@@ -93,7 +95,8 @@ class NewRecipeFragment : Fragment() {
         // TEXTOS PARA PRUEBAS
         initializeText()
 
-        // LOAD USER (Coroutine)
+        // INGRIDIENTS
+        // LOAD USER
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         scope.launch {

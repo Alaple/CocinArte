@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
         listRecipesViewModel = ViewModelProvider(requireActivity()).get(ListIngredientsViewModel::class.java)
 
         //Busco la receta
-        listRecipesViewModel.searchRecipe("pan", true)
+        listRecipesViewModel.searchRecipe(randomElementFromGivenList(), true)
 
         v = inflater.inflate(R.layout.home_fragment, container, false)
         recRecipe = v.findViewById(R.id.recyclerRecommended)
@@ -107,17 +107,9 @@ class HomeFragment : Fragment() {
 
     fun randomElementFromGivenList() : String {
         val list = listOf(
-            "meat",
-            "coffee",
-            "chicken",
-            "carrot",
-            "sal",
-            "watermelon",
-            "water",
-            "bread",
-            "strawberry",
-            "pasta",
-            "spicy"
+            "pan",
+            "queso",
+            "pollo"
         )
         return list[kotlin.random.Random.nextInt(list.size)]
     }

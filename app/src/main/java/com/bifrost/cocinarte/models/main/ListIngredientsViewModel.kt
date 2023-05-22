@@ -87,20 +87,24 @@ class ListIngredientsViewModel: ViewModel {
 
     fun searchRecipe(ingredient: String, fromHome: Boolean?) {
         val recipeRef = db.collection("userRecipe")
-
+        recipeListForHome.clear()
+        listaRecetas.clear()
         recipeRef.get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     val recipe = document.toObject(RecipeHit::class.java)
-                    if (fromHome == true) {
-                        if (!recipeListForHome.contains(recipe)) {
-                            recipeListForHome.add(recipe)
-                            recipeListForHomeLiveData.value = recipeListForHome
-                        }
-                    } else {
-                        if (!listaRecetas.contains(recipe)) {
-                            listaRecetas.add(recipe)
-                            listaRecetasLiveData.value = listaRecetas
+                    val ingredients = recipe.ingredients
+                    if (ingredients != null && ingredients.any { it.contains(ingredient, ignoreCase = true) }) {
+                        if (fromHome == true) {
+                            if (!recipeListForHome.contains(recipe)) {
+                                recipeListForHome.add(recipe)
+                                recipeListForHomeLiveData.value = recipeListForHome
+                            }
+                        } else {
+                            if (!listaRecetas.contains(recipe)) {
+                                listaRecetas.add(recipe)
+                                listaRecetasLiveData.value = listaRecetas
+                            }
                         }
                     }
                 }
